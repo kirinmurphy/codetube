@@ -1,34 +1,17 @@
-// import Image from "next/image";
-
-import { fetchToDoList, fetchPosts } from '@/lib/posts';
-
+import prisma from '@/lib/prisma';
+import { BlogListItem } from './components/BlogListItem';
 
 export default async function Home() {
-  const todoList = await fetchToDoList();
-  const posts = await fetchPosts();
-  console.log('posts', posts);
+  const blogPosts = await prisma.blogPost.findMany();
 
+  
   return (
     <>
-      {posts && posts.map(({ id, title, body }) => (
-        <div key={id}>
-          <a href={`/blog/${id}`}>
-            <h3>{title}</h3>
-          </a>
-          <div>{body}</div>
+      {blogPosts && blogPosts.map(props => (
+          <div key={props.id} className="[&:not(:last-of-type)]:mb-6">
+          <BlogListItem blogPost={props} />
         </div>
       ))}
-
-      <br/><hr/><br/>
-
-      {todoList && todoList.map(({ id, title, completed }) => (
-        <div key={id}>
-          <a href={`/blog/${id}`}>
-            <h3>{title}</h3>
-          </a>
-          <p>{completed ? 'Completed' : 'Not completed'}</p>
-        </div>
-      ))}    
     </>
   );
 }

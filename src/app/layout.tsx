@@ -4,13 +4,17 @@ import "./globals.css";
 import { PageInner } from "./components/PageInner";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../../public/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../../public/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
 });
+
+const THEME_COLORS = {
+  bgMain: 'bg-gray-800',
+};
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${THEME_COLORS.bgMain}`}>
         <header className="w-full bg-blue-500 sticky top-0 z-50">
           <PageInner>
             Site Name
@@ -37,7 +41,7 @@ export default function RootLayout({
           </PageInner>
         </main>
 
-        <footer className="w-full bg-gray-800 text-white">
+        <footer className={`w-full text-white ${THEME_COLORS.bgMain}`}>
           <PageInner>
             footer
           </PageInner>
