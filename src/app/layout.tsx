@@ -35,7 +35,7 @@ export default function RootLayout({
           </PageInner>
         </header>
 
-        <main className="w-full bg-green-900">
+        <main className="w-full bg-gray-200 text-black">
           <PageInner>
             {children}
           </PageInner>

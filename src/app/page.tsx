@@ -3,7 +3,8 @@ import { BlogListItem } from './components/BlogListItem';
 
 export default async function Home() {
   const blogPosts = await prisma.blogPost.findMany();
-
+  // await prisma.blogPost.deleteMany({})
+  
   
   return (
     <>
