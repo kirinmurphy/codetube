@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { PageInner } from "./components/PageInner";
+import { SiteHeader } from "./components/layout/SiteHeader";
+import { SiteFooter } from "./components/layout/SiteFooter";
 
 const geistSans = localFont({
   src: "../../public/fonts/GeistVF.woff",
@@ -11,10 +13,6 @@ const geistMono = localFont({
   src: "../../public/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
 });
-
-const THEME_COLORS = {
-  bgMain: 'bg-gray-800',
-};
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,25 +26,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${THEME_COLORS.bgMain}`}>
-        <header className="w-full bg-blue-500 sticky top-0 z-50">
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <header className="w-full">
           <PageInner>
-            Site Name
+            <SiteHeader />
           </PageInner>
         </header>
 
-        <main className="w-full bg-gray-200 text-black">
+        
+        <main className="w-full">
           <PageInner>
             {children}
           </PageInner>
         </main>
 
-        <footer className={`w-full text-white ${THEME_COLORS.bgMain}`}>
+        <footer className="w-full">
           <PageInner>
-            footer
+            <SiteFooter />
           </PageInner>
         </footer>
       </body>
     </html>
   );
 }
+
