@@ -1,48 +1,53 @@
 import { PrismaTypes } from '@/lib/prisma';
+import { YoutubePlayerAddButton } from './YoutubePlayerAddButton';
+
+const THUMBNAIL_SIZE = 250;
 
 import Image from 'next/image';
 
 export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps }) {
-  const { title, body, imgUrl, sourceLink } = blogPost;
+  const { title, body, imgUrl, externalSourceLink, youtubeId, blogId } = blogPost;
 
-  const isYoutubeLink = checkYoutubeLink(sourceLink);
+  const itemLink = youtubeId ? `//youtube.com/watch?v=${youtubeId}` 
+    : blogId ? `/${blogId}` 
+    : externalSourceLink || '';
+
+  const linkTarget = blogId ? '_self' : '_blank';
     
   return (
-    <div className="flex flex-col md:flex-row items-start gap-4">
-      <div className="w-[200px] flex-shrink-0">
+    <div className="flex flex-col md:flex-row items-start gap-8">
+      <div className={`w-[${THUMBNAIL_SIZE}px] flex-shrink-0`}> 
         <Image 
           className="object-cover" 
           src={imgUrl} 
           alt={title} 
-          width={200} 
-          height={200} 
+          width={THUMBNAIL_SIZE} 
+          height={THUMBNAIL_SIZE} 
         />
       </div>
 
       <div className="flex-grow">
         <header className="mb-2">
           <h3 className="text-xl font-bold">
-            {sourceLink && 
-              <a href={sourceLink} target="_blank" rel="noreferrer">
+            {itemLink && 
+              <a href={itemLink} target={linkTarget} rel="noreferrer">
                 {title}
               </a>
             }
 
-            {!sourceLink &&  
+            {!itemLink &&  
               <span>{title}</span>
             }
           </h3>
-          {isYoutubeLink && <div>It&apos;s a youtube linkk.</div>}
         </header>
 
-        <div>
+        <div className="mb-4">
           {body}
         </div>
+
+        {!!youtubeId && <YoutubePlayerAddButton />}
+
       </div>
     </div>
   );
-}
-
-function checkYoutubeLink(url: string): boolean {
-  return /youtube\.com|youtu\.be/.test(url);
 }

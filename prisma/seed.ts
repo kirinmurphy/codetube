@@ -10,7 +10,7 @@ async function main() {
       title: "Big O Finally Clicks",
       body: "Big O has always been kind of a nebulous concept, I got it around the edges, but it was nver really intuitive. Not until this video.",
       imgUrl: "https://www.ggorantala.dev/content/images/2023/05/Big-O-Notation.png",
-      sourceLink: "https://www.youtube.com/watch?v=BgLTDT03QtU"
+      youtubeId: "BgLTDT03QtU",
     },
   });
 
@@ -19,7 +19,7 @@ async function main() {
       title: "Supermaven super code completion",
       body: "Even better code completion than Copilot. Turns out there's still some room for the littly guy.",
       imgUrl: "/images/thumbs/thumb_supermaven.png",
-      sourceLink: "https://supermaven.com/"
+      externalSourceLink: "https://supermaven.com/"
     },
   });
 }

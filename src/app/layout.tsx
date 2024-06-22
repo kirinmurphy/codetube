@@ -4,6 +4,7 @@ import "./globals.css";
 import { PageInner } from "./components/PageInner";
 import { SiteHeader } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
+import { VideoPlayer } from "./components/VideoPlayer";
 
 const geistSans = localFont({
   src: "../../public/fonts/GeistVF.woff",
@@ -39,6 +40,8 @@ export default function RootLayout({
             {children}
           </PageInner>
         </main>
+
+        <VideoPlayer />
 
         <footer className="w-full">
           <PageInner>

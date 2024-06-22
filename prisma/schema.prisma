@@ -11,10 +11,12 @@ datasource db {
 }
 
 model BlogPost {
-  id         Int      @id @default(autoincrement())
-  title      String
-  imgUrl     String
-  body       String
-  sourceLink String
-  createdAt DateTime @default(now())
+  id                 Int      @id @default(autoincrement())
+  title              String
+  imgUrl             String
+  body               String 
+  externalSourceLink String?
+  youtubeId          String?  
+  blogId             String?  
+  createdAt          DateTime @default(now())
 }
