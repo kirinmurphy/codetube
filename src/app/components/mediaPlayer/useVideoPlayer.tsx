@@ -27,13 +27,17 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     activeVideo, 
     lastPlayedVideoId,
     isPlayerOpen, 
+    autoPlay,
   } = videoPlayerState
 
   const addVideo = (video: VideoItem) => {
+    const isFirstVideo = videoCollection.length === 0;
     setVideoPlayerState({ 
       ...videoPlayerState,
       videoCollection: [...videoCollection, video], 
-      isPlayerOpen: true
+      activeVideo: isFirstVideo ? video : activeVideo,
+      isPlayerOpen: true,
+      autoPlay: videoCollection.length === 0 ? false : autoPlay
     });
   };
 
@@ -54,7 +58,8 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
       videoCollection: updatedVideoCollection,
       activeVideo: video,
       lastPlayedVideoId: activeVideo?.youtubeId || null,
-      isPlayerOpen: true
+      isPlayerOpen: true,
+      autoPlay: true,
     });
   };
 
@@ -63,6 +68,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
       ...videoPlayerState,
       activeVideo: video, 
       lastPlayedVideoId: activeVideo?.youtubeId || null,
+      autoPlay: true,
     });
   };
 
@@ -78,10 +84,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   };
 
   return {
-    videoCollection,
-    activeVideo,
-    lastPlayedVideoId,
-    isPlayerOpen,
+    ...videoPlayerState,
     addVideo,
     addVideoAndPlay,
     playVideo,

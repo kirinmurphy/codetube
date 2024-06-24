@@ -18,8 +18,8 @@ async function main() {
     data: {
       title: "Supermaven super code completion",
       body: "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing.",
-      imgUrl: "/images/thumbs/thumb_supermaven.png",
-      externalSourceLink: "https://supermaven.com/"
+      imgUrl: "",
+      youtubeId: "JhmdYN1wbG0"
     },
   });
 

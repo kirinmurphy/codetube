@@ -1,7 +1,17 @@
+NEXT: 
 - mobile video player state 
-- video actions: pause video  
+- addAndPlay - insert into queue
+- add default UI area for video if no video is loaded.  
+- if add to player is first one, load without autoplay 
+- icons
 
+Content Management: 
 - authentication scheme 
 - add new blog items 
 - sort by created date 
 - tag based filters 
+
+Video player: 
+- video actions: pause video  
+- auto-next video 
+- on remove - if other videos are in queue, go to next one and load without playing

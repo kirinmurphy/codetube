@@ -10,4 +10,5 @@ export interface VideoPlayerStateProps {
   activeVideo: VideoItem | null;
   lastPlayedVideoId: string | null;
   isPlayerOpen: boolean;
+  autoPlay: boolean;
 }

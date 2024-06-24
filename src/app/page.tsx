@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <>
       {blogPosts && blogPosts.map(props => (
-        <div key={props.id} className="[&:not(:last-of-type)]:mb-6">
+        <div key={props.id} className="[&:not(:last-of-type)]:mb-10">
           <BlogListItem blogPost={props} />
         </div>
       ))}

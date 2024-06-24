@@ -7,8 +7,7 @@ import { VideoItem } from "./types";
 import { PlaylistItem } from "./PlaylistItem";
 
 export function VideoPlayer () {
-  const { videoCollection, activeVideo } = useVideoPlayer();
-  console.log('av',activeVideo);
+  const { videoCollection, activeVideo, autoPlay } = useVideoPlayer();
 
   return (
     <>
@@ -23,7 +22,7 @@ export function VideoPlayer () {
                   videoId={activeVideo?.youtubeId}
                   opts={{
                     playerVars: {
-                      autoplay: 1,
+                      autoplay: autoPlay ? 1 : 0,
                       controls: 0,
                       showinfo: 0,
                       rel: 0,

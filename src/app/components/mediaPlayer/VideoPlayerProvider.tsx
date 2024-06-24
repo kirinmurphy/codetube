@@ -20,7 +20,8 @@ export function VideoPlayerProvider ({ children }: Props) {
     videoCollection: [], 
     activeVideo: null, 
     lastPlayedVideoId: null,
-    isPlayerOpen: false
+    isPlayerOpen: false,
+    autoPlay: false
   });
 
 
