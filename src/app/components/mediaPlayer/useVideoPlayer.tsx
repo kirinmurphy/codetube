@@ -47,6 +47,8 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
       : lastPlayedVideoId 
         ? videoCollection.findIndex(v => v.youtubeId === lastPlayedVideoId)
         : -1; 
+
+    console.log('insertIndex',insertIndex);
     
     const nextIndex = insertIndex + 1;
     const updatedVideoCollection = !!insertIndex 
@@ -74,12 +76,20 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
 
   const removeVideo = (youtubeId: string) => {
     const isActiveVideo = activeVideo?.youtubeId === youtubeId;
+    const activeVideoIndex = videoCollection.findIndex(v => v.youtubeId === youtubeId);
+
+    const nextActiveVideo = isActiveVideo 
+      && videoCollection[activeVideoIndex + 1] 
+      || videoCollection[activeVideoIndex - 1] || null;
+      
     const filteredVideos = videoCollection.filter((item) => item.youtubeId !== youtubeId);
+
     setVideoPlayerState({ 
       ...videoPlayerState,
       videoCollection: videoCollection.filter((item) => item.youtubeId !== youtubeId),
-      activeVideo: isActiveVideo ? null : activeVideo,
-      isPlayerOpen: !!filteredVideos.length ? isPlayerOpen : false
+      activeVideo: nextActiveVideo || activeVideo,
+      isPlayerOpen: !!filteredVideos.length ? isPlayerOpen : false,
+      autoPlay: nextActiveVideo ? false : autoPlay
     });
   };
 
