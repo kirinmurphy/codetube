@@ -7,9 +7,9 @@ async function main() {
 
   await prisma.blogPost.create({
     data: {
-      title: "Big O Finally Clicks",
+      title: "Big O Clicks",
       body: "Big O has always been kind of a nebulous concept, I got it around the edges, but it was nver really intuitive. Not until this video.",
-      imgUrl: "https://www.ggorantala.dev/content/images/2023/05/Big-O-Notation.png",
+      imgUrl: "",
       youtubeId: "BgLTDT03QtU",
     },
   });
@@ -17,9 +17,27 @@ async function main() {
   await prisma.blogPost.create({
     data: {
       title: "Supermaven super code completion",
-      body: "Even better code completion than Copilot. Turns out there's still some room for the littly guy.",
+      body: "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing.",
       imgUrl: "/images/thumbs/thumb_supermaven.png",
       externalSourceLink: "https://supermaven.com/"
+    },
+  });
+
+  await prisma.blogPost.create({
+    data: {
+      title: "Every React 19 Feature Explained in 8 Minutes",
+      body: "Very Exciting Stuff",
+      imgUrl: "",
+      youtubeId: "2NPIYnY3ilo",
+    },
+  });
+
+  await prisma.blogPost.create({
+    data: {
+      title: "Signals In JS...",
+      body: "full on pub sub in javascript",
+      imgUrl: "",
+      youtubeId: "vGBBtqPnaUk",
     },
   });
 }

@@ -1,9 +1,9 @@
 import { PrismaTypes } from '@/lib/prisma';
-import { YoutubePlayerAddButton } from './YoutubePlayerAddButton';
 
 const THUMBNAIL_SIZE = 250;
 
 import Image from 'next/image';
+import { VideoPlayerBlogItemControls } from './BlogListItemVideoControls';
 
 export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps }) {
   const { title, body, imgUrl, externalSourceLink, youtubeId, blogId } = blogPost;
@@ -12,14 +12,18 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
     : blogId ? `/${blogId}` 
     : externalSourceLink || '';
 
+  const blogImage = imgUrl ? imgUrl
+    : youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` 
+    : '';
+
   const linkTarget = blogId ? '_self' : '_blank';
-    
+
   return (
     <div className="flex flex-col md:flex-row items-start gap-8">
       <div className={`w-[${THUMBNAIL_SIZE}px] flex-shrink-0`}> 
         <Image 
           className="object-cover" 
-          src={imgUrl} 
+          src={blogImage} 
           alt={title} 
           width={THUMBNAIL_SIZE} 
           height={THUMBNAIL_SIZE} 
@@ -45,8 +49,9 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
           {body}
         </div>
 
-        {!!youtubeId && <YoutubePlayerAddButton />}
-
+        {!!youtubeId && (
+          <VideoPlayerBlogItemControls youtubeId={youtubeId} title={title} />
+        )}
       </div>
     </div>
   );

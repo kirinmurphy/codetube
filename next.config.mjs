@@ -11,6 +11,11 @@ const nextConfig = {
         hostname: '**.ggorantala.dev',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+        port: '',
+      }
     ],
   },    
 };
