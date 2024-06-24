@@ -1,0 +1,7 @@
+- mobile video player state 
+- video actions: pause video  
+
+- authentication scheme 
+- add new blog items 
+- sort by created date 
+- tag based filters 

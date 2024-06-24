@@ -3,7 +3,8 @@
 import React, { createContext, ReactNode, useState } from 'react';
 import { VideoPlayerStateProps } from './types';
 
-interface VideoPlayerContextType extends VideoPlayerStateProps {
+interface VideoPlayerContextType {
+  videoPlayerState: VideoPlayerStateProps;
   setVideoPlayerState: (state: VideoPlayerStateProps) => void;
 }
 
@@ -16,12 +17,15 @@ interface Props {
 export function VideoPlayerProvider ({ children }: Props) {
 
   const [videoPlayerState, setVideoPlayerState] = useState<VideoPlayerStateProps>({
-    videoCollection: [], activeVideo: null, lastPlayedVideoId: null
+    videoCollection: [], 
+    activeVideo: null, 
+    lastPlayedVideoId: null,
+    isPlayerOpen: false
   });
 
 
   return (
-    <VideoPlayerContext.Provider value={{ ...videoPlayerState, setVideoPlayerState }}>
+    <VideoPlayerContext.Provider value={{ videoPlayerState, setVideoPlayerState }}>
       {children}
     </VideoPlayerContext.Provider>
   );

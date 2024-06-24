@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { VideoPlayerProvider } from "./components/mediaPlayer/VideoPlayerProvider";
 import { LayoutContents } from "./components/layout/LayoutContents";
+import { VideoPlayerWrapper } from "./components/layout/VideoPlayerWrapper";
 
 const geistSans = localFont({
   src: "../../public/fonts/GeistVF.woff",
@@ -21,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <VideoPlayerProvider>
-          <LayoutContents>{children}</LayoutContents>
+          <VideoPlayerWrapper>
+            <LayoutContents>{children}</LayoutContents>
+          </VideoPlayerWrapper>
         </VideoPlayerProvider>
       </body>
     </html>
