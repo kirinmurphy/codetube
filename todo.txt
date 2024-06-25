@@ -11,7 +11,6 @@ Content Management:
 - sort by created date 
 - tag based filters 
 
-Video player: 
+Video player:   
 - video actions: pause video  
 - auto-next video 
-- on remove - if other videos are in queue, go to next one and load without playing

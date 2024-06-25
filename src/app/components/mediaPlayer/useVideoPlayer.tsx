@@ -30,6 +30,9 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     autoPlay,
   } = videoPlayerState
 
+  console.log('--------------------------');
+  console.log('activeVideo',activeVideo?.title);
+
   const addVideo = (video: VideoItem) => {
     const isFirstVideo = videoCollection.length === 0;
     setVideoPlayerState({ 
@@ -42,16 +45,20 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   };
 
   const addVideoAndPlay = (video: VideoItem) => {    
-    const insertIndex = !!activeVideo 
+    const insertAfterIndex = !!activeVideo 
       ? videoCollection.findIndex(v => v.youtubeId === activeVideo.youtubeId)
-      : lastPlayedVideoId 
+      : !!lastPlayedVideoId 
         ? videoCollection.findIndex(v => v.youtubeId === lastPlayedVideoId)
         : -1; 
 
-    console.log('insertIndex',insertIndex);
+    // console.log('--------------------------');   
+    // console.log('find matcher', videoCollection.findIndex(v => v.youtubeId === activeVideo?.youtubeId));    
+    // console.log('insertAfterIndex',insertAfterIndex);
+    // console.log('activeVideo',activeVideo?.title);
+    // console.log('activeVideoIndex',videoCollection.findIndex(v => v.youtubeId === activeVideo?.youtubeId));
     
-    const nextIndex = insertIndex + 1;
-    const updatedVideoCollection = !!insertIndex 
+    const nextIndex = insertAfterIndex + 1;
+    const updatedVideoCollection = !!insertAfterIndex 
       ? [...videoCollection.slice(0, nextIndex), video, ...videoCollection.slice(nextIndex)]
       : [...videoCollection, video];
   
@@ -86,7 +93,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
 
     setVideoPlayerState({ 
       ...videoPlayerState,
-      videoCollection: videoCollection.filter((item) => item.youtubeId !== youtubeId),
+      videoCollection: filteredVideos,
       activeVideo: nextActiveVideo || activeVideo,
       isPlayerOpen: !!filteredVideos.length ? isPlayerOpen : false,
       autoPlay: nextActiveVideo ? false : autoPlay
