@@ -19,7 +19,7 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
   const linkTarget = blogId ? '_self' : '_blank';
 
   return (
-    <div className="blog-list-item flex flex-col items-start gap-8">
+    <div className="blog-list-item flex flex-col items-start gap-4">
       <div className="blog-thumbnail-container w-full flex-shrink-0"> 
         <Image 
           className="blog-thumbnail w-full object-cover" 

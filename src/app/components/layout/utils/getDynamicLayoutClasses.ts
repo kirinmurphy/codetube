@@ -8,26 +8,29 @@ interface Props {
   isPlayerOpen: boolean;
 }
 
-export const VIDEO_PLAYER_BG = 'bg-gray-900';
+export const VIDEO_PLAYER_BG = 'bg-gray-500';
+
+const containerClassesBase = 'transition-transform duration-300 ease-in-out';
 
 export function getDynamicLayoutClasses(props: Props): ClassDefinitions {
 
   const { isPlayerOpen } = props;
   
   const videoPlayerClasses = isPlayerOpen 
-    ? `w-full fixed top-0 left-0 overflow-hidden h-1/2   
-      md:w-1/2 md:static md:h-full ${VIDEO_PLAYER_BG}`
+    ? `w-full fixed top-0 left-0 overflow-hidden h-1/2 bg-gray-800 
+        900mq:w-[calc(100%-400px)] 900mq:static 900mq:h-full  
+        1250mq:w-1/2`
     : 'hidden';
 
-  const containerClassesBase = 'transition-transform duration-300 ease-in-out';
-
   const contentContainerClasses = isPlayerOpen 
-    ? `w-full fixed bottom-0 left-0 h-1/2 md:w-1/2 md:relative md:h-full overflow-y-scroll 
-        ${containerClassesBase} md:translate-x-0`
-    : `w-full md:w-full h-full ${containerClassesBase} md:translate-x-0`;
+    ? `w-full fixed bottom-0 left-0 h-1/2 overflow-y-scroll ${containerClassesBase} 
+        900mq:w-[400px] 900mq:relative 900mq:h-full 900mq:translate-x-0 
+        1250mq:w-1/2`
+    : `w-full h-full ${containerClassesBase} 
+        900mq:translate-x-0`;
 
   const pageWrapperClasses = isPlayerOpen 
-    ? 'md:flex md:h-screen w-full' 
+    ? '900mq:flex 900mq:h-screen w-full' 
     : 'w-full';
 
   return { 

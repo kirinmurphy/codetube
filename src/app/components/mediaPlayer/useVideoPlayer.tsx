@@ -66,7 +66,8 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   };
 
   const playNextVideo = () => {
-    const activeVideoIndex = videoCollection.findIndex((item) => item.youtubeId === activeVideo?.youtubeId);
+    const activeVideoIndex = videoCollection
+      .findIndex((item) => item.youtubeId === activeVideo?.youtubeId);
     const nextVideo = videoCollection[activeVideoIndex + 1];
     if (nextVideo) { playVideo(nextVideo); } 
   }

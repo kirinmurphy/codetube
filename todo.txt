@@ -1,9 +1,5 @@
 NEXT: 
 - mobile video player state 
-- addAndPlay - insert into queue
-- add default UI area for video if no video is loaded.  
-- if add to player is first one, load without autoplay 
-- icons
 
 Content Management: 
 - authentication scheme 
@@ -11,6 +7,3 @@ Content Management:
 - sort by created date 
 - tag based filters 
 
-Video player:   
-- video actions: pause video  
-- auto-next video 

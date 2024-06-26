@@ -4,7 +4,6 @@ import React from "react";
 import YouTube from "react-youtube";
 import { useVideoPlayer } from "./useVideoPlayer";
 import { PlaylistItem } from "./PlaylistItem";
-import { VIDEO_PLAYER_BG } from "../layout/utils/getDynamicLayoutClasses";
 
 export function VideoPlayer () {
   const { 
@@ -17,7 +16,7 @@ export function VideoPlayer () {
   return (
     <>
       {videoCollection.length > 0 && (
-        <div className={`w-full ${VIDEO_PLAYER_BG}`}>
+        <div className="w-full">
           {!!activeVideo && (
             <div className="w-full p-4">
               <div className="relative pb-[56.25%] h-0 overflow-hidden">

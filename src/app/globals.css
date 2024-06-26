@@ -23,17 +23,23 @@ body {
 @layer components {
   .player-closed .blog-list-item {
     @apply sm:flex-row; 
+    @apply 600mq:flex-row;
   }
 
   .player-open .blog-list-item {
-    @apply 1150:flex-row; 
+    /* TODO: two columns for 600-900px */
+    /* @apply 600mq:flex-col 600mq:w-1/2; */
+    @apply 600mq:flex-col;
+    @apply 900mq:flex-col 900mq:w-auto;
+    @apply 1250mq:flex-row 1250mq:gap-8;
   }
 
   .player-closed .blog-list-item .blog-thumbnail-container {
     @apply sm:w-[250px];
+    @apply 600mq:w-[250px];
   }
 
   .player-open .blog-list-item .blog-thumbnail-container {
-    @apply 1150:w-[250px];
+    @apply 1250mq:w-[250px];
   }
 }

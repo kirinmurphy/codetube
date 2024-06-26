@@ -9,7 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        '1150': '1150px',
+        '600mq': '600px',
+        '900mq': '900px',
+        '1250mq': '1250px',
       },
       colors: {
         background: "var(--background)",
