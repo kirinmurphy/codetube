@@ -25,7 +25,6 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   const { 
     videoCollection, 
     activeVideo, 
-    lastPlayedVideoId,
     isPlayerOpen, 
     autoPlay,
   } = videoPlayerState
@@ -45,28 +44,21 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   };
 
   const addVideoAndPlay = (video: VideoItem) => {    
-    const insertAfterIndex = !!activeVideo 
-      ? videoCollection.findIndex(v => v.youtubeId === activeVideo.youtubeId)
-      : !!lastPlayedVideoId 
-        ? videoCollection.findIndex(v => v.youtubeId === lastPlayedVideoId)
-        : -1; 
+    const currentActiveIndex = activeVideo &&  
+      videoCollection.findIndex(v => v.youtubeId === activeVideo.youtubeId);
 
-    // console.log('--------------------------');   
-    // console.log('find matcher', videoCollection.findIndex(v => v.youtubeId === activeVideo?.youtubeId));    
-    // console.log('insertAfterIndex',insertAfterIndex);
-    // console.log('activeVideo',activeVideo?.title);
-    // console.log('activeVideoIndex',videoCollection.findIndex(v => v.youtubeId === activeVideo?.youtubeId));
-    
-    const nextIndex = insertAfterIndex + 1;
-    const updatedVideoCollection = !!insertAfterIndex 
-      ? [...videoCollection.slice(0, nextIndex), video, ...videoCollection.slice(nextIndex)]
+    console.log('--------------------------------------');
+    console.log('currentActiveIndex',currentActiveIndex);
+      
+    const insertIndex = !!currentActiveIndex ? (currentActiveIndex + 1) : 0;
+    const updatedVideoCollection = !!insertIndex 
+      ? [...videoCollection.slice(0, insertIndex), video, ...videoCollection.slice(insertIndex)]
       : [...videoCollection, video];
   
     setVideoPlayerState({
       ...videoPlayerState,
       videoCollection: updatedVideoCollection,
       activeVideo: video,
-      lastPlayedVideoId: activeVideo?.youtubeId || null,
       isPlayerOpen: true,
       autoPlay: true,
     });
@@ -76,13 +68,15 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     setVideoPlayerState({
       ...videoPlayerState,
       activeVideo: video, 
-      lastPlayedVideoId: activeVideo?.youtubeId || null,
       autoPlay: true,
     });
   };
 
   const removeVideo = (youtubeId: string) => {
     const isActiveVideo = activeVideo?.youtubeId === youtubeId;
+    console.log('----- REMOVE VIDEO -------------------');
+    console.log('isActiveVideo', isActiveVideo);
+
     const activeVideoIndex = videoCollection.findIndex(v => v.youtubeId === youtubeId);
 
     const nextActiveVideo = isActiveVideo 

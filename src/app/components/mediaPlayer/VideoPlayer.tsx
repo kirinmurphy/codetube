@@ -3,8 +3,8 @@
 import React from "react";
 import YouTube from "react-youtube";
 import { useVideoPlayer } from "./useVideoPlayer";
-import { VideoItem } from "./types";
 import { PlaylistItem } from "./PlaylistItem";
+import { VIDEO_PLAYER_BG } from "../layout/utils/getDynamicLayoutClasses";
 
 export function VideoPlayer () {
   const { videoCollection, activeVideo, autoPlay } = useVideoPlayer();
@@ -12,9 +12,9 @@ export function VideoPlayer () {
   return (
     <>
       {videoCollection.length > 0 && (
-        <>
+        <div className={`w-full ${VIDEO_PLAYER_BG}`}>
           {!!activeVideo && (
-            <div className="w-full bg-blue-500 p-4">
+            <div className="w-full p-4">
               <div className="relative pb-[56.25%] h-0 overflow-hidden">
                 <YouTube
                   className="absolute top-0 left-0 w-full h-full"
@@ -43,7 +43,7 @@ export function VideoPlayer () {
               ))}
             </ul>
           </div>
-        </>
+        </div>
       )}
     </>
   );

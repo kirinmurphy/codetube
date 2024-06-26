@@ -19,3 +19,21 @@ body {
   background: var(--background);
   font-synthesis: none;
 }
+
+@layer components {
+  .player-closed .blog-list-item {
+    @apply sm:flex-row; 
+  }
+
+  .player-open .blog-list-item {
+    @apply 1150:flex-row; 
+  }
+
+  .player-closed .blog-list-item .blog-thumbnail-container {
+    @apply sm:w-[250px];
+  }
+
+  .player-open .blog-list-item .blog-thumbnail-container {
+    @apply 1150:w-[250px];
+  }
+}

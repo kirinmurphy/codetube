@@ -8,13 +8,13 @@ export function VideoPlayerWrapper({ children }: { children: React.ReactNode }) 
   const { isPlayerOpen } = useVideoPlayer();
 
   const { 
-    wrapperClasses,
+    pageWrapperClasses,
     videoPlayerClasses, 
     contentContainerClasses, 
   } = getDynamicLayoutClasses({ isPlayerOpen });
 
   return (
-    <div className={wrapperClasses}>
+    <div className={pageWrapperClasses}>
       <div className={videoPlayerClasses}>
         <VideoPlayer />
       </div>

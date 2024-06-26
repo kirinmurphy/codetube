@@ -19,7 +19,6 @@ export function VideoPlayerProvider ({ children }: Props) {
   const [videoPlayerState, setVideoPlayerState] = useState<VideoPlayerStateProps>({
     videoCollection: [], 
     activeVideo: null, 
-    lastPlayedVideoId: null,
     isPlayerOpen: false,
     autoPlay: false
   });

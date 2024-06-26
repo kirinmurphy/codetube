@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
-import { Button } from './widgets/Button';
-import { useVideoPlayer } from "./mediaPlayer/useVideoPlayer";
+import { FaPlay, FaPlus, FaMinusCircle } from "react-icons/fa";
+
+import { Button } from '../widgets/Button';
+import { useVideoPlayer } from "../mediaPlayer/useVideoPlayer";
 
 interface Props {
   youtubeId: string;
@@ -39,18 +41,18 @@ export function VideoPlayerBlogItemControls (props: Props) {
       {!idHasBeenAdded && (
         <div className="flex items-center gap-2">
           <Button onClick={handlePlay}>
-            Play
+            <FaPlay /> Play
           </Button>
 
           <Button onClick={handleAddToQueue}>
-            Add to Player
+            <FaPlus /> Add
           </Button>
         </div>
       )}
 
       {idHasBeenAdded && (
         <Button onClick={handleRemoveFromPlayer}>
-          Remove from Player
+          <FaMinusCircle /> Remove
         </Button>
       )}
     </>

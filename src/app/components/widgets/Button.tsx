@@ -12,7 +12,7 @@ const BUTTON_TYPE_STYLES = {
   [ButtonType.Secondary]: '',
 };
 
-const BASE_BUTTON_STYLES = 'text-white font-bold py-2 px-4 rounded';
+const BASE_BUTTON_STYLES = 'text-white font-bold py-2 px-4 rounded flex items-center gap-2';
 
 type ButtonPropsBase = {
   children: React.ReactNode;

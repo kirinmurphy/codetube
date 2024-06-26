@@ -8,7 +8,6 @@ export interface VideoItem {
 export interface VideoPlayerStateProps {
   videoCollection: VideoItem[];
   activeVideo: VideoItem | null;
-  lastPlayedVideoId: string | null;
   isPlayerOpen: boolean;
   autoPlay: boolean;
 }
