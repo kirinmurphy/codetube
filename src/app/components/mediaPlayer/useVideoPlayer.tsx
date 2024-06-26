@@ -8,6 +8,7 @@ interface UseVideoPlayerStateProps extends VideoPlayerStateProps {
   addVideo: (item: VideoItem) => void;
   addVideoAndPlay: (item: VideoItem) => void;
   playVideo: (video: VideoItem) => void;  
+  playNextVideo: () => void;
   removeVideo: (youtubeId: string) => void;
 }
 
@@ -64,11 +65,14 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     });
   };
 
+  const playNextVideo = () => {
+    const activeVideoIndex = videoCollection.findIndex((item) => item.youtubeId === activeVideo?.youtubeId);
+    const nextVideo = videoCollection[activeVideoIndex + 1];
+    if (nextVideo) { playVideo(nextVideo); } 
+  }
+ 
   const removeVideo = (youtubeId: string) => {
-    const nextActiveVideo = getNextActiveVideoOnRemove({ 
-      youtubeId, activeVideo, videoCollection 
-    });    
-
+    const nextActiveVideo = getNextActiveVideoOnRemove({ youtubeId, activeVideo, videoCollection });    
     const filteredVideos = videoCollection.filter((item) => item.youtubeId !== youtubeId);
 
     setVideoPlayerState({ 
@@ -85,6 +89,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     addVideo,
     addVideoAndPlay,
     playVideo,
+    playNextVideo,
     removeVideo
   }
 };

@@ -7,7 +7,12 @@ import { PlaylistItem } from "./PlaylistItem";
 import { VIDEO_PLAYER_BG } from "../layout/utils/getDynamicLayoutClasses";
 
 export function VideoPlayer () {
-  const { videoCollection, activeVideo, autoPlay } = useVideoPlayer();
+  const { 
+    videoCollection, 
+    activeVideo, 
+    autoPlay, 
+    playNextVideo 
+  } = useVideoPlayer();
 
   return (
     <>
@@ -20,13 +25,16 @@ export function VideoPlayer () {
                   className="absolute top-0 left-0 w-full h-full"
                   iframeClassName="absolute top-0 left-0 w-full h-full"
                   videoId={activeVideo?.youtubeId}
+                  onEnd={() => {
+                    playNextVideo();
+                  }}
                   opts={{
                     playerVars: {
                       autoplay: autoPlay ? 1 : 0,
-                      controls: 0,
-                      showinfo: 0,
-                      rel: 0,
-                      loop: 1,
+                      // controls: 0,
+                      // showinfo: 0,
+                      // rel: 0,
+                      // loop: 1,
                     },
                   }}
                 />
