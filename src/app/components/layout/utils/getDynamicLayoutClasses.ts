@@ -1,3 +1,5 @@
+import { VideoPlayerDisplayState } from "../../VideoPlayer/types";
+
 interface ClassDefinitions {
   videoPlayerClasses: string;
   contentContainerClasses: string;
@@ -5,37 +7,46 @@ interface ClassDefinitions {
 }
 
 interface Props {
-  isPlayerOpen: boolean;
+  displayState: VideoPlayerDisplayState;
 }
 
 export const VIDEO_PLAYER_BG = 'bg-gray-500';
 
 const containerClassesBase = 'transition-transform duration-300 ease-in-out';
 
+const videoPlayerClasses = {
+  [VideoPlayerDisplayState.Closed]: 'hidden',
+  [VideoPlayerDisplayState.SplitScreen]: `w-full h-1/2 fixed top-0 left-0 overflow-hidden bg-gray-800 
+    900mq:w-[calc(100%-400px)] 900mq:static 900mq:h-full  
+    1250mq:w-1/2`,
+  [VideoPlayerDisplayState.FullScreen]: `w-full h-full fixed top-0 left-0 overflow-hidden bg-gray-800`,
+  [VideoPlayerDisplayState.Mini]: `w-full h-[100px] fixed bottom-0 left-0 overflow-hidden bg-gray-800`,
+};
+
+const contentContainerClasses = {
+  [VideoPlayerDisplayState.Closed]: `w-full h-full ${containerClassesBase}  
+    900mq:translate-x-0`,
+  [VideoPlayerDisplayState.SplitScreen]: `w-full fixed bottom-0 left-0 h-1/2 overflow-y-scroll ${containerClassesBase} 
+    900mq:w-[400px] 900mq:relative 900mq:h-full 900mq:translate-x-0 
+    1250mq:w-1/2`,
+  [VideoPlayerDisplayState.FullScreen]: `w-full h-full ${containerClassesBase}`, 
+  [VideoPlayerDisplayState.Mini]: `w-full h-full mb-[100px] ${containerClassesBase}`,
+};
+
+const pageWrapperClasses = {
+  [VideoPlayerDisplayState.Closed]: 'w-full',
+  [VideoPlayerDisplayState.SplitScreen]: '900mq:flex 900mq:h-screen w-full',
+  [VideoPlayerDisplayState.FullScreen]: 'w-full',
+  [VideoPlayerDisplayState.Mini]: 'w-full',
+};
+
 export function getDynamicLayoutClasses(props: Props): ClassDefinitions {
 
-  const { isPlayerOpen } = props;
-  
-  const videoPlayerClasses = isPlayerOpen 
-    ? `w-full fixed top-0 left-0 overflow-hidden h-1/2 bg-gray-800 
-        900mq:w-[calc(100%-400px)] 900mq:static 900mq:h-full  
-        1250mq:w-1/2`
-    : 'hidden';
-
-  const contentContainerClasses = isPlayerOpen 
-    ? `w-full fixed bottom-0 left-0 h-1/2 overflow-y-scroll ${containerClassesBase} 
-        900mq:w-[400px] 900mq:relative 900mq:h-full 900mq:translate-x-0 
-        1250mq:w-1/2`
-    : `w-full h-full ${containerClassesBase} 
-        900mq:translate-x-0`;
-
-  const pageWrapperClasses = isPlayerOpen 
-    ? '900mq:flex 900mq:h-screen w-full' 
-    : 'w-full';
+  const { displayState } = props;  
 
   return { 
-    videoPlayerClasses, 
-    contentContainerClasses, 
-    pageWrapperClasses     
+    videoPlayerClasses: videoPlayerClasses[displayState], 
+    contentContainerClasses: contentContainerClasses[displayState], 
+    pageWrapperClasses: pageWrapperClasses[displayState],
   };
 }

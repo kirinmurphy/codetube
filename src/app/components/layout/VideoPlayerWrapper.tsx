@@ -5,13 +5,13 @@ import { useVideoPlayer } from "../VideoPlayer/useVideoPlayer";
 import { getDynamicLayoutClasses } from "./utils/getDynamicLayoutClasses";
 
 export function VideoPlayerWrapper({ children }: { children: React.ReactNode }) {
-  const { isPlayerOpen } = useVideoPlayer();
+  const { displayState } = useVideoPlayer();
 
   const { 
     pageWrapperClasses,
     videoPlayerClasses, 
     contentContainerClasses, 
-  } = getDynamicLayoutClasses({ isPlayerOpen });
+  } = getDynamicLayoutClasses({ displayState });
 
   return (
     <div className={pageWrapperClasses}>

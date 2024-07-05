@@ -1,5 +1,5 @@
 import { use } from "react";
-import { VideoItem, VideoPlayerStateProps } from "./types";
+import { VideoItem, VideoPlayerStateProps, VideoPlayerDisplayState } from "./types";
 import { VideoPlayerContext } from "./VideoPlayerProvider";
 import { getNextActiveVideoOnRemove } from "./utils/getNextActiveVideoOnRemove";
 import { getUpdatedCollectionWithInsertedVideo } from "./utils/getUpdatedCollectionWithInsertVideo";
@@ -10,6 +10,8 @@ interface UseVideoPlayerStateProps extends VideoPlayerStateProps {
   playVideo: (video: VideoItem) => void;  
   playNextVideo: () => void;
   removeVideo: (youtubeId: string) => void;
+  updateDisplayState: (displayState: VideoPlayerDisplayState) => void;
+  closePlayer: () => void;
 }
 
 export function useVideoPlayer (): UseVideoPlayerStateProps {
@@ -28,8 +30,8 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   const { 
     videoCollection, 
     activeVideo, 
-    isPlayerOpen, 
     autoPlay,
+    displayState
   } = videoPlayerState
 
   const addVideo = (video: VideoItem) => {
@@ -38,7 +40,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
       ...videoPlayerState,
       videoCollection: [...videoCollection, video], 
       activeVideo: isFirstVideo ? video : activeVideo,
-      isPlayerOpen: true,
+      displayState: VideoPlayerDisplayState.SplitScreen,
       autoPlay: videoCollection.length === 0 ? false : autoPlay
     });
   };
@@ -52,7 +54,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
       ...videoPlayerState,
       videoCollection: newVideoCollection,
       activeVideo: video,
-      isPlayerOpen: true,
+      displayState: VideoPlayerDisplayState.SplitScreen,
       autoPlay: true,
     });
   };
@@ -80,10 +82,18 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
       ...videoPlayerState,
       videoCollection: filteredVideos,
       activeVideo: nextActiveVideo || activeVideo,
-      isPlayerOpen: !!filteredVideos.length ? isPlayerOpen : false,
+      displayState: !!filteredVideos.length ? displayState : VideoPlayerDisplayState.Closed,
       autoPlay: nextActiveVideo ? false : autoPlay
     });
   };
+
+  const updateDisplayState = (displayState: VideoPlayerDisplayState) => {
+    setVideoPlayerState({ ...videoPlayerState, displayState });
+  }
+
+  const closePlayer = () => {
+    setVideoPlayerState({ ...videoPlayerState, displayState: VideoPlayerDisplayState.Closed });
+  }
 
   return {
     ...videoPlayerState,
@@ -91,6 +101,8 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     addVideoAndPlay,
     playVideo,
     playNextVideo,
-    removeVideo
+    removeVideo,
+    updateDisplayState,
+    closePlayer,
   }
 };

@@ -17,6 +17,7 @@ const BASE_BUTTON_STYLES = 'text-white font-bold py-1 px-2 rounded flex items-ce
 type ButtonPropsBase = {
   children: React.ReactNode;
   type?: ButtonType;
+  isDisabled?: boolean;
 };
 
 type ButtonPropsWithClick = ButtonPropsBase & {
@@ -32,12 +33,21 @@ type ButtonPropsWithMouseDown = ButtonPropsBase & {
 type ButtonProps = ButtonPropsWithClick | ButtonPropsWithMouseDown;
 
 export function Button (props: ButtonProps) {
-  const { children, type = ButtonType.Default, onClick } = props;
+  const { 
+    children, 
+    type = ButtonType.Default, 
+    isDisabled = false,
+    onClick 
+  } = props;
 
   const buttonClasses = `${BASE_BUTTON_STYLES} ${BUTTON_TYPE_STYLES[type]}`;
 
   return (
-    <button className={buttonClasses} onClick={onClick}>
+    <button 
+      className={buttonClasses} 
+      onClick={isDisabled ? undefined : onClick} 
+      disabled={isDisabled}
+    >
       {children}
     </button>
   );

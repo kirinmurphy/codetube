@@ -4,6 +4,7 @@ import React from "react";
 import YouTube from "react-youtube";
 import { useVideoPlayer } from "./useVideoPlayer";
 import { PlaylistItem } from "./PlaylistItem";
+import { VideoDisplayStateActions } from "./VideoDisplayStateActions";
 
 export function VideoPlayer () {
   const { 
@@ -17,6 +18,11 @@ export function VideoPlayer () {
     <>
       {videoCollection.length > 0 && (
         <div className="w-full p-4">
+
+          <div className="w-full mb-4 bg-black text-align-right">
+            <VideoDisplayStateActions />
+          </div>  
+
           {!!activeVideo && (
             <div className="w-full mb-4">
               <div className="relative pb-[56.25%] h-0 overflow-hidden">

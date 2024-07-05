@@ -5,9 +5,16 @@ export interface VideoItem {
 
 }
 
+export enum VideoPlayerDisplayState {
+  Closed = 'closed',
+  SplitScreen = 'split-screen',
+  FullScreen = 'full-screen',
+  Mini = 'mini',
+};
+
 export interface VideoPlayerStateProps {
   videoCollection: VideoItem[];
   activeVideo: VideoItem | null;
-  isPlayerOpen: boolean;
+  displayState: VideoPlayerDisplayState;
   autoPlay: boolean;
 }

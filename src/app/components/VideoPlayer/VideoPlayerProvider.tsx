@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, ReactNode, useState } from 'react';
-import { VideoPlayerStateProps } from './types';
+import { VideoPlayerStateProps, VideoPlayerDisplayState } from './types';
 
 interface VideoPlayerContextType {
   videoPlayerState: VideoPlayerStateProps;
@@ -19,16 +19,15 @@ export function VideoPlayerProvider ({ children }: Props) {
   const [videoPlayerState, setVideoPlayerState] = useState<VideoPlayerStateProps>({
     videoCollection: [], 
     activeVideo: null, 
-    isPlayerOpen: false,
+    displayState: VideoPlayerDisplayState.Closed,
     autoPlay: false
   });
 
-  const { isPlayerOpen } = videoPlayerState;
-
+  const { displayState } = videoPlayerState;
 
   return (
     <VideoPlayerContext.Provider value={{ videoPlayerState, setVideoPlayerState }}>
-      <div className={isPlayerOpen ? 'player-open' : 'player-closed'}>
+      <div className={`player-provider-wrapper ${displayState}`}>
         {children}
       </div>
     </VideoPlayerContext.Provider>
