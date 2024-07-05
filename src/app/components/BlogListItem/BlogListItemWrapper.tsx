@@ -1,6 +1,6 @@
 'use client';
 
-import { useVideoPlayer } from '../mediaPlayer/useVideoPlayer';
+import { useVideoPlayer } from '../VideoPlayer/useVideoPlayer';
 
 interface Props {
   children: React.ReactNode;

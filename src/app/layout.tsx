@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
-import "./globals.css";
-import { VideoPlayerProvider } from "./components/mediaPlayer/VideoPlayerProvider";
+import "./css/globals.css";
+import "./components/BlogListItem/blogListItem.css";
+import { VideoPlayerProvider } from "./components/VideoPlayer/VideoPlayerProvider";
 import { LayoutContents } from "./components/layout/LayoutContents";
 import { VideoPlayerWrapper } from "./components/layout/VideoPlayerWrapper";
 

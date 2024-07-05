@@ -16,9 +16,9 @@ export function VideoPlayer () {
   return (
     <>
       {videoCollection.length > 0 && (
-        <div className="w-full">
+        <div className="w-full p-4">
           {!!activeVideo && (
-            <div className="w-full p-4">
+            <div className="w-full mb-4">
               <div className="relative pb-[56.25%] h-0 overflow-hidden">
                 <YouTube
                   className="absolute top-0 left-0 w-full h-full"
@@ -41,7 +41,7 @@ export function VideoPlayer () {
             </div>    
           )}
 
-          <div className="w-full p-6">
+          <div className="w-full">
             <ul>
               {videoCollection.map(video => (
                 <li key={video.youtubeId}>

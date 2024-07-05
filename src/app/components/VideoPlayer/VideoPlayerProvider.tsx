@@ -23,10 +23,14 @@ export function VideoPlayerProvider ({ children }: Props) {
     autoPlay: false
   });
 
+  const { isPlayerOpen } = videoPlayerState;
+
 
   return (
     <VideoPlayerContext.Provider value={{ videoPlayerState, setVideoPlayerState }}>
-      {children}
+      <div className={isPlayerOpen ? 'player-open' : 'player-closed'}>
+        {children}
+      </div>
     </VideoPlayerContext.Provider>
   );
 };

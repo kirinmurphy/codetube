@@ -1,4 +1,5 @@
 NEXT: 
+- video init race codntion on earlylicks
 - mobile video player state 
 
 Content Management: 

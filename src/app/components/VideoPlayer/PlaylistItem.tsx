@@ -10,11 +10,6 @@ export function PlaylistItem({ video }: PlaylistItemProps) {
   const { activeVideo, playVideo } = useVideoPlayer();
   const isActiveVideo = activeVideo?.youtubeId === video.youtubeId;
 
-  const baseClassList = "text-lg mb-2";
-  const dynamicVideoLinkClasses = isActiveVideo 
-    ? 'font-bold text-white' : 'cursor-pointer hover:text-white'; 
-  const classList = `${baseClassList} ${dynamicVideoLinkClasses}`;
-
   const handlePlaylistItemSelect = () => {
     if (isActiveVideo) return;
     playVideo(video);
@@ -34,7 +29,8 @@ interface GetListItemClassListProps {
 }
 
 function getListItemClassList({ isActiveVideo }: GetListItemClassListProps) {
+  const baseClasses = 'text-lg px-4 py-2 border border-gray-500';
   const dynamicVideoLinkClasses = isActiveVideo 
-    ? 'font-bold text-white' : 'cursor-pointer hover:text-white'; 
-  return `text-lg mb-2 ${dynamicVideoLinkClasses}`;
+    ? 'font-bold bg-gray-200 text-black' : 'cursor-pointer hover:text-white'; 
+  return `${baseClasses} ${dynamicVideoLinkClasses}`;
 }

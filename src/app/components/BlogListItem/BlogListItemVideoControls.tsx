@@ -4,7 +4,7 @@ import React from "react";
 import { FaPlay, FaPlus, FaMinusCircle } from "react-icons/fa";
 
 import { Button } from '../widgets/Button';
-import { useVideoPlayer } from "../mediaPlayer/useVideoPlayer";
+import { useVideoPlayer } from "../VideoPlayer/useVideoPlayer";
 
 interface Props {
   youtubeId: string;
@@ -16,17 +16,25 @@ export function VideoPlayerBlogItemControls (props: Props) {
 
   const { 
     videoCollection, 
+    activeVideo,
     addVideo, 
     addVideoAndPlay, 
-    removeVideo     
+    removeVideo,
+    playVideo     
   } = useVideoPlayer();
 
-  const idHasBeenAdded = videoCollection
-    .some((item) => item.youtubeId === youtubeId);
+  const alreadyAddedVideo = videoCollection
+    .find((item) => item.youtubeId === youtubeId);
 
-  const handlePlay = () => {
+  const isActiveVideo = activeVideo?.youtubeId === youtubeId;
+
+  const handleAddAndPlay = () => {
     addVideoAndPlay({ youtubeId, title, played: true });
   };
+
+  const handlePlayAfterAdd = () => {
+    playVideo(alreadyAddedVideo!);
+  }
 
   const handleAddToQueue = () => {
     addVideo({ youtubeId, title, played: false });
@@ -37,24 +45,32 @@ export function VideoPlayerBlogItemControls (props: Props) {
   };
 
   return (
-    <>
-      {!idHasBeenAdded && (
-        <div className="flex items-center gap-2">
-          <Button onClick={handlePlay}>
+    <div className="flex items-center gap-2">
+      {!alreadyAddedVideo && (
+        <>
+          <Button onClick={handleAddAndPlay}>
             <FaPlay /> Play
           </Button>
 
           <Button onClick={handleAddToQueue}>
             <FaPlus /> Add
           </Button>
-        </div>
+        </>
       )}
 
-      {idHasBeenAdded && (
-        <Button onClick={handleRemoveFromPlayer}>
-          <FaMinusCircle /> Remove
-        </Button>
+      {alreadyAddedVideo && (
+        <>
+          {!isActiveVideo && (
+            <Button onClick={handlePlayAfterAdd}>
+              <FaPlay /> Play
+            </Button>            
+          )}        
+
+          <Button onClick={handleRemoveFromPlayer}>
+            <FaMinusCircle /> Remove
+          </Button>
+        </>
       )}
-    </>
+    </div>
   );
 }

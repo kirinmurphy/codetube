@@ -1,7 +1,7 @@
 "use client";
 
-import { VideoPlayer } from "../mediaPlayer/VideoPlayer";
-import { useVideoPlayer } from "../mediaPlayer/useVideoPlayer";
+import { VideoPlayer } from "../VideoPlayer/VideoPlayer";
+import { useVideoPlayer } from "../VideoPlayer/useVideoPlayer";
 import { getDynamicLayoutClasses } from "./utils/getDynamicLayoutClasses";
 
 export function VideoPlayerWrapper({ children }: { children: React.ReactNode }) {

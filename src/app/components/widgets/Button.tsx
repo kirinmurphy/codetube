@@ -7,12 +7,12 @@ export enum ButtonType {
 }
 
 const BUTTON_TYPE_STYLES = {
-  [ButtonType.Default]: 'bg-blue-500 hover:bg-blue-700',
+  [ButtonType.Default]: 'bg-black hover:bg-gray-800 border border-gray-600',
   [ButtonType.Primary]: '',
   [ButtonType.Secondary]: '',
 };
 
-const BASE_BUTTON_STYLES = 'text-white font-bold py-2 px-4 rounded flex items-center gap-2';
+const BASE_BUTTON_STYLES = 'text-white font-bold py-1 px-2 rounded flex items-center gap-2';
 
 type ButtonPropsBase = {
   children: React.ReactNode;

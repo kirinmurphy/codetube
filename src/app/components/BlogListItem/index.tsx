@@ -20,7 +20,7 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
 
   return (
     <div className="blog-list-item flex flex-col items-start gap-4">
-      <div className="blog-thumbnail-container w-full flex-shrink-0"> 
+      <div className="blog-thumbnail-container w-full flex-shrink-0 border border-gray-600">
         <Image 
           className="blog-thumbnail w-full object-cover" 
           src={blogImage} 
