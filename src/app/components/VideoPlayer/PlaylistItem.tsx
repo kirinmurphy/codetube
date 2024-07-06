@@ -12,7 +12,7 @@ export function PlaylistItem({ video }: PlaylistItemProps) {
 
   const handlePlaylistItemSelect = () => {
     if (isActiveVideo) return;
-    playVideo(video);
+    playVideo({ video });
   }
 
   return (

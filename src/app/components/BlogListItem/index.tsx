@@ -1,9 +1,10 @@
+import Image from 'next/image';
 import { PrismaTypes } from '@/lib/prisma';
 
 const THUMBNAIL_SIZE = 250;
 
-import Image from 'next/image';
 import { VideoPlayerBlogItemControls } from './BlogListItemVideoControls';
+import { getYoutubeThumbnaillUrl } from '../VideoPlayer/utils/getYoutubeUrls';
 
 export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps }) {
   const { title, body, imgUrl, externalSourceLink, youtubeId, blogId } = blogPost;
@@ -13,7 +14,7 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
     : externalSourceLink || '';
 
   const blogImage = imgUrl ? imgUrl
-    : youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` 
+    : youtubeId ? getYoutubeThumbnaillUrl(youtubeId) 
     : '';
 
   const linkTarget = blogId ? '_self' : '_blank';

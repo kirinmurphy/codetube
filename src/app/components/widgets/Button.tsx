@@ -2,12 +2,14 @@ import React from "react";
 
 export enum ButtonType {
   Default = 'default',
+  DefaultDisabled = 'defaultDisabled',
   Primary = 'primary',
   Secondary = 'secondary',
 }
 
 const BUTTON_TYPE_STYLES = {
-  [ButtonType.Default]: 'bg-black hover:bg-gray-800 border border-gray-600',
+  [ButtonType.Default]: 'bg-black hover:bg-gray-800 border border-gray-700',
+  [ButtonType.DefaultDisabled]: 'bg-gray-900 text-gray-700 border-gray-900 hover:bg-gray-900',
   [ButtonType.Primary]: '',
   [ButtonType.Secondary]: '',
 };
@@ -40,7 +42,8 @@ export function Button (props: ButtonProps) {
     onClick 
   } = props;
 
-  const buttonClasses = `${BASE_BUTTON_STYLES} ${BUTTON_TYPE_STYLES[type]}`;
+  const buttonDisabledStyles = isDisabled ? BUTTON_TYPE_STYLES[`${type}Disabled` as ButtonType] : '';
+  const buttonClasses = `${BASE_BUTTON_STYLES} ${BUTTON_TYPE_STYLES[type]} ${buttonDisabledStyles}`;
 
   return (
     <button 

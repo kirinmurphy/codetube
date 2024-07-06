@@ -21,7 +21,7 @@ const videoPlayerClasses = {
     900mq:w-[calc(100%-400px)] 900mq:static 900mq:h-full  
     1250mq:w-1/2`,
   [VideoPlayerDisplayState.FullScreen]: `w-full h-full fixed top-0 left-0 overflow-hidden bg-gray-800`,
-  [VideoPlayerDisplayState.Mini]: `w-full h-[100px] fixed bottom-0 left-0 overflow-hidden bg-gray-800`,
+  [VideoPlayerDisplayState.Mini]: `w-full h-[85px] fixed bottom-0 left-0 overflow-hidden bg-gray-800`,
 };
 
 const contentContainerClasses = {
@@ -33,7 +33,7 @@ const contentContainerClasses = {
     900mq:w-[400px] 900mq:relative 900mq:h-full 900mq:translate-x-0 
     1250mq:w-1/2`,
   [VideoPlayerDisplayState.FullScreen]: `w-full h-full ${containerClassesBase}`, 
-  [VideoPlayerDisplayState.Mini]: `w-full h-full mb-[100px] ${containerClassesBase}`,
+  [VideoPlayerDisplayState.Mini]: `w-full h-full mb-[85px] ${containerClassesBase}`,
 };
 
 const pageWrapperClasses = {

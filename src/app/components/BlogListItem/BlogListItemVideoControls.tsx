@@ -33,7 +33,7 @@ export function VideoPlayerBlogItemControls (props: Props) {
   };
 
   const handlePlayAfterAdd = () => {
-    playVideo(alreadyAddedVideo!);
+    playVideo({ video: alreadyAddedVideo! });
   }
 
   const handleAddToQueue = () => {

@@ -4,16 +4,28 @@ import { VideoPlayerContext } from "./VideoPlayerProvider";
 import { getNextActiveVideoOnRemove } from "./utils/getNextActiveVideoOnRemove";
 import { getUpdatedCollectionWithInsertedVideo } from "./utils/getUpdatedCollectionWithInsertVideo";
 
+interface PlayVideoProps {
+  video: VideoItem;
+  displayState?: VideoPlayerDisplayState;
+}
+
+interface UpdatePlayerStateProps {
+  isPlaying: boolean;
+}
+
 interface UseVideoPlayerStateProps extends VideoPlayerStateProps {
   getPlayerState: () => VideoPlayerStateProps;
   addVideo: (item: VideoItem) => void;
   addVideoAndPlay: (item: VideoItem) => void;
-  playVideo: (video: VideoItem) => void;  
+  playVideo: ({ video, displayState }: PlayVideoProps) => void;  
+  getPreviousVideo: () => VideoItem | null;
+  playPreviousVideo: () => void;
+  getNextVideo: () => VideoItem | null;
   playNextVideo: () => void;
   removeVideo: (youtubeId: string) => void;
   updateDisplayState: (displayState: VideoPlayerDisplayState) => void;
   closePlayer: () => void;
-  updatePlayState: ({ isPlaying }: { isPlaying: boolean }) => void;
+  updatePlayState: ({ isPlaying }: UpdatePlayerStateProps) => void;
 }
 
 export function useVideoPlayer (): UseVideoPlayerStateProps {
@@ -42,9 +54,8 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   const addVideo = (video: VideoItem) => {
     const isFirstVideo = videoCollection.length === 0;
     const newDisplayState = displayState !== VideoPlayerDisplayState.Closed 
-      ? displayState : screenType === ScreenType.Full 
-        ? VideoPlayerDisplayState.SplitScreen : VideoPlayerDisplayState.Mini;
-
+      ? displayState : VideoPlayerDisplayState.Mini;
+ 
     setVideoPlayerState({ 
       ...videoPlayerState,
       videoCollection: [...videoCollection, video], 
@@ -73,24 +84,41 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     });
   };
 
-  const playVideo = (video: VideoItem) => {
+  const playVideo = ({ video, displayState }: PlayVideoProps) => {
     setVideoPlayerState({
       ...videoPlayerState,
+      ...(displayState ? { displayState } : {}),
       activeVideo: video, 
       autoPlay: true,
       isPlaying: true,
     });
   };
 
-  const updatePlayState = ({ isPlaying }: { isPlaying: boolean }) => {
+  const updatePlayState = ({ isPlaying }: UpdatePlayerStateProps) => {
     setVideoPlayerState({ ...videoPlayerState, isPlaying });
   }  
 
-  const playNextVideo = () => {
+  const getPreviousVideo = () => {
     const activeVideoIndex = videoCollection
       .findIndex((item) => item.youtubeId === activeVideo?.youtubeId);
-    const nextVideo = videoCollection[activeVideoIndex + 1];
-    if (nextVideo) { playVideo(nextVideo); } 
+    return activeVideoIndex > 0 ? videoCollection[activeVideoIndex - 1] : null;
+  }
+
+  const playPreviousVideo = () => {
+    const nextVideo = getPreviousVideo();
+    if (nextVideo) { playVideo({ video: nextVideo }); } 
+    else { updatePlayState({ isPlaying: false }); }
+  }
+
+  const getNextVideo = () => {
+    const activeVideoIndex = videoCollection
+      .findIndex((item) => item.youtubeId === activeVideo?.youtubeId);
+    return videoCollection[activeVideoIndex + 1] || null;
+  }
+
+  const playNextVideo = () => {
+    const nextVideo = getNextVideo();
+    if (nextVideo) { playVideo({ video: nextVideo }); } 
     else { updatePlayState({ isPlaying: false }); }
   }
  
@@ -121,6 +149,9 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     addVideo,
     addVideoAndPlay,
     playVideo,
+    getPreviousVideo,
+    playPreviousVideo,
+    getNextVideo,
     playNextVideo,
     removeVideo,
     updateDisplayState,
