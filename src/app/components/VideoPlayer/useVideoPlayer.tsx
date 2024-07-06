@@ -1,10 +1,11 @@
 import { use } from "react";
-import { VideoItem, VideoPlayerStateProps, VideoPlayerDisplayState } from "./types";
+import { VideoItem, VideoPlayerStateProps, VideoPlayerDisplayState, ScreenType } from "./types";
 import { VideoPlayerContext } from "./VideoPlayerProvider";
 import { getNextActiveVideoOnRemove } from "./utils/getNextActiveVideoOnRemove";
 import { getUpdatedCollectionWithInsertedVideo } from "./utils/getUpdatedCollectionWithInsertVideo";
 
 interface UseVideoPlayerStateProps extends VideoPlayerStateProps {
+  getPlayerState: () => VideoPlayerStateProps;
   addVideo: (item: VideoItem) => void;
   addVideoAndPlay: (item: VideoItem) => void;
   playVideo: (video: VideoItem) => void;  
@@ -12,6 +13,7 @@ interface UseVideoPlayerStateProps extends VideoPlayerStateProps {
   removeVideo: (youtubeId: string) => void;
   updateDisplayState: (displayState: VideoPlayerDisplayState) => void;
   closePlayer: () => void;
+  updatePlayState: ({ isPlaying }: { isPlaying: boolean }) => void;
 }
 
 export function useVideoPlayer (): UseVideoPlayerStateProps {
@@ -31,16 +33,23 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     videoCollection, 
     activeVideo, 
     autoPlay,
-    displayState
-  } = videoPlayerState
+    displayState,
+    screenType,
+  } = videoPlayerState;
+
+  const getPlayerState = () => ({ ...videoPlayerState }); 
 
   const addVideo = (video: VideoItem) => {
     const isFirstVideo = videoCollection.length === 0;
+    const newDisplayState = displayState !== VideoPlayerDisplayState.Closed 
+      ? displayState : screenType === ScreenType.Full 
+        ? VideoPlayerDisplayState.SplitScreen : VideoPlayerDisplayState.Mini;
+
     setVideoPlayerState({ 
       ...videoPlayerState,
       videoCollection: [...videoCollection, video], 
       activeVideo: isFirstVideo ? video : activeVideo,
-      displayState: VideoPlayerDisplayState.SplitScreen,
+      displayState: newDisplayState,
       autoPlay: videoCollection.length === 0 ? false : autoPlay
     });
   };
@@ -50,12 +59,17 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
       video, videoCollection, activeVideo
     });
 
+    const newDisplayState = displayState !== VideoPlayerDisplayState.Closed ? displayState 
+      : screenType === ScreenType.Full ? VideoPlayerDisplayState.SplitScreen 
+      : VideoPlayerDisplayState.FullScreen;
+
     setVideoPlayerState({
       ...videoPlayerState,
       videoCollection: newVideoCollection,
       activeVideo: video,
-      displayState: VideoPlayerDisplayState.SplitScreen,
+      displayState: newDisplayState,
       autoPlay: true,
+      isPlaying: true,
     });
   };
 
@@ -64,14 +78,20 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
       ...videoPlayerState,
       activeVideo: video, 
       autoPlay: true,
+      isPlaying: true,
     });
   };
+
+  const updatePlayState = ({ isPlaying }: { isPlaying: boolean }) => {
+    setVideoPlayerState({ ...videoPlayerState, isPlaying });
+  }  
 
   const playNextVideo = () => {
     const activeVideoIndex = videoCollection
       .findIndex((item) => item.youtubeId === activeVideo?.youtubeId);
     const nextVideo = videoCollection[activeVideoIndex + 1];
     if (nextVideo) { playVideo(nextVideo); } 
+    else { updatePlayState({ isPlaying: false }); }
   }
  
   const removeVideo = (youtubeId: string) => {
@@ -97,6 +117,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
 
   return {
     ...videoPlayerState,
+    getPlayerState,
     addVideo,
     addVideoAndPlay,
     playVideo,
@@ -104,5 +125,6 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     removeVideo,
     updateDisplayState,
     closePlayer,
+    updatePlayState,
   }
 };

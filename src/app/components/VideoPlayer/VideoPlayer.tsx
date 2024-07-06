@@ -11,15 +11,16 @@ export function VideoPlayer () {
     videoCollection, 
     activeVideo, 
     autoPlay, 
-    playNextVideo 
+    playNextVideo,
+    updatePlayState, 
   } = useVideoPlayer();
 
   return (
     <>
       {videoCollection.length > 0 && (
-        <div className="w-full p-4">
+        <div className="w-full p-4 max-w-[1100px] mx-auto">
 
-          <div className="w-full mb-4 bg-black text-align-right">
+          <div className="w-full mb-4 flex justify-end">
             <VideoDisplayStateActions />
           </div>  
 
@@ -33,6 +34,12 @@ export function VideoPlayer () {
                   onEnd={() => {
                     playNextVideo();
                   }}
+                  onPlay={() => {
+                    updatePlayState({ isPlaying: true });
+                  }}
+                  onPause={() => {
+                    updatePlayState({ isPlaying: false });
+                  }}                  
                   opts={{
                     playerVars: {
                       autoplay: autoPlay ? 1 : 0,

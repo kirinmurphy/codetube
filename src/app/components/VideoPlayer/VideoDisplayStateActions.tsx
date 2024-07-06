@@ -2,42 +2,50 @@
 
 import React from "react";
 import { useVideoPlayer } from "./useVideoPlayer";
-import { FaTimes, FaExpand } from "react-icons/fa";
+
+import { FaTimes, FaArrowDown, FaArrowUp, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+
 import { Button } from "../widgets/Button";
-import { VideoPlayerDisplayState } from "./types";
+import { ScreenType, VideoPlayerDisplayState } from "./types";
 
 export function VideoDisplayStateActions () {
-  const { displayState, updateDisplayState } = useVideoPlayer();
+  const { 
+    displayState: currentDisplayState,
+    screenType, 
+    updateDisplayState 
+  } = useVideoPlayer();
 
   const handleDisplayStateChange = (newDisplayState: VideoPlayerDisplayState) => {
     updateDisplayState(newDisplayState);
   };
 
+  const FullScreenIcon = currentDisplayState === VideoPlayerDisplayState.SplitScreen 
+    ? FaArrowRight : FaArrowUp;
+
+  const viewStateTriggers = [
+    { displayState: VideoPlayerDisplayState.SplitScreen, Icon: FaArrowLeft },
+    { displayState: VideoPlayerDisplayState.FullScreen, Icon: FullScreenIcon },
+    { displayState: VideoPlayerDisplayState.Mini, Icon: FaArrowDown },
+    { displayState: VideoPlayerDisplayState.Closed, Icon: FaTimes },
+  ];
+
   return (
     <div className="flex items-center gap-2">
-      
-      <Button 
-        isDisabled={displayState === VideoPlayerDisplayState.SplitScreen}
-        onClick={() => handleDisplayStateChange(VideoPlayerDisplayState.SplitScreen)}>
-        <FaExpand /> Split
-      </Button>
+      {viewStateTriggers.map(({ displayState, Icon }) => {
+        const isNotCurrentDisplayState = displayState !== currentDisplayState;
+        const hideNonMobileTrigger = screenType === ScreenType.Mobile && displayState === VideoPlayerDisplayState.SplitScreen;
+        const showButton = isNotCurrentDisplayState && !hideNonMobileTrigger; 
 
-      <Button 
-        isDisabled={displayState === VideoPlayerDisplayState.FullScreen}
-        onClick={() => handleDisplayStateChange(VideoPlayerDisplayState.FullScreen)}>
-        <FaExpand /> Full
-      </Button>
-
-      <Button 
-        isDisabled={displayState === VideoPlayerDisplayState.Mini}
-        onClick={() => handleDisplayStateChange(VideoPlayerDisplayState.Mini)}>
-        <FaExpand /> Mini
-      </Button>
-
-      <Button 
-        onClick={() => handleDisplayStateChange(VideoPlayerDisplayState.Closed)}>
-        <FaTimes /> Close
-      </Button>
+        return (
+          <React.Fragment key={displayState}>
+            {showButton && (
+              <Button onClick={() => handleDisplayStateChange(displayState)}>
+                <Icon />
+              </Button>
+            )}
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 }
