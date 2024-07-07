@@ -9,11 +9,13 @@ export function VideoPlayerMini () {
 
   const { 
     activeVideo,
+    isPlaying,
     playVideo,
     getPreviousVideo,
     playPreviousVideo,
     getNextVideo,
     playNextVideo,
+    pauseVideo,
   } = useVideoPlayer();
 
   if ( activeVideo === null ) return <></>;
@@ -25,6 +27,10 @@ export function VideoPlayerMini () {
 
   const handleListen = () => {
     console.log('listen');
+  };
+
+  const handlePause = () => {
+    pauseVideo()
   };
 
   const handleWatch = () => {
@@ -45,8 +51,6 @@ export function VideoPlayerMini () {
   return (
     <>
       <div className="w-full p-2 max-w-[1020px] mx-auto flex items-center gap-4">
-        {/* <div className="w-[80px] relative pb-[36.25%] h-0 overflow-hidden border border-gray-600"> */}
-
         <div className="w-[120px] mr-2 border border-gray-600">
           <Image
             className="w-full object-cover" 
@@ -59,7 +63,9 @@ export function VideoPlayerMini () {
 
         <div className="flex-1 flex items-center gap-2 max-w-[730px] mx-auto px-4 h-[60px] bg-black">
 
-          <Button onClick={handleListen}>Listen</Button>
+          {!isPlaying && <Button onClick={handleListen}>Listen</Button>}
+
+          {isPlaying && <Button onClick={handlePause}>Pause</Button>}
 
           <Button onClick={handleWatch}>Watch</Button>
 

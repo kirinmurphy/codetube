@@ -5,15 +5,11 @@ import { getNextActiveVideoOnRemove } from "./utils/getNextActiveVideoOnRemove";
 import { getUpdatedCollectionWithInsertedVideo } from "./utils/getUpdatedCollectionWithInsertVideo";
 
 interface PlayVideoProps {
-  video: VideoItem;
+  video?: VideoItem;
   displayState?: VideoPlayerDisplayState;
 }
 
-interface UpdatePlayerStateProps {
-  isPlaying: boolean;
-}
-
-interface UseVideoPlayerStateProps extends VideoPlayerStateProps {
+interface Props extends VideoPlayerStateProps {
   getPlayerState: () => VideoPlayerStateProps;
   addVideo: (item: VideoItem) => void;
   addVideoAndPlay: (item: VideoItem) => void;
@@ -25,10 +21,10 @@ interface UseVideoPlayerStateProps extends VideoPlayerStateProps {
   removeVideo: (youtubeId: string) => void;
   updateDisplayState: (displayState: VideoPlayerDisplayState) => void;
   closePlayer: () => void;
-  updatePlayState: ({ isPlaying }: UpdatePlayerStateProps) => void;
+  pauseVideo: () => void;
 }
 
-export function useVideoPlayer (): UseVideoPlayerStateProps {
+export function useVideoPlayer (): Props {
 
   const context = use(VideoPlayerContext);
 
@@ -88,15 +84,15 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     setVideoPlayerState({
       ...videoPlayerState,
       ...(displayState ? { displayState } : {}),
-      activeVideo: video, 
+      activeVideo: video || activeVideo,
       autoPlay: true,
       isPlaying: true,
     });
   };
 
-  const updatePlayState = ({ isPlaying }: UpdatePlayerStateProps) => {
-    setVideoPlayerState({ ...videoPlayerState, isPlaying });
-  }  
+  const pauseVideo = () => {
+    setVideoPlayerState({ ...videoPlayerState, isPlaying: false });
+  };
 
   const getPreviousVideo = () => {
     const activeVideoIndex = videoCollection
@@ -107,7 +103,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   const playPreviousVideo = () => {
     const nextVideo = getPreviousVideo();
     if (nextVideo) { playVideo({ video: nextVideo }); } 
-    else { updatePlayState({ isPlaying: false }); }
+    else { pauseVideo() }
   }
 
   const getNextVideo = () => {
@@ -119,7 +115,7 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
   const playNextVideo = () => {
     const nextVideo = getNextVideo();
     if (nextVideo) { playVideo({ video: nextVideo }); } 
-    else { updatePlayState({ isPlaying: false }); }
+    else { pauseVideo() }
   }
  
   const removeVideo = (youtubeId: string) => {
@@ -156,6 +152,6 @@ export function useVideoPlayer (): UseVideoPlayerStateProps {
     removeVideo,
     updateDisplayState,
     closePlayer,
-    updatePlayState,
+    pauseVideo,
   }
 };

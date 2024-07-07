@@ -12,15 +12,17 @@ export function VideoPlayer () {
     displayState,
   } = useVideoPlayer();
 
+  const isMiniPlayer = displayState === VideoPlayerDisplayState.Mini;
+
   return (
     <>
       {videoCollection.length > 0 && (
         <>
-          {displayState === VideoPlayerDisplayState.Mini && (
+          {isMiniPlayer && (
             <VideoPlayerMini />
           )}
 
-          {displayState !== VideoPlayerDisplayState.Mini && (
+          {!isMiniPlayer && (
             <VideoPlayerFull />
           )}
         </>

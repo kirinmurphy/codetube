@@ -11,8 +11,9 @@ export function VideoPlayerFull () {
     videoCollection, 
     activeVideo, 
     autoPlay, 
+    playVideo,
     playNextVideo,
-    updatePlayState, 
+    pauseVideo,
   } = useVideoPlayer();
 
   return (
@@ -35,10 +36,10 @@ export function VideoPlayerFull () {
                     playNextVideo();
                   }}
                   onPlay={() => {
-                    updatePlayState({ isPlaying: true });
+                    playVideo({ video: activeVideo });
                   }}
                   onPause={() => {
-                    updatePlayState({ isPlaying: false });
+                    pauseVideo()
                   }}                  
                   opts={{
                     playerVars: {
