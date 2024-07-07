@@ -1,11 +1,12 @@
 "use client";
 
-import React, { createContext, ReactNode, useLayoutEffect, useState } from 'react';
+import React, { createContext, MutableRefObject, ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { debounce } from '@/lib/debounce';
 import { VideoPlayerStateProps, VideoPlayerDisplayState, ScreenType } from './types';
 import { getDisplayStateOnResize } from './utils/getDisplayStateOnResize';
 
 interface VideoPlayerContextType {
+  videoPlayerRef: MutableRefObject<any>;
   videoPlayerState: VideoPlayerStateProps;
   setVideoPlayerState: (state: VideoPlayerStateProps) => void;
 }
@@ -29,6 +30,14 @@ export function VideoPlayerProvider ({ children }: Props) {
 
   const { displayState } = videoPlayerState;
 
+  const videoPlayerRef = useRef<any>(null);
+
+  useEffect(() => {
+    return () => {
+      videoPlayerRef.current = null;
+    };
+  }, []);
+
   useLayoutEffect(() => {
     const handleResize = debounce(() => {
       const newScreenType: ScreenType = window.innerWidth <= 900 
@@ -48,8 +57,15 @@ export function VideoPlayerProvider ({ children }: Props) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const contextProps = {
+    videoPlayerRef,
+    videoPlayerState,
+    setVideoPlayerState,
+  }
+
+
   return (
-    <VideoPlayerContext.Provider value={{ videoPlayerState, setVideoPlayerState }}>
+    <VideoPlayerContext.Provider value={contextProps}>
       <div className={`player-provider-wrapper ${displayState}`}>
         {children}
       </div>

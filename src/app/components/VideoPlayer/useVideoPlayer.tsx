@@ -11,6 +11,7 @@ interface PlayVideoProps {
 
 interface Props extends VideoPlayerStateProps {
   getPlayerState: () => VideoPlayerStateProps;
+  onReady: (event: any) => void;
   addVideo: (item: VideoItem) => void;
   addVideoAndPlay: (item: VideoItem) => void;
   playVideo: ({ video, displayState }: PlayVideoProps) => void;  
@@ -34,6 +35,7 @@ export function useVideoPlayer (): Props {
 
   const { 
     videoPlayerState,
+    videoPlayerRef,
     setVideoPlayerState 
   } = context;
 
@@ -44,6 +46,11 @@ export function useVideoPlayer (): Props {
     displayState,
     screenType,
   } = videoPlayerState;
+
+  const onReady = (event: any) => {
+    videoPlayerRef.current = event.target;
+    console.log('!!!! videoPlayerRef', videoPlayerRef);
+  };
 
   const getPlayerState = () => ({ ...videoPlayerState }); 
 
@@ -91,6 +98,11 @@ export function useVideoPlayer (): Props {
   };
 
   const pauseVideo = () => {
+    console.log('PAUSEEE - videoPlayerRef', videoPlayerRef);
+    if (videoPlayerRef.current) {
+      console.log('<<<<< whyyyyyyyyyyyyyyyyyyy');
+      videoPlayerRef.current.pauseVideo();
+    }
     setVideoPlayerState({ ...videoPlayerState, isPlaying: false });
   };
 
@@ -141,6 +153,7 @@ export function useVideoPlayer (): Props {
 
   return {
     ...videoPlayerState,
+    onReady,
     getPlayerState,
     addVideo,
     addVideoAndPlay,

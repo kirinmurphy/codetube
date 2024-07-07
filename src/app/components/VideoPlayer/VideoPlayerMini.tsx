@@ -26,11 +26,11 @@ export function VideoPlayerMini () {
   const { title, youtubeId } = activeVideo;
 
   const handleListen = () => {
-    console.log('listen');
+    playVideo({ video: activeVideo });
   };
 
   const handlePause = () => {
-    pauseVideo()
+    pauseVideo();
   };
 
   const handleWatch = () => {
@@ -50,41 +50,38 @@ export function VideoPlayerMini () {
 
   return (
     <>
-      <div className="w-full p-2 max-w-[1020px] mx-auto flex items-center gap-4">
-        <div className="w-[120px] mr-2 border border-gray-600">
-          <Image
-            className="w-full object-cover" 
-            src={getYoutubeThumbnaillUrl(youtubeId)}
-            alt={title} 
-            width={120} 
-            height={60} 
-          />
-        </div>
-
-        <div className="flex-1 flex items-center gap-2 max-w-[730px] mx-auto px-4 h-[60px] bg-black">
-
-          {!isPlaying && <Button onClick={handleListen}>Listen</Button>}
-
-          {isPlaying && <Button onClick={handlePause}>Pause</Button>}
-
-          <Button onClick={handleWatch}>Watch</Button>
-
-          <div className="flex-1 truncate px-2 text-lg">{title}</div>
-
-          <Button 
-            isDisabled={previousVideo === null}
-            onClick={handleGoToPrevious}>Previous</Button>
-
-          <Button
-            isDisabled={nextVideo === null} 
-            onClick={handleGoToNext}>Next</Button>
-        </div>
-
-        <div>
-          <VideoDisplayStateActions />
-        </div>  
-
+      <div className="w-[120px] mr-2 border border-gray-600">
+        <Image
+          className="w-full object-cover" 
+          src={getYoutubeThumbnaillUrl(youtubeId)}
+          alt={title} 
+          width={120} 
+          height={60} 
+        />
       </div>
+
+      <div className="flex-1 flex items-center gap-2 max-w-[730px] mx-auto px-4 h-[60px] bg-black">
+
+        {!isPlaying && <Button onClick={handleListen}>Listen</Button>}
+
+        {isPlaying && <Button onClick={handlePause}>Pause</Button>}
+
+        <Button onClick={handleWatch}>Watch</Button>
+
+        <div className="flex-1 truncate px-2 text-lg">{title}</div>
+
+        <Button 
+          isDisabled={previousVideo === null}
+          onClick={handleGoToPrevious}>Previous</Button>
+
+        <Button
+          isDisabled={nextVideo === null} 
+          onClick={handleGoToNext}>Next</Button>
+      </div>
+
+      <div>
+        <VideoDisplayStateActions />
+      </div>  
     </>
   );
 }

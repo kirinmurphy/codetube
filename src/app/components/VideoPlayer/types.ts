@@ -1,3 +1,6 @@
+import { Mutable } from "next/dist/client/components/router-reducer/router-reducer-types";
+import { MutableRefObject } from "react";
+
 export interface VideoItem {
   youtubeId: string;
   title: string;
