@@ -1,17 +1,17 @@
 "use client";
 
-import React, { createContext, MutableRefObject, ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { debounce } from '@/lib/debounce';
-import { VideoPlayerStateProps, VideoPlayerDisplayState, ScreenType } from './types';
+import { VideoPlayerStateProps, VideoPlayerDisplayState, ScreenType, VideoPlayerContextDefault, VideoPlayerActions } from './types';
 import { getDisplayStateOnResize } from './utils/getDisplayStateOnResize';
+import { getVideoPlayerActions } from './utils/getVideoPlayerActions';
 
-interface VideoPlayerContextType {
-  videoPlayerRef: MutableRefObject<any>;
-  videoPlayerState: VideoPlayerStateProps;
-  setVideoPlayerState: (state: VideoPlayerStateProps) => void;
+
+interface VideoPlayerContextProps extends VideoPlayerContextDefault {
+  playerActions: VideoPlayerActions;
 }
 
-export const VideoPlayerContext = createContext<VideoPlayerContextType | undefined>(undefined);
+export const VideoPlayerContext = createContext<VideoPlayerContextProps | undefined>(undefined);
 
 interface Props {
   children: ReactNode;
@@ -61,8 +61,8 @@ export function VideoPlayerProvider ({ children }: Props) {
     videoPlayerRef,
     videoPlayerState,
     setVideoPlayerState,
-  }
-
+    playerActions: getVideoPlayerActions({ videoPlayerRef, videoPlayerState, setVideoPlayerState }),
+  };
 
   return (
     <VideoPlayerContext.Provider value={contextProps}>

@@ -29,8 +29,6 @@ export function VideoPlayer () {
   const videoWrapperClasses = isMiniPlayer 
     ? 'invisible absolute -left-full' : 'visible relative w-full mb-4';
 
-    console.log('!!!!!!! PLATER INITTTTTT!!!!!!');
-
   return (
     <>
       {videoCollection.length > 0 && (

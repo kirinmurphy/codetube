@@ -1,11 +1,9 @@
-import { Mutable } from "next/dist/client/components/router-reducer/router-reducer-types";
 import { MutableRefObject } from "react";
 
 export interface VideoItem {
   youtubeId: string;
   title: string;
   played: boolean;
-
 }
 
 export enum VideoPlayerDisplayState {
@@ -27,4 +25,30 @@ export interface VideoPlayerStateProps {
   autoPlay: boolean;
   screenType: ScreenType;
   isPlaying: boolean;
+}
+
+export interface VideoPlayerContextDefault {
+  videoPlayerRef: MutableRefObject<any>;
+  videoPlayerState: VideoPlayerStateProps;
+  setVideoPlayerState: (state: VideoPlayerStateProps) => void;
+}
+
+export interface PlayVideoProps {
+  video?: VideoItem;
+  displayState?: VideoPlayerDisplayState;
+}
+
+export interface VideoPlayerActions {
+  onReady: (event: any) => void;
+  addVideo: (item: VideoItem) => void;
+  addVideoAndPlay: (item: VideoItem) => void;
+  playVideo: ({ video, displayState }: PlayVideoProps) => void;  
+  pauseVideo: () => void;
+  getPreviousVideo: () => VideoItem | null;
+  playPreviousVideo: () => void;
+  getNextVideo: () => VideoItem | null;
+  playNextVideo: () => void;
+  removeVideo: (youtubeId: string) => void;
+  closePlayer: () => void;
+  updateDisplayState: (displayState: VideoPlayerDisplayState) => void;
 }
