@@ -1,43 +1,16 @@
 import Image from 'next/image';
-import { Button } from "../widgets/Button";
 import { VideoDisplayStateActions } from "./VideoDisplayStateActions";
 import { useVideoPlayer } from "./utils/useVideoPlayer";
 import { getYoutubeThumbnaillUrl } from './utils/getYoutubeUrls';
-import { VideoPlayerDisplayState } from './types';
-import { VideoPlayerNavigationButtons } from './VideoPlayerNavigationButtons';
-import { FaPause } from 'react-icons/fa';
+import { VideoPlayerControlBar } from './VideoPlayerControlBar';
+import { VideoPlayerMiniPlayControls } from './VideoPlayerMiniPlayControls';
 
 export function VideoPlayerMini () {
-  const { 
-    videoCollection,
-    activeVideo,
-    isPlaying,
-    videoPlayerRef,
-    playVideo,
-    pauseVideo,
-  } = useVideoPlayer();
+  const { activeVideo } = useVideoPlayer();
 
   if ( activeVideo === null ) return <></>;
 
   const { title, youtubeId } = activeVideo;
-
-  const activeVideoIndex = videoCollection.findIndex(v => v.youtubeId === youtubeId);
-  const totalVideos = videoCollection.length;
-
-  const handleListen = () => {
-    if ( videoPlayerRef.current ) { videoPlayerRef.current.playVideo(); }
-    playVideo({ video: activeVideo });
-  };
-
-  const handlePause = () => { pauseVideo(); };
-
-  const handleWatch = () => {
-    if ( videoPlayerRef.current ) { videoPlayerRef.current.playVideo(); }
-    playVideo({ 
-      video: activeVideo,
-      displayState: VideoPlayerDisplayState.FullScreen,
-    });
-  };
 
   return (
     <>
@@ -51,25 +24,10 @@ export function VideoPlayerMini () {
         />
       </div>
 
-      <div className="flex-1 flex items-center gap-2 max-w-[730px] mx-auto px-4 h-[60px] bg-black">
-
-        {!isPlaying && <Button onClick={handleListen}>Listen</Button>}
-
-        {isPlaying && (
-          <Button onClick={handlePause}>
-            <FaPause className="text-2xl" />
-          </Button>
-        )}
-
-        <Button onClick={handleWatch}>Watch</Button>
-
-        <div className="flex-1 truncate px-2 text-lg">{title}</div>
-
-        <div>
-          {activeVideoIndex+1} /  {totalVideos}
-        </div>
-
-        <VideoPlayerNavigationButtons />
+      <div className="w-full max-w-[730px] mx-auto">
+        <VideoPlayerControlBar>
+          <VideoPlayerMiniPlayControls />
+        </VideoPlayerControlBar>
       </div>
 
       <VideoDisplayStateActions />

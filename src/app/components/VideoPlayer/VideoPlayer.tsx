@@ -21,53 +21,54 @@ export function VideoPlayer () {
     pauseVideo,
   } = useVideoPlayer();
 
+  if ( !activeVideo ) return <></>;
+
   const isMiniPlayer = displayState === VideoPlayerDisplayState.Mini;
 
   const videoPlayerClasses = isMiniPlayer 
     ? 'w-full p-2 max-w-[1020px] mx-auto flex items-center gap-4' 
     : 'w-full p-4 max-w-[1100px] mx-auto'; 
   
-  const videoWrapperClasses = isMiniPlayer 
-    ? 'invisible absolute -left-full' : 'visible relative w-full mb-4';
+  const videoIframeWrapperClasses = isMiniPlayer 
+    ? 'invisible absolute -left-full' : 'visible relative w-full';
+
+  const handleVideoError = (err: any) => {
+    const currentYoutubeId = activeVideo?.youtubeId;
+    setTimeout(() => {
+      const isSameVideo = currentYoutubeId === activeVideo?.youtubeId;
+      if (isSameVideo) { alert('heyyyy'); playNextVideo(); }
+    }, 5000);
+  };    
 
   return (
     <>
       {videoCollection.length > 0 && (
         <div className={videoPlayerClasses}>
-
           {!isMiniPlayer && (
             <div className="w-full mb-4 flex justify-end">
               <VideoDisplayStateActions />
             </div>  
           )}
 
-          {!!activeVideo && (
-            <div className={videoWrapperClasses}>
-              <div className="relative pb-[56.25%] h-0 overflow-hidden">
-                <YouTube
-                  className="absolute top-0 left-0 w-full h-full"
-                  iframeClassName="absolute top-0 left-0 w-full h-full"
-                  videoId={activeVideo?.youtubeId}
-                  onEnd={playNextVideo}
-                  onPlay={() => { playVideo({ video: activeVideo }); }}
-                  onPause={pauseVideo}
-                  onReady={onReady}
-                  onError={(err: any) => {
-                    console.log('onError', err);
-                  }}                  
-                  opts={{
-                    playerVars: {
-                      autoplay: autoPlay ? 1 : 0,
-                      // controls: 0,
-                      // showinfo: 0,
-                      // rel: 0,
-                      // loop: 1,
-                    },
-                  }}
-                />
-              </div>
-            </div>    
-          )}
+          <div className={videoIframeWrapperClasses}>
+            <div className="relative pb-[56.25%] h-0 overflow-hidden">
+              <YouTube
+                className="absolute top-0 left-0 w-full h-full"
+                iframeClassName="absolute top-0 left-0 w-full h-full"
+                videoId={activeVideo?.youtubeId}
+                onEnd={playNextVideo}
+                onPlay={() => { playVideo({ video: activeVideo }); }}
+                onPause={pauseVideo}
+                onReady={onReady}
+                onError={handleVideoError}                  
+                opts={{
+                  playerVars: {
+                    autoplay: autoPlay ? 1 : 0,
+                  },
+                }}
+              />
+            </div>
+          </div>    
 
           {!isMiniPlayer && <VideoPlayerFull />}
 
