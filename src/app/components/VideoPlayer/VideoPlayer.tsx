@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import YouTube from "react-youtube";
 
 import { VideoPlayerDisplayState } from "./types";
@@ -21,6 +21,12 @@ export function VideoPlayer () {
     pauseVideo,
   } = useVideoPlayer();
 
+  const currentVideoIdRef = useRef(activeVideo?.youtubeId);
+
+  useEffect(() => {
+    currentVideoIdRef.current = activeVideo?.youtubeId;
+  }, [activeVideo?.youtubeId]);
+
   if ( !activeVideo ) return <></>;
 
   const isMiniPlayer = displayState === VideoPlayerDisplayState.Mini;
@@ -33,12 +39,12 @@ export function VideoPlayer () {
     ? 'invisible absolute -left-full' : 'visible relative w-full';
 
   const handleVideoError = (err: any) => {
-    const currentYoutubeId = activeVideo?.youtubeId;
+    const errorVideoId = currentVideoIdRef.current;
     setTimeout(() => {
-      const isSameVideo = currentYoutubeId === activeVideo?.youtubeId;
-      if (isSameVideo) { alert('heyyyy'); playNextVideo(); }
+      const isSameVideo = errorVideoId === currentVideoIdRef.current;
+      if (isSameVideo) { playNextVideo(); } 
     }, 5000);
-  };    
+  };  
 
   return (
     <>

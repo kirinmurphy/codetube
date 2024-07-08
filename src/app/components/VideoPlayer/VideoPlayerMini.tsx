@@ -30,7 +30,9 @@ export function VideoPlayerMini () {
         </VideoPlayerControlBar>
       </div>
 
-      <VideoDisplayStateActions />
+      <div className="hidden 900mq:block">
+        <VideoDisplayStateActions />
+      </div>
     </>
   );
 }
