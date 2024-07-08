@@ -49,11 +49,11 @@ export function VideoPlayerBlogItemControls (props: Props) {
       {!alreadyAddedVideo && (
         <>
           <Button onClick={handleAddAndPlay}>
-            <FaPlay /> Play
+            <FaPlay />
           </Button>
 
           <Button onClick={handleAddToQueue}>
-            <FaPlus /> Add
+            <FaPlus />
           </Button>
         </>
       )}
@@ -62,12 +62,12 @@ export function VideoPlayerBlogItemControls (props: Props) {
         <>
           {!isActiveVideo && (
             <Button onClick={handlePlayAfterAdd}>
-              <FaPlay /> Play
+              <FaPlay />
             </Button>            
           )}        
 
           <Button onClick={handleRemoveFromPlayer}>
-            <FaMinusCircle /> Remove
+            <FaMinusCircle />
           </Button>
         </>
       )}

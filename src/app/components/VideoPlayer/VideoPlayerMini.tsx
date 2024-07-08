@@ -9,6 +9,7 @@ import { FaPause } from 'react-icons/fa';
 
 export function VideoPlayerMini () {
   const { 
+    videoCollection,
     activeVideo,
     isPlaying,
     videoPlayerRef,
@@ -20,14 +21,15 @@ export function VideoPlayerMini () {
 
   const { title, youtubeId } = activeVideo;
 
+  const activeVideoIndex = videoCollection.findIndex(v => v.youtubeId === youtubeId);
+  const totalVideos = videoCollection.length;
+
   const handleListen = () => {
     if ( videoPlayerRef.current ) { videoPlayerRef.current.playVideo(); }
     playVideo({ video: activeVideo });
   };
 
-  const handlePause = () => {
-    pauseVideo();
-  };
+  const handlePause = () => { pauseVideo(); };
 
   const handleWatch = () => {
     if ( videoPlayerRef.current ) { videoPlayerRef.current.playVideo(); }
@@ -54,12 +56,18 @@ export function VideoPlayerMini () {
         {!isPlaying && <Button onClick={handleListen}>Listen</Button>}
 
         {isPlaying && (
-          <Button onClick={handlePause}><FaPause className="text-2xl" /></Button>
+          <Button onClick={handlePause}>
+            <FaPause className="text-2xl" />
+          </Button>
         )}
 
         <Button onClick={handleWatch}>Watch</Button>
 
         <div className="flex-1 truncate px-2 text-lg">{title}</div>
+
+        <div>
+          {activeVideoIndex+1} /  {totalVideos}
+        </div>
 
         <VideoPlayerNavigationButtons />
       </div>

@@ -51,7 +51,10 @@ export function VideoPlayer () {
                   onEnd={playNextVideo}
                   onPlay={() => { playVideo({ video: activeVideo }); }}
                   onPause={pauseVideo}
-                  onReady={onReady}                  
+                  onReady={onReady}
+                  onError={(err: any) => {
+                    console.log('onError', err);
+                  }}                  
                   opts={{
                     playerVars: {
                       autoplay: autoPlay ? 1 : 0,
