@@ -4,7 +4,7 @@ import React from "react";
 import YouTube from "react-youtube";
 
 import { VideoPlayerDisplayState } from "./types";
-import { useVideoPlayer } from "./useVideoPlayer";
+import { useVideoPlayer } from "./utils/useVideoPlayer";
 import { VideoPlayerFull } from "./VideoPlayerFull";
 import { VideoPlayerMini } from "./VideoPlayerMini";
 import { VideoDisplayStateActions } from "./VideoDisplayStateActions";
@@ -24,7 +24,8 @@ export function VideoPlayer () {
   const isMiniPlayer = displayState === VideoPlayerDisplayState.Mini;
 
   const videoPlayerClasses = isMiniPlayer 
-    ? 'w-full p-2 max-w-[1020px] mx-auto flex items-center gap-4' : 'w-full p-4 max-w-[1100px] mx-auto'; 
+    ? 'w-full p-2 max-w-[1020px] mx-auto flex items-center gap-4' 
+    : 'w-full p-4 max-w-[1100px] mx-auto'; 
   
   const videoWrapperClasses = isMiniPlayer 
     ? 'invisible absolute -left-full' : 'visible relative w-full mb-4';

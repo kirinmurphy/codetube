@@ -6,19 +6,27 @@ import {
   VideoItem, 
   VideoPlayerContextDefault, 
   VideoPlayerActions, 
-  PlayVideoProps 
+  PlayVideoProps, 
 } from '../types';
 
+import { getDisplayStateOnResize } from './getDisplayStateOnResize';
 import { getNextActiveVideoOnRemove } from './getNextActiveVideoOnRemove';
 import { getUpdatedCollectionWithInsertedVideo } from './getUpdatedCollectionWithInsertVideo';
 
 export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoPlayerActions {
+
   const { videoPlayerState, setVideoPlayerState, videoPlayerRef } = props;
-  const { videoCollection, activeVideo, displayState, autoPlay, screenType } = videoPlayerState;
+
+  const { 
+    videoCollection, 
+    activeVideo, 
+    displayState, 
+    autoPlay, 
+    screenType 
+  } = videoPlayerState;
 
   const onReady = (event: any) => {
     videoPlayerRef.current = event.target;
-    console.log('!!!! videoPlayerRef', videoPlayerRef);
   };
 
   const addVideo = (video: VideoItem) => {
@@ -58,7 +66,7 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     setVideoPlayerState({
       ...videoPlayerState,
       ...(displayState ? { displayState } : {}),
-      activeVideo: video || activeVideo,
+      activeVideo: video,
       autoPlay: true,
       isPlaying: true,
     });
@@ -113,13 +121,22 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
   const closePlayer = () => {
     setVideoPlayerState({ ...videoPlayerState, displayState: VideoPlayerDisplayState.Closed });
   }
+
+  const handlePlayerResize = ({ window }: { window: Window }) => {
+    const isMobile = window.innerWidth <= 900;
+    const newScreenType: ScreenType = isMobile ? ScreenType.Mobile : ScreenType.Full;
+
+    setVideoPlayerState((prevState) => ({
+      ...prevState,
+      displayState: getDisplayStateOnResize({ prevState, newScreenType }),
+      screenType: newScreenType,
+    }));
+  }
   
   return {
     onReady,
     addVideo,
     addVideoAndPlay,
-    removeVideo,
-    closePlayer,
     updateDisplayState,
     playVideo,
     pauseVideo,
@@ -127,5 +144,8 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     playPreviousVideo,
     getNextVideo,
     playNextVideo,
+    removeVideo,
+    closePlayer,
+    handlePlayerResize,
   }
 }

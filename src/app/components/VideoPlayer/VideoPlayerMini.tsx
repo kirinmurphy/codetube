@@ -1,31 +1,27 @@
 import Image from 'next/image';
 import { Button } from "../widgets/Button";
 import { VideoDisplayStateActions } from "./VideoDisplayStateActions";
-import { useVideoPlayer } from "./useVideoPlayer";
+import { useVideoPlayer } from "./utils/useVideoPlayer";
 import { getYoutubeThumbnaillUrl } from './utils/getYoutubeUrls';
 import { VideoPlayerDisplayState } from './types';
+import { VideoPlayerNavigationButtons } from './VideoPlayerNavigationButtons';
+import { FaPause } from 'react-icons/fa';
 
 export function VideoPlayerMini () {
-
   const { 
     activeVideo,
     isPlaying,
+    videoPlayerRef,
     playVideo,
-    getPreviousVideo,
-    playPreviousVideo,
-    getNextVideo,
-    playNextVideo,
     pauseVideo,
   } = useVideoPlayer();
 
   if ( activeVideo === null ) return <></>;
 
-  const previousVideo = getPreviousVideo();
-  const nextVideo = getNextVideo();
-
   const { title, youtubeId } = activeVideo;
 
   const handleListen = () => {
+    if ( videoPlayerRef.current ) { videoPlayerRef.current.playVideo(); }
     playVideo({ video: activeVideo });
   };
 
@@ -34,18 +30,11 @@ export function VideoPlayerMini () {
   };
 
   const handleWatch = () => {
+    if ( videoPlayerRef.current ) { videoPlayerRef.current.playVideo(); }
     playVideo({ 
       video: activeVideo,
       displayState: VideoPlayerDisplayState.FullScreen,
     });
-  };
-
-  const handleGoToPrevious = () => {
-    playPreviousVideo();
-  };
-
-  const handleGoToNext = () => {
-    playNextVideo();
   };
 
   return (
@@ -64,24 +53,18 @@ export function VideoPlayerMini () {
 
         {!isPlaying && <Button onClick={handleListen}>Listen</Button>}
 
-        {isPlaying && <Button onClick={handlePause}>Pause</Button>}
+        {isPlaying && (
+          <Button onClick={handlePause}><FaPause className="text-2xl" /></Button>
+        )}
 
         <Button onClick={handleWatch}>Watch</Button>
 
         <div className="flex-1 truncate px-2 text-lg">{title}</div>
 
-        <Button 
-          isDisabled={previousVideo === null}
-          onClick={handleGoToPrevious}>Previous</Button>
-
-        <Button
-          isDisabled={nextVideo === null} 
-          onClick={handleGoToNext}>Next</Button>
+        <VideoPlayerNavigationButtons />
       </div>
 
-      <div>
-        <VideoDisplayStateActions />
-      </div>  
+      <VideoDisplayStateActions />
     </>
   );
 }

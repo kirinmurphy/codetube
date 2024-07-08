@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useVideoPlayer } from "./useVideoPlayer";
+import { useVideoPlayer } from "./utils/useVideoPlayer";
 
 import { FaTimes, FaArrowDown, FaArrowUp, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 

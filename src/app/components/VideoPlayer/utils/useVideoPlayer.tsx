@@ -1,6 +1,6 @@
 import { MutableRefObject, use } from "react";
-import { VideoPlayerActions, VideoPlayerStateProps } from "./types";
-import { VideoPlayerContext } from "./VideoPlayerProvider";
+import { VideoPlayerActions, VideoPlayerStateProps } from "../types";
+import { VideoPlayerContext } from "../VideoPlayerProvider";
 
 interface ReturnProps extends VideoPlayerStateProps, VideoPlayerActions {
   videoPlayerRef: MutableRefObject<any>;

@@ -1,5 +1,5 @@
 import { VideoItem } from "./types";
-import { useVideoPlayer } from "./useVideoPlayer";
+import { useVideoPlayer } from "./utils/useVideoPlayer";
 
 interface PlaylistItemProps {
   video: VideoItem;

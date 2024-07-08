@@ -27,14 +27,17 @@ export interface VideoPlayerStateProps {
   isPlaying: boolean;
 }
 
+type SetVideoPlayerState = (state: VideoPlayerStateProps 
+  | ((prevState: VideoPlayerStateProps) => VideoPlayerStateProps)) => void;
+
 export interface VideoPlayerContextDefault {
   videoPlayerRef: MutableRefObject<any>;
   videoPlayerState: VideoPlayerStateProps;
-  setVideoPlayerState: (state: VideoPlayerStateProps) => void;
+  setVideoPlayerState: SetVideoPlayerState;
 }
 
 export interface PlayVideoProps {
-  video?: VideoItem;
+  video: VideoItem;
   displayState?: VideoPlayerDisplayState;
 }
 
@@ -51,4 +54,5 @@ export interface VideoPlayerActions {
   removeVideo: (youtubeId: string) => void;
   closePlayer: () => void;
   updateDisplayState: (displayState: VideoPlayerDisplayState) => void;
+  handlePlayerResize: ({ window }: { window: Window }) => void;
 }

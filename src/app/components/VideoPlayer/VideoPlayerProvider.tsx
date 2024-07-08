@@ -1,11 +1,25 @@
 "use client";
 
-import React, { createContext, ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { debounce } from '@/lib/debounce';
-import { VideoPlayerStateProps, VideoPlayerDisplayState, ScreenType, VideoPlayerContextDefault, VideoPlayerActions } from './types';
-import { getDisplayStateOnResize } from './utils/getDisplayStateOnResize';
-import { getVideoPlayerActions } from './utils/getVideoPlayerActions';
+import React, { 
+  createContext, 
+  ReactNode, 
+  useState,
+  useRef, 
+  useEffect, 
+  useLayoutEffect, 
+} from 'react';
 
+import { debounce } from '@/lib/debounce';
+
+import { 
+  VideoPlayerStateProps, 
+  VideoPlayerDisplayState, 
+  ScreenType, 
+  VideoPlayerContextDefault, 
+  VideoPlayerActions 
+} from './types';
+
+import { getVideoPlayerActions } from './utils/getVideoPlayerActions';
 
 interface VideoPlayerContextProps extends VideoPlayerContextDefault {
   playerActions: VideoPlayerActions;
@@ -28,29 +42,19 @@ export function VideoPlayerProvider ({ children }: Props) {
     isPlaying: false,
   });
 
-  const { displayState } = videoPlayerState;
-
   const videoPlayerRef = useRef<any>(null);
 
+  const playerActions = getVideoPlayerActions({ 
+    videoPlayerRef, videoPlayerState, setVideoPlayerState 
+  });
+
   useEffect(() => {
-    return () => {
-      videoPlayerRef.current = null;
-    };
+    return () => { videoPlayerRef.current = null; };
   }, []);
 
   useLayoutEffect(() => {
-    const handleResize = debounce(() => {
-      const newScreenType: ScreenType = window.innerWidth <= 900 
-        ? ScreenType.Mobile : ScreenType.Full;
-  
-      setVideoPlayerState((prevState) => {
-        return ({
-          ...prevState,
-          displayState: getDisplayStateOnResize({ prevState, newScreenType }),
-          screenType: newScreenType,
-        });
-      });
-    }, 250);
+    const onResize = () => { playerActions.handlePlayerResize({ window }) };
+    const handleResize = debounce(onResize, 250);
 
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -60,13 +64,13 @@ export function VideoPlayerProvider ({ children }: Props) {
   const contextProps = {
     videoPlayerRef,
     videoPlayerState,
+    playerActions,
     setVideoPlayerState,
-    playerActions: getVideoPlayerActions({ videoPlayerRef, videoPlayerState, setVideoPlayerState }),
   };
 
   return (
     <VideoPlayerContext.Provider value={contextProps}>
-      <div className={`player-provider-wrapper ${displayState}`}>
+      <div className={`player-provider-wrapper ${videoPlayerState.displayState}`}>
         {children}
       </div>
     </VideoPlayerContext.Provider>

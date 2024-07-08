@@ -4,7 +4,7 @@ import React from "react";
 import { FaPlay, FaPlus, FaMinusCircle } from "react-icons/fa";
 
 import { Button } from '../widgets/Button';
-import { useVideoPlayer } from "../VideoPlayer/useVideoPlayer";
+import { useVideoPlayer } from "../VideoPlayer/utils/useVideoPlayer";
 
 interface Props {
   youtubeId: string;

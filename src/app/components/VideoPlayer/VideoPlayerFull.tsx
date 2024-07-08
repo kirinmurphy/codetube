@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useVideoPlayer } from "./useVideoPlayer";
+import { useVideoPlayer } from "./utils/useVideoPlayer";
 import { PlaylistItem } from "./PlaylistItem";
 
 export function VideoPlayerFull () {
