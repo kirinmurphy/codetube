@@ -1,4 +1,4 @@
-import { FaPause } from 'react-icons/fa';
+import { FaArrowUp, FaPause } from 'react-icons/fa';
 import { Button } from "../widgets/Button";
 import { VideoPlayerDisplayState } from './types';
 import { useVideoPlayer } from "./utils/useVideoPlayer";
@@ -39,7 +39,10 @@ export function VideoPlayerMiniPlayControls () {
         </Button>
       )}
 
-      <Button onClick={handleWatch}>Watch</Button>  
+      <Button onClick={handleWatch}>
+        <span className="hidden 500mq:block">Watch</span>
+        <span className="block text-2xl 500mq:hidden"><FaArrowUp /></span>
+      </Button>  
     </>          
   )
 }

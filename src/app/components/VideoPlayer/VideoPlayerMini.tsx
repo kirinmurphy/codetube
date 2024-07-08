@@ -14,17 +14,17 @@ export function VideoPlayerMini () {
 
   return (
     <>
-      <div className="w-[120px] mr-2 border border-gray-600">
+      <div className="hidden 900mq:block w-[100px] mr-2 border border-gray-600">
         <Image
-          className="w-full object-cover" 
+          className="w-full object-cover min-w-[100px]" 
           src={getYoutubeThumbnaillUrl(youtubeId)}
           alt={title} 
-          width={120} 
-          height={60} 
+          width={100} 
+          height={50} 
         />
       </div>
 
-      <div className="w-full max-w-[730px] mx-auto">
+      <div className="w-full h-full max-w-[730px] mx-auto 500mq:h-auto">
         <VideoPlayerControlBar>
           <VideoPlayerMiniPlayControls />
         </VideoPlayerControlBar>

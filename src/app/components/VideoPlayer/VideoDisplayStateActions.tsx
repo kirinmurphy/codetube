@@ -33,7 +33,7 @@ export function VideoDisplayStateActions () {
     <div className="flex items-center gap-2">
       {viewStateTriggers.map(({ displayState, Icon }) => {
         const isNotCurrentDisplayState = displayState !== currentDisplayState;
-        const hideNonMobileTrigger = screenType === ScreenType.Mobile && displayState === VideoPlayerDisplayState.SplitScreen;
+        const hideNonMobileTrigger = screenType !== ScreenType.Full && displayState === VideoPlayerDisplayState.SplitScreen;
         const showButton = isNotCurrentDisplayState && !hideNonMobileTrigger; 
 
         return (

@@ -32,7 +32,7 @@ export function VideoPlayer () {
   const isMiniPlayer = displayState === VideoPlayerDisplayState.Mini;
 
   const videoPlayerClasses = isMiniPlayer 
-    ? 'w-full p-2 max-w-[1020px] mx-auto flex items-center gap-4' 
+    ? 'w-full h-full max-w-[1020px] mx-auto flex items-center gap-4 500mq:p-2 500mq:max-w-[1020px] 500mq:h-auto'
     : 'w-full p-4 max-w-[1100px] mx-auto'; 
   
   const videoIframeWrapperClasses = isMiniPlayer 

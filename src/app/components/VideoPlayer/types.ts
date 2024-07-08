@@ -16,6 +16,7 @@ export enum VideoPlayerDisplayState {
 export enum ScreenType {
   Full = 'full',
   Mobile = 'mobile',
+  SmallMobile = 'small-mobile',
 }
 
 export interface VideoPlayerStateProps {
