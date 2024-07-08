@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "./prismaClient";
 import seedData from "./seedData.json";
-
-const prisma = new PrismaClient();
 
 async function main() {
   await prisma.blogPost.deleteMany({});
