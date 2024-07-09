@@ -24,7 +24,7 @@ export function VideoPlayerMini () {
         />
       </div>
 
-      <div className="w-full h-full max-w-[730px] mx-auto 500mq:h-auto">
+      <div className="w-full h-full max-w-[730px] mx-auto 600mq:h-auto">
         <VideoPlayerControlBar>
           <VideoPlayerMiniPlayControls />
         </VideoPlayerControlBar>

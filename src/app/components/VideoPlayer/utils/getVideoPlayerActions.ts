@@ -123,7 +123,7 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
   }
 
   const handlePlayerResize = ({ window }: { window: Window }) => {
-    const isSmallMobile = window.innerWidth <= 500;
+    const isSmallMobile = window.innerWidth <= 599;
     const isMobile = window.innerWidth <= 900;
     const newScreenType: ScreenType = isSmallMobile ? ScreenType.SmallMobile 
       : isMobile ? ScreenType.Mobile 

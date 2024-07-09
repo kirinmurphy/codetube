@@ -39,10 +39,7 @@ export function VideoPlayerMiniPlayControls () {
         </Button>
       )}
 
-      <Button onClick={handleWatch}>
-        <span className="hidden 500mq:block">Watch</span>
-        <span className="block text-2xl 500mq:hidden"><FaArrowUp /></span>
-      </Button>  
+      <Button onClick={handleWatch}>Watch</Button>  
     </>          
   )
 }
