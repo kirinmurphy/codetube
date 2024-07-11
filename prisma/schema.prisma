@@ -19,4 +19,19 @@ model BlogPost {
   youtubeId          String?  
   blogId             String?  
   createdAt          DateTime @default(now())
+  tags     BlogPostTag[]
+}
+
+model Tag {
+  id   Int      @id @default(autoincrement())
+  name String   @unique
+  posts BlogPostTag[]
+}
+
+model BlogPostTag {
+  id         Int      @id @default(autoincrement())
+  blogPost   BlogPost @relation(fields: [blogPostId], references: [id])
+  blogPostId Int
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tagId      Int
 }

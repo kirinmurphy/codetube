@@ -15,20 +15,22 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
 
   const blogImage = imgUrl ? imgUrl
     : youtubeId ? getYoutubeThumbnaillUrl(youtubeId) 
-    : '';
+    : null;
 
   const linkTarget = blogId ? '_self' : '_blank';
 
   return (
     <div className="blog-list-item flex flex-col items-start gap-4">
       <div className="blog-thumbnail-container w-full flex-shrink-0 border border-gray-600">
-        <Image 
-          className="blog-thumbnail w-full object-cover" 
-          src={blogImage} 
-          alt={title} 
-          width={THUMBNAIL_SIZE} 
-          height={THUMBNAIL_SIZE} 
-        />
+        {!!blogImage && (
+          <Image 
+            className="blog-thumbnail w-full object-cover" 
+            src={blogImage} 
+            alt={title} 
+            width={THUMBNAIL_SIZE} 
+            height={THUMBNAIL_SIZE} 
+          />
+        )}
       </div>
 
       <div className="flex-grow">

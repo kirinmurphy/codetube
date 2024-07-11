@@ -3,66 +3,77 @@
     "title": "The Basics of Linked Lists",
     "body": "",
     "imgUrl": "",
-    "youtubeId": "TDtVagwa3QQ"
+    "youtubeId": "TDtVagwa3QQ",
+    "tags": ["data_structures"]
   },
   {
     "title": "When You Use Vanilla CSS After Using Tailwind",
     "body": "",
     "imgUrl": "",
-    "youtubeId": "zJATx80zW9w"
+    "youtubeId": "zJATx80zW9w",
+    "tags": ["css", "tailwind"]
   },
   {
     "title": "Only The Best Developers Understand How This Works",
     "body": "",
     "imgUrl": "",
-    "youtubeId": "WqNqeMjd28I"
+    "youtubeId": "WqNqeMjd28I",
+    "tags": ["browser_basics"]
   },
   {
     "title": "JavaScript Visualized - Event Loop, Web APIs, (Micro)task Queue",
     "body": "",
     "imgUrl": "",
-    "youtubeId": "eiC58R16hb8"
+    "youtubeId": "eiC58R16hb8",
+    "tags": ["javascript_basics", "event_loop"]
   },
   {
     "title": "Depth First & Tree Traversals (Pre, In, Post) Explained",
     "body": "",
     "imgUrl": "",
-    "youtubeId": "fPz40W9mfCg"
+    "youtubeId": "fPz40W9mfCg",
+    "tags": ["data_structures"]
   },
   {
     "title": "Big O Clicks",
     "body": "Big O has always been kind of a nebulous concept, I got it around the edges, but it was nver really intuitive. Not until this video.",
     "imgUrl": "",
-    "youtubeId": "BgLTDT03QtU"
+    "youtubeId": "BgLTDT03QtU",
+    "tags": ["algorithms"]
   },
   {
     "title": "Supermaven super code completion",
     "body": "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing.",
     "imgUrl": "",
-    "youtubeId": "JhmdYN1wbG0"
+    "youtubeId": "JhmdYN1wbG0",
+    "tags": ["AI_code_completion"]
   },
   {
     "title": "Every React 19 Feature Explained in 8 Minutes",
     "body": "Very Exciting Stuff",
     "imgUrl": "",
-    "youtubeId": "2NPIYnY3ilo"
+    "youtubeId": "2NPIYnY3ilo",
+    "tags": ["react_19"]
   },
   {
     "title": "Signals In JS...",
     "body": "full on pub sub in javascript",
     "imgUrl": "",
-    "youtubeId": "vGBBtqPnaUk"
+    "youtubeId": "vGBBtqPnaUk",
+    "tags": ["javascript_basics"]
   },
   {
     "title": "React 19 Is FINALLY Here",
     "body": "",
     "imgUrl": "",
-    "youtubeId": "sFeu_aK8cB8"
+    "youtubeId": "sFeu_aK8cB8",
+    "tags": ["react_19"]
   },
   {
     "title": "10 common mistakes with the Next.js App Router",
     "body": "",
     "imgUrl": "",
-    "youtubeId": "RBM03RihZVs"
+    "youtubeId": "RBM03RihZVs",
+    "tags": ["nextjs"]
   }
 ]
