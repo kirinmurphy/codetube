@@ -6,6 +6,8 @@ export enum ButtonType {
   DefaultDisabled = 'defaultDisabled',
   Primary = 'primary',
   Secondary = 'secondary',
+  Tag = 'tag',
+  TagActive = 'tagActive',
 }
 
 const BASE_BUTTON_STYLES = 'font-bold py-1 px-2 rounded flex items-center gap-2';
@@ -15,6 +17,8 @@ const BUTTON_TYPE_STYLES = {
   [ButtonType.DefaultDisabled]: 'bg-gray-900 text-gray-700 border-gray-900 hover:bg-gray-900',
   [ButtonType.Primary]: '',
   [ButtonType.Secondary]: '',
+  [ButtonType.Tag]: 'bg-blue-100 text-black hover:bg-light-blue-700',
+  [ButtonType.TagActive]: ''
 };
 
 type ButtonPropsBase = {

@@ -1,8 +1,9 @@
 import prisma from "./prisma";
 
-interface TagWithCount {
+export interface TagWithCount {
   id: number;
   name: string;
+  readableName: string;
   count: number;
 }
 
@@ -17,9 +18,12 @@ export async function fetchTagsFacet(): Promise<TagWithCount[]> {
     },
   });
 
-  return tags.map(tag => ({
-    id: tag.id,
-    name: tag.name,
-    count: tag._count.posts,
-  }));
+  return tags
+    .map(tag => ({
+      id: tag.id,
+      name: tag.name,
+      readableName: tag.name.replace(/_/g, ' '),
+      count: tag._count.posts,
+    }))
+    .sort((a, b) => b.count - a.count);
 }
