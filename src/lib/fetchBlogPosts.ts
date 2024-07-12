@@ -1,10 +1,12 @@
 import { Prisma } from "@prisma/client";
+import prisma from "./prisma";
 
 interface GetBlogPostQueryParams {
   tag?: string;
 }
 
-export function getBlogPostQuery ({ tag }: GetBlogPostQueryParams): Prisma.BlogPostFindManyArgs {
+export async function fetchBlogPosts ({ tag }: GetBlogPostQueryParams) {
+
   const getAllItemsQuery: Prisma.BlogPostFindManyArgs = {
     include: {
       tags: {
@@ -28,5 +30,7 @@ export function getBlogPostQuery ({ tag }: GetBlogPostQueryParams): Prisma.BlogP
     ...getAllItemsQuery,
   }
 
-  return tag ? getItemsByTagQuery : getAllItemsQuery
+  const query = tag ? getItemsByTagQuery : getAllItemsQuery;
+
+  return await prisma.blogPost.findMany(query);
 }

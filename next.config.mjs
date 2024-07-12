@@ -8,11 +8,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.ggorantala.dev',
-        port: '',
-      },
-      {
-        protocol: 'https',
         hostname: 'img.youtube.com',
         port: '',
       }
