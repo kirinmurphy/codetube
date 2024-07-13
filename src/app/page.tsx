@@ -8,23 +8,25 @@ interface Props {
 }
 
 export default async function Home({ searchParams }: Props) {
-  const { tag } = searchParams;
+  // const { tag } = searchParams;
   
   try {
-    const [blogPosts, allTags] = await Promise.all([
-      fetchBlogPosts({ tag }),
-      fetchTagsFacet()
+    const [blogPosts] = await Promise.all([
+    // const [blogPosts, allTags] = await Promise.all([
+      fetchBlogPosts({ tag: '' }),
+      // fetchTagsFacet()
     ]);
 
-    if (!blogPosts || !allTags) return <></>;
+    // if (!blogPosts || !allTags) return <></>;
+    if (!blogPosts) return <></>;
 
     return (
       <>
-        <div className="w-full flex flex-row gap-2 flex-wrap mb-6">
+        {/* <div className="w-full flex flex-row gap-2 flex-wrap mb-6">
           {allTags.map(tag => (
             <SearchableTag key={tag.id} tag={tag} />
           ))}
-        </div>
+        </div> */}
 
         {blogPosts.map(props => (
           <div key={props.id} 
