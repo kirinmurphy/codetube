@@ -7,26 +7,27 @@ interface Props {
   searchParams: { [key: string]: string }
 }
 
-export default async function Home({ searchParams }: Props) {
-  // const { tag } = searchParams;
-  
+export default async function Home({ searchParams = {} }: Props) {
+  console.log('searchParams', searchParams);
+  const hasParams = !!searchParams ? 'true' : 'false';
+  console.log('fffffee');
+  console.log(hasParams === 'true' ? JSON.stringify(searchParams) : ''); 
   try {
-    const [blogPosts] = await Promise.all([
-    // const [blogPosts, allTags] = await Promise.all([
+    const [blogPosts, allTags] = await Promise.all([
       fetchBlogPosts({ tag: '' }),
-      // fetchTagsFacet()
+      fetchTagsFacet()
     ]);
 
-    // if (!blogPosts || !allTags) return <></>;
-    if (!blogPosts) return <></>;
+    if (!blogPosts || !allTags) return <></>;
 
     return (
       <>
-        {/* <div className="w-full flex flex-row gap-2 flex-wrap mb-6">
+        <div>HAS PARAMS: {hasParams}</div>
+        <div className="w-full flex flex-row gap-2 flex-wrap mb-6">
           {allTags.map(tag => (
             <SearchableTag key={tag.id} tag={tag} />
           ))}
-        </div> */}
+        </div>
 
         {blogPosts.map(props => (
           <div key={props.id} 
@@ -41,7 +42,7 @@ export default async function Home({ searchParams }: Props) {
         ))}
       </>
     );
-  } catch (error) {
-    return <div>Error loading data</div>;
+  } catch (error: any) {
+    return <div>Error loading data: {error.message}</div>;
   }
 }

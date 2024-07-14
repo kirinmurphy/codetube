@@ -1,21 +1,9 @@
-// import { Handler } from '@netlify/functions';
-// import { fetchBlogPosts } from '../../src/lib/fetchBlogPosts';
+import type { Context } from "@netlify/functions";
 
-// const handler: Handler = async (event, context) => {
-//   const tag = event.queryStringParameters?.tag;
+function hello (req: Request, context: Context) { 
+  console.log('request', req);
+  console.log('context', context);
+  return new Response("Hello, world!")
+}
 
-//   try {
-//     const blogPosts = await fetchBlogPosts({ tag });
-//     return {
-//       statusCode: 200,
-//       body: JSON.stringify(blogPosts),
-//     };
-//   } catch (error) {
-//     return {
-//       statusCode: 500,
-//       body: JSON.stringify({ error: 'Error fetching blog posts' }),
-//     };
-//   }
-// };
-
-// export { handler };
+export default hello;
