@@ -26,11 +26,17 @@ export const handler: Handler = async () => {
 
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(tagsWithCount),
     };
   } catch (error) {
     return {
       statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ error: "Failed to fetch tags facet" }),
     };
   } finally {

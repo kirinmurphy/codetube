@@ -27,7 +27,7 @@ const handler = async (event) => {
             } }, getAllItemsQuery);
         const query = tag ? getItemsByTagQuery : getAllItemsQuery;
         const blogPosts = await prisma.blogPost.findMany(query);
-        console.log('Blog posts fetched:', blogPosts);
+        // console.log('Blog posts fetched:', blogPosts);
         return {
             statusCode: 200,
             headers: {

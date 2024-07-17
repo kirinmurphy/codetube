@@ -9,12 +9,11 @@ interface Props {
 
 export default async function Home({ searchParams = {} }: Props) {
   console.log('searchParams', searchParams);
-  const hasParams = !!searchParams ? 'true' : 'false';
-  console.log('fffffee');
-  console.log(hasParams === 'true' ? JSON.stringify(searchParams) : ''); 
+  const { tag = '' } = searchParams;
+    
   try {
     const [blogPosts, allTags] = await Promise.all([
-      fetchBlogPosts({ tag: '' }),
+      fetchBlogPosts({ tag }),
       fetchTagsFacet()
     ]);
 
@@ -22,7 +21,6 @@ export default async function Home({ searchParams = {} }: Props) {
 
     return (
       <>
-        <div>HAS PARAMS: {hasParams}</div>
         <div className="w-full flex flex-row gap-2 flex-wrap mb-6">
           {allTags.map(tag => (
             <SearchableTag key={tag.id} tag={tag} />

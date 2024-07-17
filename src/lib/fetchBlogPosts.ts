@@ -14,11 +14,11 @@ export async function fetchBlogPosts({ tag }: GetBlogPostQueryParams) {
 
   try {
     const response = await fetch(url.toString());
-    console.log('Response status:', response.status);
-    console.log('Response headers:', response.headers);
+    // console.log('Response status:', response.status);
+    // console.log('Response headers:', response.headers);
 
     const text = await response.text();
-    console.log('Response text:', text);
+    // console.log('Response text:', text);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
