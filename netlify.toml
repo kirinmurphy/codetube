@@ -1,9 +1,21 @@
 [build]
-  command = "yarn run build"
+  command = "next build"
   publish = ".next"
-  functions = "netlify/functions"
+  functions = "netlify/functions-dist"
+
+[dev]
+  command = "next dev"
+  port = 3000
+  targetPort = 3001
+  framework = "#custom"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+[functions]
+  directory = "netlify/functions-dist"

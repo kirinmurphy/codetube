@@ -29,7 +29,7 @@ export default async function Home({ searchParams = {} }: Props) {
           ))}
         </div>
 
-        {blogPosts.map(props => (
+        {blogPosts.map((props: any) => (
           <div key={props.id} 
             className={`
               [&:not(:last-of-type)]:mb-5 

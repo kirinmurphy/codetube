@@ -12,7 +12,18 @@ const nextConfig = {
         port: '',
       }
     ],
-  },    
+  },  
+  async rewrites() {
+    return [
+      {
+        source: '/.netlify/functions/:path*',
+        destination: 
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:8888/.netlify/functions/:path*'
+            : '/.netlify/functions/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

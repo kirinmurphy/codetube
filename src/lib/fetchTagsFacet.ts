@@ -1,5 +1,3 @@
-import prisma from "./prisma";
-
 export interface TagWithCount {
   id: number;
   name: string;
@@ -8,22 +6,13 @@ export interface TagWithCount {
 }
 
 export async function fetchTagsFacet(): Promise<TagWithCount[]> {
-  const tags = await prisma.tag.findMany({
-    include: {
-      _count: {
-        select: {
-          posts: true,
-        },
-      },
-    },
-  });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:8888';
+  const url = new URL('/.netlify/functions/fetchTagsFacet', baseUrl);
 
-  return tags
-    .map(tag => ({
-      id: tag.id,
-      name: tag.name,
-      readableName: tag.name.replace(/_/g, ' '),
-      count: tag._count.posts,
-    }))
-    .sort((a, b) => b.count - a.count);
+  const response = await fetch(url.toString());
+  if (!response.ok) {
+    throw new Error('Failed to fetch tags facet');
+  }
+
+  return response.json();
 }
