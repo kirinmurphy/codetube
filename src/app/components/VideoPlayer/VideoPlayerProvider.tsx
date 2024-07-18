@@ -8,6 +8,7 @@ import React, {
   useEffect, 
   useLayoutEffect, 
 } from 'react';
+import { YouTubePlayer } from "react-youtube";
 
 import { debounce } from '@/lib/debounce';
 
@@ -42,14 +43,17 @@ export function VideoPlayerProvider ({ children }: Props) {
     isPlaying: false,
   });
 
-  const videoPlayerRef = useRef<any>(null);
+  const videoPlayerRef = useRef<YouTubePlayer>(null);
 
   const playerActions = getVideoPlayerActions({ 
     videoPlayerRef, videoPlayerState, setVideoPlayerState 
   });
 
   useEffect(() => {
-    return () => { videoPlayerRef.current = null; };
+    const ref = videoPlayerRef.current;
+    return () => { 
+      if (ref) { ref.srcObject = null; }
+     };
   }, []);
 
   useLayoutEffect(() => {
@@ -59,6 +63,7 @@ export function VideoPlayerProvider ({ children }: Props) {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const contextProps = {

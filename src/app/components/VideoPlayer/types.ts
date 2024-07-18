@@ -1,4 +1,5 @@
 import { MutableRefObject } from "react";
+import { YouTubeEvent, YouTubePlayer } from "react-youtube";
 
 export interface VideoItem {
   youtubeId: string;
@@ -32,7 +33,7 @@ type SetVideoPlayerState = (state: VideoPlayerStateProps
   | ((prevState: VideoPlayerStateProps) => VideoPlayerStateProps)) => void;
 
 export interface VideoPlayerContextDefault {
-  videoPlayerRef: MutableRefObject<any>;
+  videoPlayerRef: MutableRefObject<YouTubePlayer>;
   videoPlayerState: VideoPlayerStateProps;
   setVideoPlayerState: SetVideoPlayerState;
 }
@@ -43,7 +44,7 @@ export interface PlayVideoProps {
 }
 
 export interface VideoPlayerActions {
-  onReady: (event: any) => void;
+  onReady: (event: YouTubeEvent<Event>) => void;
   addVideo: (item: VideoItem) => void;
   addVideoAndPlay: (item: VideoItem) => void;
   playVideo: ({ video, displayState }: PlayVideoProps) => void;  

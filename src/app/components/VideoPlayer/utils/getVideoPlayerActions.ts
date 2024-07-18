@@ -1,5 +1,6 @@
 "use client";
 
+import { YouTubePlayer } from 'react-youtube';
 import { 
   VideoPlayerDisplayState, 
   ScreenType, 
@@ -25,7 +26,7 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     screenType 
   } = videoPlayerState;
 
-  const onReady = (event: any) => {
+  const onReady = (event: { target: YouTubePlayer }) => {
     videoPlayerRef.current = event.target;
   };
 

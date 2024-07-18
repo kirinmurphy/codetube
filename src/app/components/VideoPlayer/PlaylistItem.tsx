@@ -6,7 +6,7 @@ interface PlaylistItemProps {
 }
 
 export function PlaylistItem({ video }: PlaylistItemProps) {
-  const { title, played } = video;
+  const { title } = video;
   const { activeVideo, playVideo } = useVideoPlayer();
   const isActiveVideo = activeVideo?.youtubeId === video.youtubeId;
 

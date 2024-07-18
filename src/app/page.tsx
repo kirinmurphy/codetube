@@ -2,6 +2,7 @@ import { fetchTagsFacet } from '@/lib/fetchTagsFacet';
 import { fetchBlogPosts } from '@/lib/fetchBlogPosts';
 import { BlogListItem } from './components/BlogListItem/index';
 import { SearchableTag } from './components/blog/tags/SearchableTag';
+import { PrismaTypes } from '@/lib/prisma';
 
 interface Props {
   searchParams: { [key: string]: string }
@@ -27,7 +28,7 @@ export default async function Home({ searchParams = {} }: Props) {
           ))}
         </div>
 
-        {blogPosts.map((props: any) => (
+        {blogPosts.map((props: PrismaTypes.BlogPostProps) => (
           <div key={props.id} 
             className={`
               [&:not(:last-of-type)]:mb-5 
@@ -40,7 +41,8 @@ export default async function Home({ searchParams = {} }: Props) {
         ))}
       </>
     );
-  } catch (error: any) {
-    return <div>Error loading data: {error.message}</div>;
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    return <div>Error loading data: {errorMessage}</div>;
   }
 }

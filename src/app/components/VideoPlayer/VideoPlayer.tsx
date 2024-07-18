@@ -38,7 +38,7 @@ export function VideoPlayer () {
   const videoIframeWrapperClasses = isMiniPlayer 
     ? 'invisible absolute -left-full' : 'visible relative w-full';
 
-  const handleVideoError = (err: any) => {
+  const handleVideoError = () => {
     const errorVideoId = currentVideoIdRef.current;
     setTimeout(() => {
       const isSameVideo = errorVideoId === currentVideoIdRef.current;

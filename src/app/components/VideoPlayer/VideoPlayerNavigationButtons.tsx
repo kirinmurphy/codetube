@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 
 import { Button } from "../widgets/Button";

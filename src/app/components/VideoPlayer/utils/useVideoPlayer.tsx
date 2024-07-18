@@ -1,9 +1,10 @@
 import { MutableRefObject, use } from "react";
 import { VideoPlayerActions, VideoPlayerStateProps } from "../types";
 import { VideoPlayerContext } from "../VideoPlayerProvider";
+import { YouTubePlayer } from "react-youtube";
 
 interface ReturnProps extends VideoPlayerStateProps, VideoPlayerActions {
-  videoPlayerRef: MutableRefObject<any>;
+  videoPlayerRef: MutableRefObject<YouTubePlayer>;
 }
 
 export function useVideoPlayer (): ReturnProps {
