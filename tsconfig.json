@@ -39,6 +39,7 @@
     "node_modules",
     "dist",
     ".next",
-    "netlify/functions-dist/**/*.*"
+    "netlify/functions-dist/**/*.*",
+    "custom-build.js"
   ],
 }

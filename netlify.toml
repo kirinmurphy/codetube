@@ -1,5 +1,5 @@
 [build]
-  command = "next build"
+  command = "yarn run custom-build"
   publish = ".next"
   functions = "netlify/functions-dist"
 

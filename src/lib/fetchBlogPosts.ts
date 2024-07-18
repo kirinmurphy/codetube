@@ -4,7 +4,8 @@ interface GetBlogPostQueryParams {
 
 export async function fetchBlogPosts({ tag }: GetBlogPostQueryParams) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:8888';
-  const url = new URL('/.netlify/functions/fetchBlogPosts', baseUrl);
+  console.log('===== baseUrl', baseUrl);
+  const url = new URL('/.netlify/functions/queryBlogPosts', baseUrl);
   
   if (tag) {
     url.searchParams.append('tag', tag);
@@ -14,17 +15,16 @@ export async function fetchBlogPosts({ tag }: GetBlogPostQueryParams) {
 
   try {
     const response = await fetch(url.toString());
-    // console.log('Response status:', response.status);
-    // console.log('Response headers:', response.headers);
-
     const text = await response.text();
-    // console.log('Response text:', text);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status} ${text}`);
     }
 
+    // console.log('REEEEEESPONSE OKKKKKKKKKKKK', text);
+
     const data = JSON.parse(text);
+
     return data;
   } catch (error) {
     console.error('Error in fetchBlogPosts:', error);

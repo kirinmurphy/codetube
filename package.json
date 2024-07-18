@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "npx prisma generate && prisma migrate deploy && next build",
+    "build:with-migrations": "prisma migrate deploy && yarn run build",
+    "custom-build": "node custom-build.js",
     "start": "next start",
     "lint": "next lint",
     "migrate": "npx prisma migrate dev --name init && npx prisma generate",
-    "seed": "npx prisma db seed"
+    "seed": "npx prisma generate && npx prisma db seed",
+    "compileNetlifyFunctions": "npx prisma generate && tsc -p tsconfig.netlify.json && netlify functions:build --src netlify/functions-dist"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
