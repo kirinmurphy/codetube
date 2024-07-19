@@ -40,6 +40,6 @@
     "dist",
     ".next",
     "netlify/functions-dist/**/*.*",
-    "custom-build.js"
+    "scripts/custom-build.js"
   ],
 }
