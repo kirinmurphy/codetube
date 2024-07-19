@@ -6,9 +6,9 @@ const runCommand = (command) => {
 
 try {
   if (process.env.RUN_SEED === 'true') {
-    runCommand('yarn run seed');
+    runCommand('yarn run seed:prod');
   }
-  runCommand('yarn run build:with-migrations');
+  runCommand('yarn run build');
 } catch (error) {
   console.error('Error during custom build:', error);
   process.exit(1);

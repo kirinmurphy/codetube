@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "npx prisma generate && prisma migrate deploy && next build",
-    "build:with-migrations": "prisma migrate deploy && yarn run build",
     "custom-build": "node custom-build.js",
     "start": "next start",
     "lint": "next lint",
-    "migrate": "npx prisma migrate dev --name init && npx prisma generate",
-    "seed": "npx prisma generate && npx prisma db seed",
+    "migrate:dev": "npx prisma migrate dev --name init && npx prisma generate",
+    "migrate:prod": "npx prisma migrate deploy && npx prisma generate",
+    "seed:dev": "yarn run migrate:dev && npx prisma db seed",
+    "seed:prod": "yarn run migrate:prod && npx prisma db seed",
     "compileNetlifyFunctions": "npx prisma generate && tsc -p tsconfig.netlify.json && netlify functions:build --src netlify/functions-dist"
   },
   "prisma": {
