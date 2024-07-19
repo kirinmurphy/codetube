@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 
 export const handler: Handler = async (event) => {
   try {
-    console.log('bayyyyyyyyy');
     const tag = event.queryStringParameters?.tag || '';
 
     const getAllItemsQuery: Prisma.BlogPostFindManyArgs = {
