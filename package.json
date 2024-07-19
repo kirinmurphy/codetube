@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma generate && prisma migrate deploy && next build",
-    "custom-build": "node custom-build.js",
+    "build:dev": "npx prisma generate && prisma migrate deploy && next build",
+    "build:prod": "node custom-build.js",
     "start": "next start",
     "lint": "next lint",
     "migrate:dev": "npx prisma migrate dev --name init && npx prisma generate",
