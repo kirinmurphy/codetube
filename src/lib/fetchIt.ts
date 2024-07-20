@@ -1,15 +1,31 @@
-interface FetchPostProps<T> {
-  path: string;
-  params?: T
+import { QueryError } from './QueryError';
+
+interface FetchOptions {
+  queryName: string;
+  params?: Record<string, string>;
 }
 
-export async function fetchIt<T, R>({ path, params }: FetchPostProps<T>): Promise<R | undefined> {
+export async function fetchIt<T>({ queryName, params }: FetchOptions): Promise<T> {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:8888';
+  const url = new URL(`/.netlify/functions/${queryName}`, baseUrl);
+
+  if (params) {
+    Object.entries(params).forEach(([key, value]) => {
+      url.searchParams.append(key, value);
+    });
+  }
+
   try {
-    const formattedParams = new URLSearchParams(params as unknown as Record<string, string>);
-    const res = await fetch(`${path}?${formattedParams}`);
-    const data = await res.json();
-    return data;  
-  } catch (err) {  
-    console.error(`Error fetching ${path} : ${err}`);
+    const response = await fetch(url.toString());
+    const text = await response.text();
+
+    if (!response.ok) {
+      throw new QueryError(`HTTP error! status: ${response.status}`, text);
+    }
+
+    return JSON.parse(text);
+  } catch (error) {
+    console.error(`Error fetchihng data from${queryName}:`, error);
+    throw error;
   }
 }

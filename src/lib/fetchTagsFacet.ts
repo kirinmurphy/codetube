@@ -1,4 +1,4 @@
-import prisma from "./prisma";
+import { fetchIt } from './fetchIt';  
 
 export interface TagWithCount {
   id: number;
@@ -8,22 +8,7 @@ export interface TagWithCount {
 }
 
 export async function fetchTagsFacet(): Promise<TagWithCount[]> {
-  const tags = await prisma.tag.findMany({
-    include: {
-      _count: {
-        select: {
-          posts: true,
-        },
-      },
-    },
+  return await fetchIt<TagWithCount[]>({ 
+    queryName: 'queryTagsFacet' 
   });
-
-  return tags
-    .map(tag => ({
-      id: tag.id,
-      name: tag.name,
-      readableName: tag.name.replace(/_/g, ' '),
-      count: tag._count.posts,
-    }))
-    .sort((a, b) => b.count - a.count);
 }

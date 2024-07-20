@@ -4,11 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "npx prisma generate && prisma migrate deploy && next build",
+    "build:prod": "node scripts/buildToProduction.js",
     "start": "next start",
     "lint": "next lint",
-    "migrate": "npx prisma migrate dev --name init && npx prisma generate",
-    "seed": "npx prisma db seed"
+    "migrate:dev": "npx prisma migrate dev --name init && npx prisma generate",
+    "migrate:prod": "npx prisma migrate deploy && npx prisma generate",
+    "seed:dev": "yarn run migrate:dev && npx prisma db seed",
+    "seed:prod": "yarn run migrate:prod && npx prisma db seed",
+    "compileNetlifyFunctions": "node scripts/compileNetlifyFunctions.js netlify/dist"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -28,6 +32,9 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/youtube": "^0.0.50",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "babel-plugin-react-compiler": "^0.0.0-experimental-938cd9a-20240601",
     "eslint": "^8",
     "eslint-config-next": "15.0.0-rc.0",

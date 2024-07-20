@@ -4,8 +4,7 @@ const prisma = new PrismaClient()
 
 export default prisma;
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace PrismaTypes {
   export type BlogPostProps = BlogPost
-  // export type BlogPostCreateInput = Prisma.BlogPostCreateInput
 }
-

@@ -1,6 +1,6 @@
 "use client" 
 
- import { TagWithCount } from "@/lib/fetchTagsFacet";
+ import { TagWithCount } from "@/src/lib/fetchTagsFacet";
 import { Button, ButtonType } from "../../widgets/Button";
 
 export function SearchableTag({ tag }: { tag: TagWithCount }) {

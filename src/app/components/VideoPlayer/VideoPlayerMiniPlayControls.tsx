@@ -1,4 +1,4 @@
-import { FaArrowUp, FaPause } from 'react-icons/fa';
+import { FaPause } from 'react-icons/fa';
 import { Button } from "../widgets/Button";
 import { VideoPlayerDisplayState } from './types';
 import { useVideoPlayer } from "./utils/useVideoPlayer";

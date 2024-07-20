@@ -1,36 +1,13 @@
-import { Prisma } from "@prisma/client";
-import prisma from "./prisma";
+import { BlogPost } from '@prisma/client';
+import { fetchIt } from './fetchIt';
 
 interface GetBlogPostQueryParams {
   tag?: string;
 }
 
-export async function fetchBlogPosts ({ tag }: GetBlogPostQueryParams) {
-
-  const getAllItemsQuery: Prisma.BlogPostFindManyArgs = {
-    include: {
-      tags: {
-        include: {
-          tag: true,
-        },
-      },
-    },
-  }
-
-  const getItemsByTagQuery: Prisma.BlogPostFindManyArgs = {
-    where: {
-      tags: {
-        some: {
-          tag: {
-            name: tag,
-          },
-        },
-      },
-    },
-    ...getAllItemsQuery,
-  }
-
-  const query = tag ? getItemsByTagQuery : getAllItemsQuery;
-
-  return await prisma.blogPost.findMany(query);
+export async function fetchBlogPosts({ tag }: GetBlogPostQueryParams) {
+  return await fetchIt<BlogPost[]>({
+    queryName: 'queryBlogPosts',
+    params: tag ? { tag } : undefined
+  });
 }

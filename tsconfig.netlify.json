@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./netlify/dist",
+    "noEmit": false
+  },
+  "include": [
+    "netlify/functions/**/*.ts",
+    "netlify/utils/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
