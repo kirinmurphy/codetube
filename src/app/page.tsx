@@ -1,6 +1,6 @@
 import { fetchTagsFacet } from '@/src/lib/fetchTagsFacet';
 import { fetchBlogPosts } from '@/src/lib/fetchBlogPosts';
-import { BlogListItem } from './components/BlogListItem/index';
+import { BlogListItem } from './components/blog/BlogListItem/index';
 import { SearchableTag } from './components/blog/tags/SearchableTag';
 import { PrismaTypes } from '@/src/lib/prisma';
 

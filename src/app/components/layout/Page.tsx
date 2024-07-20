@@ -2,7 +2,7 @@ import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
 import { PageInner } from "./PageInner";
 
-export function LayoutContents ({ children }: { children: React.ReactNode }) {
+export function Page ({ children }: { children: React.ReactNode }) {
   return (
     <>
       <header className="w-full">

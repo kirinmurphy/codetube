@@ -4,7 +4,7 @@ import { PrismaTypes } from '@/src/lib/prisma';
 const THUMBNAIL_SIZE = 250;
 
 import { VideoPlayerBlogItemControls } from './BlogListItemVideoControls';
-import { getYoutubeThumbnaillUrl } from '../VideoPlayer/utils/getYoutubeUrls';
+import { getYoutubeThumbnaillUrl } from '../../VideoPlayer/utils/getYoutubeUrls';
 
 export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps }) {
   const { title, body, imgUrl, externalSourceLink, youtubeId, blogId } = blogPost;
