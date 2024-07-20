@@ -39,4 +39,4 @@ next-env.d.ts
 .netlify
 
 
-/netlify/functions-dist
+/netlify/dist

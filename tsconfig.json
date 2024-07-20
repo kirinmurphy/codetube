@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": false,
-    "outDir": "./netlify/functions-dist",
+    "outDir": "./netlify/dist",
     "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
@@ -40,7 +40,7 @@
     "node_modules",
     "dist",
     ".next",
-    "netlify/functions-dist/**/*.*",
+    "netlify/dist/**/*.*",
     "scripts"
   ],
 }
