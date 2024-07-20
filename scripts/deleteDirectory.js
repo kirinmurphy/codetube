@@ -26,7 +26,7 @@ if (!directory) {
   process.exit(1);
 }
 
-async function cleanAndRecreateDirectory(dir) {
+async function deleteAndRecreateDirectory(dir) {
   try {
     await deleteDirectory(dir);
     console.log(`Directory ${dir} deleted successfully.`);
@@ -37,4 +37,4 @@ async function cleanAndRecreateDirectory(dir) {
   }
 }
 
-cleanAndRecreateDirectory(directory);
+deleteAndRecreateDirectory(directory);

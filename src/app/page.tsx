@@ -1,8 +1,8 @@
-import { fetchTagsFacet } from '@/lib/fetchTagsFacet';
-import { fetchBlogPosts } from '@/lib/fetchBlogPosts';
+import { fetchTagsFacet } from '@/src/lib/fetchTagsFacet';
+import { fetchBlogPosts } from '@/src/lib/fetchBlogPosts';
 import { BlogListItem } from './components/BlogListItem/index';
 import { SearchableTag } from './components/blog/tags/SearchableTag';
-import { PrismaTypes } from '@/lib/prisma';
+import { PrismaTypes } from '@/src/lib/prisma';
 
 interface Props {
   searchParams: { [key: string]: string }

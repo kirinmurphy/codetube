@@ -22,10 +22,10 @@ async function main() {
   }
 
   try {
-    await runCommand(`node scripts/cleanDirectory.js ${srcDirectory}`);
+    await runCommand(`node scripts/deleteDirectory.js ${srcDirectory}`);
     await runCommand('npx prisma generate');
     await runCommand('tsc -p tsconfig.netlify.json');
-    await runCommand(`netlify functions:build --src ${srcDirectory}`);
+    await runCommand(`netlify functions:build --src ${srcDirectory}/functions`);
     console.log('All tasks completed successfully.');
   } catch (error) {
     console.error('Error:', error);

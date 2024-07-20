@@ -1,58 +1,40 @@
 import { Handler } from "@netlify/functions";
-import { Prisma, PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { BlogPost, Prisma } from "@prisma/client";
+import { getNetlifyFunctionHandler } from "../utils/getNetlifyFunctionHandler";
 
 export const handler: Handler = async (event) => {
-  try {
-    const tag = event.queryStringParameters?.tag || '';
-
-    const getAllItemsQuery: Prisma.BlogPostFindManyArgs = {
-      include: {
-        tags: {
-          include: {
-            tag: true,
-          },
-        },
-      },
-    }
+  return await getNetlifyFunctionHandler<BlogPost[]>({ 
+    event,
+    errorMessage: 'Failed to fetch blog posts',
+    getQueryResponse: async ({ prisma, event }) => {
+      const tag = event.queryStringParameters?.tag || '';
   
-    const getItemsByTagQuery: Prisma.BlogPostFindManyArgs = {
-      where: {
-        tags: {
-          some: {
-            tag: {
-              name: tag,
+      const getAllItemsQuery: Prisma.BlogPostFindManyArgs = {
+        include: {
+          tags: {
+            include: {
+              tag: true,
             },
           },
         },
-      },
-      ...getAllItemsQuery,
-    }
+      }
+    
+      const getItemsByTagQuery: Prisma.BlogPostFindManyArgs = {
+        where: {
+          tags: {
+            some: {
+              tag: {
+                name: tag,
+              },
+            },
+          },
+        },
+        ...getAllItemsQuery,
+      }
+    
+      const query = tag ? getItemsByTagQuery : getAllItemsQuery;
   
-    const query = tag ? getItemsByTagQuery : getAllItemsQuery;
-
-    const blogPosts = await prisma.blogPost.findMany(query);
-
-    // console.log('Blog posts fetched:', blogPosts);
-
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(blogPosts),
-    };
-  } catch (error) {
-    console.error('Error in Netlify function:', error);
-    return {
-      statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ error: "Failed to fetch blog posts", details: error }),
-    };
-  } finally {
-    await prisma.$disconnect();
-  }
+      return await prisma.blogPost.findMany(query);      
+    }
+  });
 };

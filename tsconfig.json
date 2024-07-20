@@ -25,11 +25,12 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./*"]
     }
   },
   "include": [
     "netlify/functions/**/*.ts",
+    "netlify/utls/**/*.ts", 
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
@@ -40,6 +41,6 @@
     "dist",
     ".next",
     "netlify/functions-dist/**/*.*",
-    "scripts/custom-build.js"
+    "scripts"
   ],
 }

@@ -1,7 +1,7 @@
 [build]
   command = "yarn run build:prod"
   publish = ".next"
-  functions = "netlify/functions-dist"
+  functions = "netlify//functions"
 
 [dev]
   command = "next dev"
@@ -18,4 +18,4 @@
   status = 200
 
 [functions]
-  directory = "netlify/functions-dist"
+  directory = "netlify/functions-dist/functions"

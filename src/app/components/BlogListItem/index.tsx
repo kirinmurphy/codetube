@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PrismaTypes } from '@/lib/prisma';
+import { PrismaTypes } from '@/src/lib/prisma';
 
 const THUMBNAIL_SIZE = 250;
 

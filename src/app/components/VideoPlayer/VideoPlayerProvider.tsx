@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import { YouTubePlayer } from "react-youtube";
 
-import { debounce } from '@/lib/debounce';
+import { debounce } from '@/src/lib/debounce';
 
 import { 
   VideoPlayerStateProps, 

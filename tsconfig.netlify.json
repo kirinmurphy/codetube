@@ -5,7 +5,8 @@
     "noEmit": false
   },
   "include": [
-    "netlify/functions/**/*.ts"
+    "netlify/functions/**/*.ts",
+    "netlify/utils/**/*.ts"
   ],
   "exclude": [
     "node_modules",
