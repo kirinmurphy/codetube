@@ -3,13 +3,13 @@ import { fetchBlogPosts } from '@/src/lib/fetchBlogPosts';
 import { BlogListItem } from './components/blog/BlogListItem/index';
 import { SearchableTag } from './components/blog/tags/SearchableTag';
 import { PrismaTypes } from '@/src/lib/prisma';
+import ClientWrapper from './components/layout/ClientWrapper';
 
 interface Props {
   searchParams: { [key: string]: string }
 }
 
 export default async function Home({ searchParams = {} }: Props) {
-  console.log('searchParams', searchParams);
   const { tag = '' } = searchParams;
     
   try {
@@ -21,10 +21,14 @@ export default async function Home({ searchParams = {} }: Props) {
     if (!blogPosts || !allTags) return <></>;
 
     return (
-      <>
+      <ClientWrapper initialTag={tag}>
         <div className="w-full flex flex-row gap-2 flex-wrap mb-6">
-          {allTags.map(tag => (
-            <SearchableTag key={tag.id} tag={tag} />
+          {allTags.map(tagOption => (
+            <SearchableTag 
+              key={tagOption.id} 
+              tag={tagOption} 
+              currentTagName={tag} 
+            />
           ))}
         </div>
 
@@ -39,7 +43,7 @@ export default async function Home({ searchParams = {} }: Props) {
             <BlogListItem blogPost={props} />
           </div>
         ))}
-      </>
+      </ClientWrapper>
     );
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
