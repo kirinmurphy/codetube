@@ -18,7 +18,7 @@ const BUTTON_TYPE_STYLES = {
   [ButtonType.Primary]: '',
   [ButtonType.Secondary]: '',
   [ButtonType.Tag]: 'bg-blue-100 text-black hover:bg-light-blue-700',
-  [ButtonType.TagActive]: ''
+  [ButtonType.TagActive]: 'bg-blue-900 text-white hover:bg-blue-900'
 };
 
 type ButtonPropsBase = {
