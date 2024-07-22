@@ -19,7 +19,7 @@ model BlogPost {
   youtubeId          String?  
   blogId             String?  
   createdAt          DateTime @default(now())
-  tags     BlogPostTag[]
+  tags               BlogPostTag[]
 }
 
 model Tag {
