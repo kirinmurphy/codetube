@@ -1,9 +1,16 @@
+import { BlogPost } from '@prisma/client';
 import { fetchTagsFacet } from '@/src/lib/fetchTagsFacet';
 import { fetchBlogPosts } from '@/src/lib/fetchBlogPosts';
-import { BlogListItem } from './components/blog/BlogListItem/index';
-import { SearchableTag } from './components/blog/tags/SearchableTag';
-import { PrismaTypes } from '@/src/lib/prisma';
+import { fetchPostsByTagGroup, PostsByTagGroupResult } from '@/src/lib/fetchPostsByTagGroup';
+
 import ClientWrapper from './components/layout/ClientWrapper';
+import { PostsByTagGroup } from './components/blog/PostsByTagGroup';
+import { TagNavigation } from './components/blog/tags/TagNavigation';
+import { PostCollectionWrapper } from './components/blog/PostCollectionWrapper';
+import { BlogListItem } from './components/blog/BlogListItem';
+
+const HOMEPAGE_TAG_GROUP_NAMES = ['react_19', 'nextjs', 'css', 'browser_basics'];
+
 
 interface Props {
   searchParams: { [key: string]: string }
@@ -11,38 +18,37 @@ interface Props {
 
 export default async function Home({ searchParams = {} }: Props) {
   const { tag = '' } = searchParams;
+  const hasUserFilter = tag !== '';
     
   try {
-    const [blogPosts, allTags] = await Promise.all([
-      fetchBlogPosts({ tag }),
-      fetchTagsFacet()
+    const [allTags, blogPosts, groupedPosts] = await Promise.all([
+      fetchTagsFacet(),
+      hasUserFilter ? fetchBlogPosts({ tag }) : Promise.resolve(null),
+      hasUserFilter ? Promise.resolve(null) 
+        : fetchPostsByTagGroup({ tagNames: HOMEPAGE_TAG_GROUP_NAMES, maxItemsPerTag: 4 })
     ]);
 
-    if (!blogPosts || !allTags) return <></>;
+    if (!allTags || (!blogPosts && !groupedPosts)) return <></>;
 
     return (
       <ClientWrapper initialTag={tag}>
-        <div className="w-full flex flex-row gap-2 flex-wrap mb-6">
-          {allTags.map(tagOption => (
-            <SearchableTag 
-              key={tagOption.id} 
-              tag={tagOption} 
-              currentTagName={tag} 
-            />
-          ))}
-        </div>
+        <TagNavigation allTags={allTags} tagName={tag} />
 
-        {blogPosts.map((props: PrismaTypes.BlogPostProps) => (
-          <div key={props.id} 
-            className={`
-              [&:not(:last-of-type)]:mb-5 
-              [&:not(:last-of-type)]:pb-5 
-              [&:not(:last-of-type)]:border-b 
-              border-gray-600
-            `}>
-            <BlogListItem blogPost={props} />
-          </div>
-        ))}
+        {blogPosts && (
+          <PostCollectionWrapper>
+            {blogPosts.map((blogPost: BlogPost) => (
+              <BlogListItem key={blogPost.id} blogPost={blogPost} />
+            ))}
+          </PostCollectionWrapper>
+        )}
+
+        {groupedPosts && (
+          groupedPosts.map((props: PostsByTagGroupResult) => (
+            <div key={props.tag.id} className="mb-8">
+              <PostsByTagGroup {...props} />
+            </div>
+          ))
+        )}
       </ClientWrapper>
     );
   } catch (error: unknown) {

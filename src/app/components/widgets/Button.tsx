@@ -8,6 +8,7 @@ export enum ButtonType {
   Secondary = 'secondary',
   Tag = 'tag',
   TagActive = 'tagActive',
+  Text = 'text'
 }
 
 const BASE_BUTTON_STYLES = 'font-bold py-1 px-2 rounded flex items-center gap-2';
@@ -18,13 +19,16 @@ const BUTTON_TYPE_STYLES = {
   [ButtonType.Primary]: '',
   [ButtonType.Secondary]: '',
   [ButtonType.Tag]: 'bg-blue-100 text-black hover:bg-light-blue-700',
-  [ButtonType.TagActive]: 'bg-blue-900 text-white hover:bg-blue-900'
+  [ButtonType.TagActive]: 'bg-blue-900 text-white hover:bg-blue-900',
+  [ButtonType.Text]: 'bg-transparent text-light-gray-900 hover:text-white underline'
+
 };
 
 type ButtonPropsBase = {
   children: React.ReactNode;
   type?: ButtonType;
   isDisabled?: boolean;
+  className?: string;
 };
 
 type ButtonPropsWithClick = ButtonPropsBase & {
@@ -44,6 +48,7 @@ export function Button (props: ButtonProps) {
     children, 
     type = ButtonType.Default, 
     isDisabled = false,
+    className = '',
     onClick 
   } = props;
 
@@ -51,6 +56,7 @@ export function Button (props: ButtonProps) {
 
   const buttonClasses = classNames(
     BASE_BUTTON_STYLES,
+    className,
     {
       [BUTTON_TYPE_STYLES[type]]: !isDisabled,
       [buttonDisabledStyles]: isDisabled,
