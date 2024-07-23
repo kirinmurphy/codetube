@@ -8,7 +8,7 @@ interface ClientWrapperProps {
   initialTag: string;
 }
 
-export default function ClientWrapper({ children, initialTag }: ClientWrapperProps) {
+export function ClientRouterWrapper ({ children, initialTag }: ClientWrapperProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 

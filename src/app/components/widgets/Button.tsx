@@ -1,26 +1,25 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 export enum ButtonType {
   Default = 'default',
   DefaultDisabled = 'defaultDisabled',
   Primary = 'primary',
-  Secondary = 'secondary',
-  Tag = 'tag',
-  TagActive = 'tagActive',
-  Text = 'text'
+  // Tag = 'tag',
+  Text = 'text',
+  TextActive = 'textActive',
 }
 
-const BASE_BUTTON_STYLES = 'font-bold py-1 px-2 rounded flex items-center gap-2';
+const BASE_BUTTON_STYLES = 'flex items-center gap-2 text-left';
+const BASE_BUTTONNY_STYLES = 'font-bold py-1 px-2 rounded';
 
 const BUTTON_TYPE_STYLES = {
   [ButtonType.Default]: 'text-white bg-black hover:bg-gray-800 border border-gray-700',
   [ButtonType.DefaultDisabled]: 'bg-gray-900 text-gray-700 border-gray-900 hover:bg-gray-900',
   [ButtonType.Primary]: '',
-  [ButtonType.Secondary]: '',
-  [ButtonType.Tag]: 'bg-blue-100 text-black hover:bg-light-blue-700',
-  [ButtonType.TagActive]: 'bg-blue-900 text-white hover:bg-blue-900',
-  [ButtonType.Text]: 'bg-transparent text-light-gray-900 hover:text-white underline'
+  // [ButtonType.Tag]: 'bg-blue-100 text-black hover:bg-light-blue-700',
+  [ButtonType.Text]: 'text-light-gray-900 hover:text-white hover:underline',
+  [ButtonType.TextActive]: 'text-white font-bold hover:underline',
 
 };
 
@@ -54,8 +53,11 @@ export function Button (props: ButtonProps) {
 
   const buttonDisabledStyles = BUTTON_TYPE_STYLES[`${type}Disabled` as ButtonType];
 
-  const buttonClasses = classNames(
+  const isTextButton = type === ButtonType.Text || type === ButtonType.TextActive;
+
+  const buttonClasses = clsx(
     BASE_BUTTON_STYLES,
+    !isTextButton ? BASE_BUTTONNY_STYLES : '',
     className,
     {
       [BUTTON_TYPE_STYLES[type]]: !isDisabled,
