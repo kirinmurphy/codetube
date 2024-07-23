@@ -20,16 +20,24 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
   const linkTarget = blogId ? '_self' : '_blank';
 
   return (
-    <div className="blog-list-item flex flex-col items-start gap-4">
-      <div className="blog-thumbnail-container w-full flex-shrink-0 border border-gray-600">
-        {!!blogImage && (
-          <Image 
-            className="blog-thumbnail w-full object-cover" 
-            src={blogImage} 
-            alt={title} 
-            width={THUMBNAIL_SIZE} 
-            height={THUMBNAIL_SIZE} 
-          />
+    <div className="flex flex-col items-start gap-2">
+      <div>
+        <div className="w-full flex-shrink-0 border border-gray-600">
+          {!!blogImage && (
+            <Image 
+              className="w-full object-cover" 
+              src={blogImage} 
+              alt={title} 
+              width={THUMBNAIL_SIZE} 
+              height={THUMBNAIL_SIZE} 
+            />
+          )}
+        </div>
+                
+        {!!youtubeId && (
+          <div className="flex mt-1">
+            <VideoPlayerBlogItemControls youtubeId={youtubeId} title={title} />
+          </div>
         )}
       </div>
 
@@ -52,9 +60,6 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
           {body}
         </div>
 
-        {!!youtubeId && (
-          <VideoPlayerBlogItemControls youtubeId={youtubeId} title={title} />
-        )}
       </div>
     </div>
   );

@@ -45,32 +45,45 @@ export function VideoPlayerBlogItemControls (props: Props) {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="w-full flex justify-between gap-2">
       {!alreadyAddedVideo && (
         <>
-          <Button onClick={handleAddAndPlay}>
+          <PlayerButton onClick={handleAddAndPlay}>
             <FaPlay />
-          </Button>
+          </PlayerButton>
 
-          <Button onClick={handleAddToQueue}>
+          <PlayerButton onClick={handleAddToQueue}>
             <FaPlus />
-          </Button>
+          </PlayerButton>
         </>
       )}
 
       {alreadyAddedVideo && (
         <>
           {!isActiveVideo && (
-            <Button onClick={handlePlayAfterAdd}>
+            <PlayerButton onClick={handlePlayAfterAdd}>
               <FaPlay />
-            </Button>            
+            </PlayerButton>            
           )}        
 
-          <Button onClick={handleRemoveFromPlayer}>
+          <PlayerButton onClick={handleRemoveFromPlayer}>
             <FaMinusCircle />
-          </Button>
+          </PlayerButton>
         </>
       )}
     </div>
+  );
+}
+
+interface PlayerButtonProps {
+  children: React.ReactNode;
+  onClick: () => void;
+}
+
+function PlayerButton ({ children, onClick }: PlayerButtonProps) {
+  return (
+    <Button className="flex-1 justify-center py-2" onClick={onClick}>
+      {children}
+    </Button>
   );
 }

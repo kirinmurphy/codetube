@@ -1,15 +1,16 @@
+import { BlogPost } from '@prisma/client';
 import { fetchTagsFacet } from '@/src/lib/fetchTagsFacet';
 import { fetchBlogPosts } from '@/src/lib/fetchBlogPosts';
-import { BlogListItem } from './components/blog/BlogListItem/index';
-import { SearchableTag } from './components/blog/tags/SearchableTag';
-import ClientWrapper from './components/layout/ClientWrapper';
-import { fetchPostsByTagGroup } from '@/src/lib/fetchPostsByTagGroup';
-import { BlogPost, Tag } from '@prisma/client';
+import { fetchPostsByTagGroup, PostsByTagGroupResult } from '@/src/lib/fetchPostsByTagGroup';
 
-interface PostsByTagGroupResult {
-  tag: Tag;
-  posts: BlogPost[];
-}
+import ClientWrapper from './components/layout/ClientWrapper';
+import { PostsByTagGroup } from './components/blog/PostsByTagGroup';
+import { TagNavigation } from './components/blog/tags/TagNavigation';
+import { PostCollectionWrapper } from './components/blog/PostCollectionWrapper';
+import { BlogListItem } from './components/blog/BlogListItem';
+
+const HOMEPAGE_TAG_GROUP_NAMES = ['react_19', 'nextjs', 'css', 'browser_basics'];
+
 
 interface Props {
   searchParams: { [key: string]: string }
@@ -18,53 +19,33 @@ interface Props {
 export default async function Home({ searchParams = {} }: Props) {
   const { tag = '' } = searchParams;
   const hasUserFilter = tag !== '';
-
-  const tagGroupNames = ['react_19', 'nextjs', 'css', 'browser_basics'];
     
   try {
     const [allTags, blogPosts, groupedPosts] = await Promise.all([
       fetchTagsFacet(),
       hasUserFilter ? fetchBlogPosts({ tag }) : Promise.resolve(null),
-      hasUserFilter ? Promise.resolve(null) : fetchPostsByTagGroup({ tagNames: tagGroupNames, maxItemsPerTag: 4 })
+      hasUserFilter ? Promise.resolve(null) 
+        : fetchPostsByTagGroup({ tagNames: HOMEPAGE_TAG_GROUP_NAMES, maxItemsPerTag: 4 })
     ]);
 
     if (!allTags || (!blogPosts && !groupedPosts)) return <></>;
 
     return (
       <ClientWrapper initialTag={tag}>
-        <div className="w-full flex flex-row gap-2 flex-wrap mb-6">
-          {allTags.map(tagOption => (
-            <SearchableTag 
-              key={tagOption.id} 
-              tag={tagOption} 
-              currentTagName={tag} 
-            />
-          ))}
-        </div>
+        <TagNavigation allTags={allTags} tagName={tag} />
 
-        {hasUserFilter && blogPosts && (
-          blogPosts.map((blogPost: BlogPost) => (
-            <div key={blogPost.id} 
-              className={`
-                [&:not(:last-of-type)]:mb-5 
-                [&:not(:last-of-type)]:pb-5 
-                [&:not(:last-of-type)]:border-b 
-                border-gray-600
-              `}>
-              <BlogListItem blogPost={blogPost} />
-            </div>
-          ))
+        {blogPosts && (
+          <PostCollectionWrapper>
+            {blogPosts.map((blogPost: BlogPost) => (
+              <BlogListItem key={blogPost.id} blogPost={blogPost} />
+            ))}
+          </PostCollectionWrapper>
         )}
 
-        {!hasUserFilter && groupedPosts && (
-          groupedPosts.map(({ tag, posts }: PostsByTagGroupResult) => (
-            <div key={tag.id} className="mb-8">
-              <h2 className="text-2xl font-bold mb-4">{tag.name}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {posts.map((post) => (
-                  <BlogListItem key={post.id} blogPost={post} />
-                ))}
-              </div>
+        {groupedPosts && (
+          groupedPosts.map((props: PostsByTagGroupResult) => (
+            <div key={props.tag.id} className="mb-8">
+              <PostsByTagGroup {...props} />
             </div>
           ))
         )}

@@ -1,7 +1,7 @@
 import { BlogPost, Tag } from '@prisma/client';
 import { fetchIt } from './fetchIt';
 
-interface PostsByTagGroupResult {
+export interface PostsByTagGroupResult {
   tag: Tag;
   posts: BlogPost[];
 }

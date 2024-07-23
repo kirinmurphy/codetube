@@ -9,7 +9,7 @@ type BlogPostWithTags = BlogPost & {
 };
 
 interface PostsByTagGroupResult {
-  tag: Partial<Tag>;  // Changed to Partial<Tag> to allow for tags without an id
+  tag: Partial<Tag>;  
   posts: BlogPostWithTags[];
 }
 
@@ -18,10 +18,13 @@ export const handler: Handler = async (event) => {
     event,
     errorMessage: 'Failed to fetch posts by tag group',
     getQueryResponse: async ({ prisma, event }) => {
-      const tagNames = event.queryStringParameters?.tagNames?.split(',') || [];
-      const maxItemsPerTag = parseInt(event.queryStringParameters?.maxItemsPerTag || '4', 10);
+      const queryStringParameters = event.queryStringParameters || {};
+      const { tagNames, maxItemsPerTag } = queryStringParameters;
+
+      const tagNameCollection = tagNames?.split(',') || [];
+      const totalMaxItemsPerTag = parseInt(maxItemsPerTag || '4', 10);
     
-      return await Promise.all(tagNames.map(async (tagName) => {
+      return await Promise.all(tagNameCollection.map(async (tagName) => {
         const posts = await prisma.blogPost.findMany({
           where: {
             tags: {
@@ -42,12 +45,12 @@ export const handler: Handler = async (event) => {
           orderBy: {
             createdAt: 'desc'
           },
-          take: maxItemsPerTag
+          take: totalMaxItemsPerTag
         });
     
         return {
           tag: posts[0]?.tags[0]?.tag ?? { name: tagName },
-          posts: posts as BlogPostWithTags[] || []
+          posts: posts as BlogPostWithTags[]
         };
       }));    
     }

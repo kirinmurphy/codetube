@@ -3,6 +3,7 @@
 import { TagWithCount } from "@/src/lib/fetchTagsFacet";
 import { Button, ButtonType } from "../../widgets/Button";
 import { useRouter } from "next/navigation";
+import { getTagPath } from "../utils/getTagPath";
 
 interface Props {
   tag: TagWithCount;
@@ -15,7 +16,7 @@ export function SearchableTag({ tag, currentTagName }: Props) {
   const isCurrentTag = tag.name === currentTagName;
 
   const handleTagClick = () => {
-    const newPath = isCurrentTag ? '/' : `/?tag=${tag.name}`; 
+    const newPath = isCurrentTag ? '/' : getTagPath(tag.name);
     router.push(newPath, { scroll: false });
   };
 
