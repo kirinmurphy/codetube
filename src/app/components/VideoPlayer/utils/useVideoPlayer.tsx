@@ -23,7 +23,7 @@ export function useVideoPlayer (): ReturnProps {
 
   // TODO: should we keep these containers for the return? 
   return {
-    ...videoPlayerState,
+    ...JSON.parse(JSON.stringify(videoPlayerState)), 
     videoPlayerRef,
     ...playerActions
   }

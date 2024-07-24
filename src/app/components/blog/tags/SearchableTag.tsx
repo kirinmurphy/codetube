@@ -8,9 +8,13 @@ import { getTagPath } from "../utils/getTagPath";
 interface Props {
   tag: TagWithCount;
   currentTagName: string;
+  onAfterClick?: () => void;
 }
 
-export function SearchableTag({ tag, currentTagName }: Props) {
+export function SearchableTag(props: Props) {
+
+  const { tag, currentTagName, onAfterClick } = props;
+  
   const router = useRouter();
     
   const isCurrentTag = tag.name === currentTagName;
@@ -18,14 +22,15 @@ export function SearchableTag({ tag, currentTagName }: Props) {
   const handleTagClick = () => {
     const newPath = isCurrentTag ? '/' : getTagPath(tag.name);
     router.push(newPath, { scroll: false });
+    onAfterClick && onAfterClick();
   };
 
-  const buttonState = isCurrentTag ? ButtonType.TagActive : ButtonType.Tag;
+  const buttonState = isCurrentTag ? ButtonType.TextActive : ButtonType.Text;
 
   return (
     <Button type={buttonState} onClick={handleTagClick}>
       <span className="text-lg">{tag.readableName}</span>
-      <span className="text-sm">{tag.count}</span>
+      <span className="text-sm">({tag.count})</span>
     </Button>
   );
 }

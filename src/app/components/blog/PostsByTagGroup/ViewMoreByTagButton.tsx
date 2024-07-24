@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Button, ButtonType } from "../widgets/Button";
-import { getTagPath } from "./utils/getTagPath";
+import { Button, ButtonType } from "../../widgets/Button";
+import { getTagPath } from "../utils/getTagPath";
 
 interface Props {
   tagName: string;
