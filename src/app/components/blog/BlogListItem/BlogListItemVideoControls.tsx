@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FaPlay, FaPlus, FaMinusCircle } from "react-icons/fa";
+import { FaPlay, FaPlus, FaMinusCircle, FaPause } from "react-icons/fa";
 
 import { Button } from '../../widgets/Button';
 import { useVideoPlayer } from "../../VideoPlayer/utils/useVideoPlayer";
@@ -17,16 +17,19 @@ export function VideoPlayerBlogItemControls (props: Props) {
   const { 
     videoCollection, 
     activeVideo,
+    isPlaying,
     addVideo, 
     addVideoAndPlay, 
     removeVideo,
-    playVideo     
+    playVideo,
+    pauseVideo,     
   } = useVideoPlayer();
 
   const alreadyAddedVideo = videoCollection
     .find((item) => item.youtubeId === youtubeId);
 
   const isActiveVideo = activeVideo?.youtubeId === youtubeId;
+  const isActiveVideoPlaying = isActiveVideo && isPlaying;
 
   const handleAddAndPlay = () => {
     addVideoAndPlay({ youtubeId, title, played: true });
@@ -44,6 +47,10 @@ export function VideoPlayerBlogItemControls (props: Props) {
     removeVideo(youtubeId);
   };
 
+  const handlePause = () => {
+    pauseVideo();
+  }
+
   return (
     <div className="w-full flex justify-between gap-2">
       {!alreadyAddedVideo && (
@@ -60,11 +67,17 @@ export function VideoPlayerBlogItemControls (props: Props) {
 
       {alreadyAddedVideo && (
         <>
-          {!isActiveVideo && (
+          {!isActiveVideoPlaying && (
             <PlayerButton onClick={handlePlayAfterAdd}>
               <FaPlay />
             </PlayerButton>            
           )}        
+
+          {isActiveVideoPlaying && (
+            <PlayerButton onClick={handlePause}>
+              <FaPause />
+            </PlayerButton>            
+          )}
 
           <PlayerButton onClick={handleRemoveFromPlayer}>
             <FaMinusCircle />

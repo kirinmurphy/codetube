@@ -26,6 +26,12 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     screenType 
   } = videoPlayerState;
 
+  const getNewDisplayState = () => {
+    return displayState !== VideoPlayerDisplayState.Closed ? displayState 
+      : screenType === ScreenType.Full ? VideoPlayerDisplayState.SplitScreen 
+      : VideoPlayerDisplayState.FullScreen;
+  };
+
   const onReady = (event: { target: YouTubePlayer }) => {
     videoPlayerRef.current = event.target;
   };
@@ -49,15 +55,11 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
       video, videoCollection, activeVideo
     });
 
-    const newDisplayState = displayState !== VideoPlayerDisplayState.Closed ? displayState 
-      : screenType === ScreenType.Full ? VideoPlayerDisplayState.SplitScreen 
-      : VideoPlayerDisplayState.FullScreen;
-
     setVideoPlayerState({
       ...videoPlayerState,
       videoCollection: newVideoCollection,
       activeVideo: video,
-      displayState: newDisplayState,
+      displayState: getNewDisplayState(),
       autoPlay: true,
       isPlaying: true,
     });
@@ -66,7 +68,7 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
   const playVideo = ({ video, displayState }: PlayVideoProps) => {
     setVideoPlayerState({
       ...videoPlayerState,
-      ...(displayState ? { displayState } : {}),
+      displayState: displayState || getNewDisplayState(),
       activeVideo: video,
       autoPlay: true,
       isPlaying: true,
@@ -74,7 +76,10 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
   };
 
   const pauseVideo = () => {
-    if (videoPlayerRef.current) { videoPlayerRef.current.pauseVideo(); }
+    if ( videoPlayerRef.current ) { 
+      const isPlaying = videoPlayerRef.current.getPlayerState() === 1;
+      isPlaying && videoPlayerRef.current.pauseVideo();    
+    }
     setVideoPlayerState({ ...videoPlayerState, isPlaying: false });
   };  
 
@@ -116,11 +121,16 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
   };
 
   const updateDisplayState = (displayState: VideoPlayerDisplayState) => {
+    const isClosed = displayState === VideoPlayerDisplayState.Closed;
+    if ( isClosed && videoPlayerRef.current ) { videoPlayerRef.current.pauseVideo(); }
     setVideoPlayerState({ ...videoPlayerState, displayState });
   }
 
   const closePlayer = () => {
-    setVideoPlayerState({ ...videoPlayerState, displayState: VideoPlayerDisplayState.Closed });
+    setVideoPlayerState({ 
+      ...videoPlayerState, 
+      displayState: VideoPlayerDisplayState.Closed 
+    });
   }
 
   const handlePlayerResize = ({ window }: { window: Window }) => {

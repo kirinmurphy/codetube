@@ -19,6 +19,8 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
 
   const linkTarget = blogId ? '_self' : '_blank';
 
+  const showComment = false;
+
   return (
     <div className="flex flex-col items-start gap-2">
       <div>
@@ -43,7 +45,7 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
 
       <div className="flex-grow">
         <header className="mb-2">
-          <h3 className="text-xl font-bold">
+          <h3 className="text-lg">
             {itemLink && 
               <a href={itemLink} target={linkTarget} rel="noreferrer">
                 {title}
@@ -56,9 +58,11 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
           </h3>
         </header>
 
-        <div className="mb-4">
-          {body}
-        </div>
+        {showComment && (
+          <div className="mb-4">
+            {body}
+          </div> 
+        )}
 
       </div>
     </div>

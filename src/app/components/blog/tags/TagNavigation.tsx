@@ -39,21 +39,24 @@ export function TagNavigation ({ allTags, tagName }: Props) {
   const dropdownArrow = isFilterOpenInMobile ? '▲' : '▼';
 
   return (
-    <div className="relative flex flex-col">
+    <div ref={tagListRef} className="relative flex flex-col">
       <header className={clsx('flex justify-end 900mq:hidden', {
         '900mq:!flex': isSplitScreen
       })}>
-        <div onClick={handleFilterToggle}>Filter {dropdownArrow}</div>
+        <div onClick={handleFilterToggle} className="flex gap-1 cursor-pointer">
+          Filter
+          <span className="inline-block transform scale-y-50">{dropdownArrow}</span>
+        </div>
       </header>
 
-      <div ref={tagListRef} 
-        className={clsx('hidden 900mq:block', {
+      <div
+        className={clsx('hidden 900mq:flex flex-col gap-2', {
           '900mq:!hidden': isSplitScreen && !isFilterOpenInMobile,
-          '!block absolute top-10 right-0 z-10 bg-black p-4 rounded-lg shadow-md': isFilterOpenInMobile
+          '!flex absolute top-10 right-0 z-10 p-6 bg-black rounded-lg shadow-md': isFilterOpenInMobile
         })}
       >
         {allTags.map(tagOption => (
-          <div key={tagOption.id} className="">
+          <div key={tagOption.id}>
             <SearchableTag 
               tag={tagOption} 
               currentTagName={tagName} 

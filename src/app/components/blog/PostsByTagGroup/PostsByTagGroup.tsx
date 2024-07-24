@@ -13,7 +13,9 @@ export function PostsByTagGroup (props: Props) {
   return (
     <>
       <header className="flex">
-        <h2 className="text-2xl font-bold mb-4 flex-grow">{tag.name.replace(/_/g, ' ')}</h2>
+        <h2 className="text-3xl font-bold mb-4 flex-grow 900mq:mb-6">
+          {tag.name.replace(/_/g, ' ')}
+        </h2>
         {allowViewMore && <ViewMoreByTagButton tagName={tag.name} />}
       </header>
 

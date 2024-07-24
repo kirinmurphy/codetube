@@ -75,7 +75,7 @@ export function VideoPlayerProvider ({ children }: Props) {
 
   return (
     <VideoPlayerContext.Provider value={contextProps}>
-      <div className={`player-provider-wrapper ${videoPlayerState.displayState}`}>
+      <div className={videoPlayerState.displayState}>
         {children}
       </div>
     </VideoPlayerContext.Provider>
