@@ -21,7 +21,8 @@ export function VideoPlayerBlogItemControls (props: Props) {
     addVideo, 
     addVideoAndPlay, 
     removeVideo,
-    playVideo,
+    playNewVideo,
+    playActiveVideo,
     pauseVideo,     
   } = useVideoPlayer();
 
@@ -36,7 +37,8 @@ export function VideoPlayerBlogItemControls (props: Props) {
   };
 
   const handlePlayAfterAdd = () => {
-    playVideo({ video: alreadyAddedVideo! });
+    if ( isActiveVideo ) { playActiveVideo(); }
+    else  { playNewVideo({ video: alreadyAddedVideo! }); }
   }
 
   const handleAddToQueue = () => {

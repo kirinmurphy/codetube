@@ -9,12 +9,22 @@ interface PlaylistItemProps {
 
 export function PlaylistItem({ video }: PlaylistItemProps) {
   const { title, youtubeId } = video;
-  const { activeVideo, playVideo, removeVideo } = useVideoPlayer();
+
+  const { 
+    activeVideo,
+    isPlaying, 
+    playNewVideo, 
+    playActiveVideo,
+    pauseVideo, 
+    removeVideo 
+  } = useVideoPlayer();
+
   const isActiveVideo = activeVideo?.youtubeId === video.youtubeId;
 
   const handlePlaylistItemSelect = () => {
-    if (isActiveVideo) return;
-    playVideo({ video });
+    if ( isActiveVideo && isPlaying ) { pauseVideo(); }
+    else if ( isActiveVideo && !isPlaying ) { playActiveVideo(); }
+    else { playNewVideo({ video }); }
   }
 
   const handleRemoveVideo = () => {

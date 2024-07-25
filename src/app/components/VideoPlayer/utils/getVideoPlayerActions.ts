@@ -32,6 +32,10 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
       : VideoPlayerDisplayState.FullScreen;
   };
 
+  const setPlayingState = (isPlaying: boolean) => {
+    setVideoPlayerState({ ...videoPlayerState, isPlaying });
+  };
+
   const onReady = (event: { target: YouTubePlayer }) => {
     videoPlayerRef.current = event.target;
   };
@@ -65,7 +69,7 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     });
   };
  
-  const playVideo = ({ video, displayState }: PlayVideoProps) => {
+  const playNewVideo = ({ video, displayState }: PlayVideoProps) => {
     setVideoPlayerState({
       ...videoPlayerState,
       displayState: displayState || getNewDisplayState(),
@@ -75,37 +79,46 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     });
   };
 
+  const playActiveVideo = () => {
+    if ( videoPlayerRef.current ) { 
+      const isNotPlaying = videoPlayerRef.current.getPlayerState() !== 1;
+      isNotPlaying && videoPlayerRef.current.playVideo();
+    }
+
+    const isClosed = displayState === VideoPlayerDisplayState.Closed;
+    if ( isClosed ) { updateDisplayState(getNewDisplayState()); }
+  }
+
   const pauseVideo = () => {
     if ( videoPlayerRef.current ) { 
       const isPlaying = videoPlayerRef.current.getPlayerState() === 1;
       isPlaying && videoPlayerRef.current.pauseVideo();    
     }
-    setVideoPlayerState({ ...videoPlayerState, isPlaying: false });
   };  
 
   const getPreviousVideo = () => {
     const activeVideoIndex = videoCollection
       .findIndex((item) => item.youtubeId === activeVideo?.youtubeId);
     return activeVideoIndex > 0 ? videoCollection[activeVideoIndex - 1] : null;
-  }
+  };
 
   const playPreviousVideo = () => {
-    const nextVideo = getPreviousVideo();
-    if (nextVideo) { playVideo({ video: nextVideo }); } 
+    const previousVideo = getPreviousVideo();
+    if (previousVideo) { playNewVideo({ video: previousVideo }); } 
     else { pauseVideo() }
-  }
+  };
 
   const getNextVideo = () => {
     const activeVideoIndex = videoCollection
       .findIndex((item) => item.youtubeId === activeVideo?.youtubeId);
     return videoCollection[activeVideoIndex + 1] || null;
-  }
+  };
 
   const playNextVideo = () => {
     const nextVideo = getNextVideo();
-    if (nextVideo) { playVideo({ video: nextVideo }); } 
+    if (nextVideo) { playNewVideo({ video: nextVideo }); } 
     else { pauseVideo() }
-  }
+  };
 
   const removeVideo = (youtubeId: string) => {
     const nextActiveVideo = getNextActiveVideoOnRemove({ youtubeId, activeVideo, videoCollection });    
@@ -116,7 +129,8 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
       videoCollection: filteredVideos,
       activeVideo: nextActiveVideo || activeVideo,
       displayState: !!filteredVideos.length ? displayState : VideoPlayerDisplayState.Closed,
-      autoPlay: nextActiveVideo ? false : autoPlay
+      autoPlay: nextActiveVideo ? false : autoPlay,
+      isPlaying: false,
     });
   };
 
@@ -124,13 +138,6 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     const isClosed = displayState === VideoPlayerDisplayState.Closed;
     if ( isClosed && videoPlayerRef.current ) { videoPlayerRef.current.pauseVideo(); }
     setVideoPlayerState({ ...videoPlayerState, displayState });
-  }
-
-  const closePlayer = () => {
-    setVideoPlayerState({ 
-      ...videoPlayerState, 
-      displayState: VideoPlayerDisplayState.Closed 
-    });
   }
 
   const handlePlayerResize = ({ window }: { window: Window }) => {
@@ -149,17 +156,18 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
   
   return {
     onReady,
+    setPlayingState,
     addVideo,
     addVideoAndPlay,
     updateDisplayState,
-    playVideo,
+    playNewVideo,
+    playActiveVideo,
     pauseVideo,
     getPreviousVideo,
     playPreviousVideo,
     getNextVideo,
     playNextVideo,
     removeVideo,
-    closePlayer,
     handlePlayerResize,
   }
 }

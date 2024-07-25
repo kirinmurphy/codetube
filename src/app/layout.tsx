@@ -6,16 +6,6 @@ import { VideoPlayerProvider } from "./components/VideoPlayer/VideoPlayerProvide
 import { Page } from "./components/layout/Page";
 import { VideoPlayerWrapper } from "./components/layout/VideoPlayerWrapper";
 
-// const geistSans = localFont({
-//   src: "../../public/fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-// });
-
-// const geistMono = localFont({
-//   src: "../../public/fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-// });
-
 const lato = Lato({
   weight: ['400', '700'],
   subsets: ['latin'],
