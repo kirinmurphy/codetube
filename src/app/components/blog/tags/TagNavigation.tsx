@@ -8,6 +8,8 @@ import { SearchableTag } from "./SearchableTag";
 import { useCallbackOnExternalEventTrigger } from '@/src/lib/useCallbackOnExternalEventTrigger';
 import { useVideoPlayer } from '../../VideoPlayer/utils/useVideoPlayer';
 import { VideoPlayerDisplayState } from '../../VideoPlayer/types';
+import { Button, ButtonType } from '../../widgets/Button';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   allTags: TagWithCount[];
@@ -15,6 +17,8 @@ interface Props {
 }
 
 export function TagNavigation ({ allTags, tagName }: Props) {
+
+  const router = useRouter();
 
   const { displayState } = useVideoPlayer();
 
@@ -36,6 +40,11 @@ export function TagNavigation ({ allTags, tagName }: Props) {
     setIsFilterOpenInMobile(false);
   }
 
+  const handleClearFilter = () => {
+    router.push('/', { scroll: false });
+    handleOnAfterClick();
+  }
+
   const dropdownArrow = isFilterOpenInMobile ? '▲' : '▼';
 
   return (
@@ -55,6 +64,11 @@ export function TagNavigation ({ allTags, tagName }: Props) {
           '!flex absolute top-10 right-0 z-10 p-6 bg-black rounded-lg shadow-md': isFilterOpenInMobile
         })}
       >
+        {!!tagName && (
+          <Button type={ButtonType.Text} onClick={handleClearFilter}>
+            View All
+          </Button>
+        )}
         {allTags.map(tagOption => (
           <div key={tagOption.id}>
             <SearchableTag 
