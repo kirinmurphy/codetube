@@ -45,16 +45,17 @@ export interface PlayVideoProps {
 
 export interface VideoPlayerActions {
   onReady: (event: YouTubeEvent<Event>) => void;
+  setPlayingState: (isPlaying: boolean) => void;
   addVideo: (item: VideoItem) => void;
   addVideoAndPlay: (item: VideoItem) => void;
-  playVideo: ({ video, displayState }: PlayVideoProps) => void;  
+  playNewVideo: ({ video, displayState }: PlayVideoProps) => void;  
+  playActiveVideo: () => void;
   pauseVideo: () => void;
   getPreviousVideo: () => VideoItem | null;
   playPreviousVideo: () => void;
   getNextVideo: () => VideoItem | null;
   playNextVideo: () => void;
   removeVideo: (youtubeId: string) => void;
-  closePlayer: () => void;
   updateDisplayState: (displayState: VideoPlayerDisplayState) => void;
   handlePlayerResize: ({ window }: { window: Window }) => void;
 }

@@ -17,9 +17,8 @@ export function VideoPlayer () {
     displayState,
     autoPlay,
     onReady,
+    setPlayingState,
     playNextVideo,
-    playVideo,
-    pauseVideo,
   } = useVideoPlayer();
 
   const currentVideoIdRef = useRef(activeVideo?.youtubeId);
@@ -63,8 +62,8 @@ export function VideoPlayer () {
                 iframeClassName="absolute top-0 left-0 w-full h-full"
                 videoId={activeVideo?.youtubeId}
                 onEnd={playNextVideo}
-                onPlay={() => { playVideo({ video: activeVideo }); }}
-                onPause={pauseVideo}
+                onPlay={() => { setPlayingState(true); }}
+                onPause={() => { setPlayingState(false); }}
                 onReady={onReady}
                 onError={handleVideoError}                  
                 opts={{

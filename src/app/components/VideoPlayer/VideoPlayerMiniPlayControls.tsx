@@ -7,26 +7,22 @@ export function VideoPlayerMiniPlayControls () {
   const { 
     activeVideo,
     isPlaying,
-    videoPlayerRef,
-    playVideo,
+    playActiveVideo,
     pauseVideo,
+    updateDisplayState,
   } = useVideoPlayer();
   
   if ( activeVideo === null ) return <></>;
 
   const handleListen = () => {
-    if ( videoPlayerRef.current ) { videoPlayerRef.current.playVideo(); }
-    playVideo({ video: activeVideo });
+    playActiveVideo();
   };
 
   const handlePause = () => { pauseVideo(); };
 
   const handleWatch = () => {
-    if ( videoPlayerRef.current ) { videoPlayerRef.current.playVideo(); }
-    playVideo({ 
-      video: activeVideo,
-      displayState: VideoPlayerDisplayState.FullScreen,
-    });
+    playActiveVideo();
+    updateDisplayState(VideoPlayerDisplayState.FullScreen);
   };
 
   return (

@@ -4,10 +4,13 @@ import { useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { TagWithCount } from '@/src/lib/fetchTagsFacet';
-import { SearchableTag } from "./SearchableTag";
+import { HandleTagSelectionProps, SearchableTag } from "./SearchableTag";
 import { useCallbackOnExternalEventTrigger } from '@/src/lib/useCallbackOnExternalEventTrigger';
 import { useVideoPlayer } from '../../VideoPlayer/utils/useVideoPlayer';
 import { VideoPlayerDisplayState } from '../../VideoPlayer/types';
+import { Button, ButtonType } from '../../widgets/Button';
+import { useRouter } from 'next/navigation';
+import { getTagPath } from '../utils/getTagPath';
 
 interface Props {
   allTags: TagWithCount[];
@@ -15,6 +18,8 @@ interface Props {
 }
 
 export function TagNavigation ({ allTags, tagName }: Props) {
+
+  const router = useRouter();
 
   const { displayState } = useVideoPlayer();
 
@@ -32,32 +37,50 @@ export function TagNavigation ({ allTags, tagName }: Props) {
     setIsFilterOpenInMobile(!isFilterOpenInMobile);
   }
 
-  const handleOnAfterClick = () => {
+  const pushNewRoute = ({ newPath }: { newPath: string }) => {
+    router.push(newPath, { scroll: false });
     setIsFilterOpenInMobile(false);
+  }
+
+  const handleTagSelection = ({ tagName, isActiveTag }: HandleTagSelectionProps) => {
+    const newPath = isActiveTag ? '/' : getTagPath(tagName);
+    pushNewRoute({ newPath });
+  }
+
+  const handleClearFilter = () => {
+    pushNewRoute({ newPath: '/' });
   }
 
   const dropdownArrow = isFilterOpenInMobile ? '▲' : '▼';
 
   return (
-    <div className="relative flex flex-col">
+    <div ref={tagListRef} className="relative flex flex-col">
       <header className={clsx('flex justify-end 900mq:hidden', {
         '900mq:!flex': isSplitScreen
       })}>
-        <div onClick={handleFilterToggle}>Filter {dropdownArrow}</div>
+        <div onClick={handleFilterToggle} className="flex gap-1 cursor-pointer">
+          Filter
+          <span className="inline-block transform scale-y-50">{dropdownArrow}</span>
+        </div>
       </header>
 
-      <div ref={tagListRef} 
-        className={clsx('hidden 900mq:block', {
+      <div
+        className={clsx('hidden 900mq:flex flex-col gap-2', {
           '900mq:!hidden': isSplitScreen && !isFilterOpenInMobile,
-          '!block absolute top-10 right-0 z-10 bg-black p-4 rounded-lg shadow-md': isFilterOpenInMobile
+          '!flex absolute top-10 right-0 z-10 p-6 bg-black rounded-lg shadow-md': isFilterOpenInMobile
         })}
       >
+        {!!tagName && (
+          <Button type={ButtonType.Text} onClick={handleClearFilter}>
+            View All
+          </Button>
+        )}
         {allTags.map(tagOption => (
-          <div key={tagOption.id} className="">
+          <div key={tagOption.id}>
             <SearchableTag 
               tag={tagOption} 
               currentTagName={tagName} 
-              onAfterClick={handleOnAfterClick} 
+              handleTagSelection={handleTagSelection} 
             />
           </div>
         ))}
