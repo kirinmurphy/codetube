@@ -1,8 +1,9 @@
-import { BlogPost, Tag } from '@prisma/client';
+import { BlogPost } from '@prisma/client';
 import { fetchIt } from './fetchIt';
+import { TagWithCount } from './fetchTagsFacet';
 
 export interface PostsByTagGroupResult {
-  tag: Tag;
+  tag: TagWithCount;
   posts: BlogPost[];
 }
 

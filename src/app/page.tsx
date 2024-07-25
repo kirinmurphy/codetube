@@ -42,7 +42,11 @@ export default async function Home({ searchParams = {} }: Props) {
           {groupedPosts && (
             groupedPosts.map((props: PostsByTagGroupResult) => (
               <div key={props.tag.id} className="mb-8">
-                <PostsByTagGroup {...props} allowViewMore={true} />
+                <PostsByTagGroup 
+                  {...props} 
+                  tagWithCount={allTags.find(tag => tag.name === props.tag.name)}
+                  allowViewMore={true} 
+                />
               </div>
             ))
           )}          
