@@ -4,12 +4,13 @@ import { useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { TagWithCount } from '@/src/lib/fetchTagsFacet';
-import { SearchableTag } from "./SearchableTag";
+import { HandleTagSelectionProps, SearchableTag } from "./SearchableTag";
 import { useCallbackOnExternalEventTrigger } from '@/src/lib/useCallbackOnExternalEventTrigger';
 import { useVideoPlayer } from '../../VideoPlayer/utils/useVideoPlayer';
 import { VideoPlayerDisplayState } from '../../VideoPlayer/types';
 import { Button, ButtonType } from '../../widgets/Button';
 import { useRouter } from 'next/navigation';
+import { getTagPath } from '../utils/getTagPath';
 
 interface Props {
   allTags: TagWithCount[];
@@ -36,13 +37,18 @@ export function TagNavigation ({ allTags, tagName }: Props) {
     setIsFilterOpenInMobile(!isFilterOpenInMobile);
   }
 
-  const handleOnAfterClick = () => {
+  const pushNewRoute = ({ newPath }: { newPath: string }) => {
+    router.push(newPath, { scroll: false });
     setIsFilterOpenInMobile(false);
   }
 
+  const handleTagSelection = ({ tagName, isActiveTag }: HandleTagSelectionProps) => {
+    const newPath = isActiveTag ? '/' : getTagPath(tagName);
+    pushNewRoute({ newPath });
+  }
+
   const handleClearFilter = () => {
-    router.push('/', { scroll: false });
-    handleOnAfterClick();
+    pushNewRoute({ newPath: '/' });
   }
 
   const dropdownArrow = isFilterOpenInMobile ? '▲' : '▼';
@@ -74,7 +80,7 @@ export function TagNavigation ({ allTags, tagName }: Props) {
             <SearchableTag 
               tag={tagOption} 
               currentTagName={tagName} 
-              onAfterClick={handleOnAfterClick} 
+              handleTagSelection={handleTagSelection} 
             />
           </div>
         ))}

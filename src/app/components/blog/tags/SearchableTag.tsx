@@ -2,30 +2,29 @@
 
 import { TagWithCount } from "@/src/lib/fetchTagsFacet";
 import { Button, ButtonType } from "../../widgets/Button";
-import { useRouter } from "next/navigation";
-import { getTagPath } from "../utils/getTagPath";
+
+export interface HandleTagSelectionProps {
+  tagName: string;
+  isActiveTag: boolean;
+}
 
 interface Props {
   tag: TagWithCount;
   currentTagName: string;
-  onAfterClick?: () => void;
+  handleTagSelection: (props: HandleTagSelectionProps) => void;
 }
 
 export function SearchableTag(props: Props) {
 
-  const { tag, currentTagName, onAfterClick } = props;
-  
-  const router = useRouter();
-    
-  const isCurrentTag = tag.name === currentTagName;
+  const { tag, currentTagName, handleTagSelection } = props;
+      
+  const isActiveTag = tag.name === currentTagName;
 
   const handleTagClick = () => {
-    const newPath = isCurrentTag ? '/' : getTagPath(tag.name);
-    router.push(newPath, { scroll: false });
-    onAfterClick && onAfterClick();
+    handleTagSelection({ tagName: tag.name, isActiveTag });
   };
 
-  const buttonState = isCurrentTag ? ButtonType.TextActive : ButtonType.Text;
+  const buttonState = isActiveTag ? ButtonType.TextActive : ButtonType.Text;
 
   return (
     <Button type={buttonState} onClick={handleTagClick}>

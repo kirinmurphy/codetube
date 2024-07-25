@@ -1,4 +1,3 @@
-import localFont from "next/font/local";
 import { Lato } from 'next/font/google'
 
 import "./css/globals.css";
