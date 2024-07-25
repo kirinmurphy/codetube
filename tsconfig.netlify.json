@@ -6,7 +6,8 @@
   },
   "include": [
     "netlify/functions/**/*.ts",
-    "netlify/utils/**/*.ts"
+    "netlify/utils/**/*.ts",
+    "jest-dom.d.ts"
   ],
   "exclude": [
     "node_modules",
