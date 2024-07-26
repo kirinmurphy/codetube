@@ -26,7 +26,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "types": [
+      "node", 
+      "jest", 
+      "@testing-library/jest-dom", 
+      "@testing-library/react", 
+      "./test-utils.d.ts"
+    ]
   },
   "include": [
     "netlify/functions/**/*.ts",
@@ -35,6 +42,8 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
+    "jest-dom.d.ts",
+    "test-utils.d.ts"
   ],
   "exclude": [
     "node_modules",
