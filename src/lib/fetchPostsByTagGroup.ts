@@ -2,9 +2,14 @@ import { BlogPost } from '@prisma/client';
 import { fetchIt } from './fetchIt';
 import { TagWithCount } from './fetchTagsFacet';
 
-export interface PostsByTagGroupResult {
+export interface FilteredTagGroupResponse {
   tag: TagWithCount;
   posts: BlogPost[];
+}
+
+export interface PostsByTagGroupResult {
+  featuredPosts: BlogPost[];
+  tagGroups: FilteredTagGroupResponse[];
 }
 
 interface GetPostsByTagGroupQueryParams {
@@ -13,7 +18,7 @@ interface GetPostsByTagGroupQueryParams {
 }
 
 export async function fetchPostsByTagGroup({ tagNames, maxItemsPerTag }: GetPostsByTagGroupQueryParams) {
-  return await fetchIt<PostsByTagGroupResult[]>({
+  return await fetchIt<PostsByTagGroupResult>({
     queryName: 'queryPostsByTagGroup',
     params: { 
       tagNames: tagNames.join(','),

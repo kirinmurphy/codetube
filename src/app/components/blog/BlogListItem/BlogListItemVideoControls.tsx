@@ -1,17 +1,36 @@
 "use client";
 
 import React from "react";
-import { FaPlay, FaPlus, FaMinusCircle, FaPause } from "react-icons/fa";
+import { FaPlay, FaPlus, FaMinusCircle, FaPause, FaExternalLinkAlt } from "react-icons/fa";
 
 import { Button } from '../../widgets/Button';
 import { useVideoPlayer } from "../../VideoPlayer/utils/useVideoPlayer";
+import { getYoutubeVideoUrl } from "../../VideoPlayer/utils/getYoutubeUrls";
 
 interface Props {
   youtubeId: string;
   title: string;
+  playOnYoutubeOnly: boolean;
 }
 
 export function VideoPlayerBlogItemControls (props: Props) {
+  const { playOnYoutubeOnly, ...videoProps } = props;
+  return playOnYoutubeOnly 
+    ? <ExternalYoutubeNavLink youtubeId={props.youtubeId} />
+    : <VideoPlayerControls {...videoProps} />;
+}
+
+function ExternalYoutubeNavLink ({ youtubeId }: { youtubeId: string }) {
+  const externalLink = getYoutubeVideoUrl(youtubeId); 
+  return (
+    <PlayerButton onClick={() => { window.open(externalLink, '_blank'); }}>
+      <FaExternalLinkAlt /> 
+      <span className="leading-none font-normal text-sm"> Only</span> 
+    </PlayerButton>
+  );
+}
+
+function VideoPlayerControls (props: Omit<Props, 'playOnYoutubeOnly'>) {
   const { youtubeId, title } = props;
 
   const { 

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `BlogPost` MODIFY `body` VARCHAR(1000) NOT NULL;

@@ -1,10 +1,10 @@
-import { PostsByTagGroupResult } from "@/src/lib/fetchPostsByTagGroup";
+import { FilteredTagGroupResponse } from "@/src/lib/fetchPostsByTagGroup";
 import { BlogListItem } from "../BlogListItem";
 import { PostCollectionWrapper } from "../PostCollectionWrapper";
 import { ViewMoreByTagButton } from "./ViewMoreByTagButton";
 import { TagWithCount } from "@/src/lib/fetchTagsFacet";
 
-interface Props extends PostsByTagGroupResult {
+interface Props extends FilteredTagGroupResponse {
   tagWithCount?: TagWithCount;
   allowViewMore?: boolean;
 }

@@ -14,10 +14,12 @@ model BlogPost {
   id                 Int      @id @default(autoincrement())
   title              String
   imgUrl             String
-  body               String 
+  body               String  @db.VarChar(1000)
   externalSourceLink String?
   youtubeId          String?  
   blogId             String?  
+  featured           Boolean?
+  playOnYoutubeOnly  Boolean
   createdAt          DateTime @default(now())
   tags               BlogPostTag[]
 }

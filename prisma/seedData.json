@@ -2,78 +2,145 @@
   {
     "title": "The Basics of Linked Lists",
     "body": "",
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "TDtVagwa3QQ",
+    "playOnYoutubeOnly": false,
     "tags": ["data_structures"]
   },
   {
     "title": "When You Use Vanilla CSS After Using Tailwind",
     "body": "",
+    "featured": true,
     "imgUrl": "",
     "youtubeId": "zJATx80zW9w",
+    "playOnYoutubeOnly": false,
     "tags": ["css", "tailwind"]
   },
   {
     "title": "Only The Best Developers Understand How This Works",
     "body": "",
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "WqNqeMjd28I",
+    "playOnYoutubeOnly": false,
     "tags": ["browser_basics"]
   },
   {
     "title": "JavaScript Visualized - Event Loop, Web APIs, (Micro)task Queue",
     "body": "",
+    "featured": true,
     "imgUrl": "",
     "youtubeId": "eiC58R16hb8",
-    "tags": ["javascript_basics", "browser_basics"]
+    "playOnYoutubeOnly": false,
+    "tags": ["browser_basics"]
   },
   {
     "title": "Depth First & Tree Traversals (Pre, In, Post) Explained",
     "body": "",
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "fPz40W9mfCg",
+    "playOnYoutubeOnly": false,
     "tags": ["data_structures"]
   },
   {
     "title": "Big O Clicks",
-    "body": "Big O has always been kind of a nebulous concept, I got it around the edges, but it was nver really intuitive. Not until this video.",
+    "body": "",
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "BgLTDT03QtU",
-    "tags": ["algorithms"]
+    "playOnYoutubeOnly": false,
+    "tags": ["algorithmy_stuff"]
   },
   {
     "title": "Supermaven super code completion",
-    "body": "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing.",
+    "body": "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing. Can fit an entire medium-sized repo in its 300,000 token context window.",
+    "featured": true,
     "imgUrl": "",
     "youtubeId": "JhmdYN1wbG0",
-    "tags": ["AI_code_completion"]
+    "playOnYoutubeOnly": false,
+    "tags": ["code_assist"]
   },
   {
     "title": "Every React 19 Feature Explained in 8 Minutes",
     "body": "Very Exciting Stuff",
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "2NPIYnY3ilo",
-    "tags": ["react_19"]
+    "playOnYoutubeOnly": true,
+    "tags": ["new_react_stuff"]
   },
   {
     "title": "Signals In JS...",
     "body": "full on pub sub in javascript",
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "vGBBtqPnaUk",
-    "tags": ["javascript_basics"]
+    "playOnYoutubeOnly": false,
+    "tags": ["new_javascript_stuff"]
   },
   {
     "title": "React 19 Is FINALLY Here",
     "body": "",
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "sFeu_aK8cB8",
-    "tags": ["react_19"]
+    "playOnYoutubeOnly": false,
+    "tags": ["new_react_stuff"]
   },
   {
     "title": "10 common mistakes with the Next.js App Router",
     "body": "",
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "RBM03RihZVs",
+    "playOnYoutubeOnly": false,
     "tags": ["nextjs"]
+  },
+  {
+    "title": "Why Signals Are Better Than React Hooks",
+    "body": "",
+    "featured": true,
+    "imgUrl": "",
+    "youtubeId": "SO8lBVWF2Y8",
+    "playOnYoutubeOnly": false,
+    "tags": ["new_javascript_stuff"]
+  },
+  {
+    "title": "5 Simple Steps for Solving Any Recursive Problem",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "ngCos392W4w",
+    "playOnYoutubeOnly": false,
+    "tags": ["algorithmy_stuff"]
+  },
+  {
+    "title": "The Biggest Typescript Update In Years",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "4XgIvE5SH4Y",
+    "playOnYoutubeOnly": false,
+    "tags": ["typescript"]
+  },
+  {
+    "title": "20+ Must Know Array Methods That Almost Nobody Knows",
+    "body": "",
+    "featured": true,
+    "imgUrl": "",
+    "youtubeId": "mSBnJvHtgD0",
+    "playOnYoutubeOnly": false,
+    "tags": ["new_javascript_stuff"]
+  },
+  {
+    "title": "10 Tailwind Classes I Wish I Knew Earlier",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "x1RJ5Q09PqM",
+    "playOnYoutubeOnly": false,
+    "tags": ["css", "tailwind"]
   }
 ]
