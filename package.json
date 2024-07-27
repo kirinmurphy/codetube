@@ -12,8 +12,7 @@
     "migrate:prod": "npx prisma migrate deploy && npx prisma generate",
     "seed:dev": "yarn run migrate:dev && npx prisma db seed",
     "seed:prod": "yarn run migrate:prod && npx prisma db seed",
-    "compileServerFunctions": "node scripts/compileServerFunctions.js netlify/dist",
-    "deployPreviewOnNetlify": "netlify deploy --build --branch=$npm_config_branch --alias=preview"
+    "compileServerFunctions": "node scripts/compileServerFunctions.js netlify/dist"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -42,6 +41,6 @@
     "prisma": "^5.15.1",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5.5.4"
   }
 }
