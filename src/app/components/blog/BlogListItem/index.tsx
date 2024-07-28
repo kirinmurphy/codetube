@@ -1,17 +1,15 @@
-import Image from 'next/image';
 import { PrismaTypes } from '@/src/lib/prisma';
 
-const THUMBNAIL_SIZE = 250;
 
 import { VideoPlayerBlogItemControls } from './BlogListItemVideoControls';
-import { getYoutubeThumbnaillUrl, getYoutubeVideoUrl } from '../../VideoPlayer/utils/getYoutubeUrls';
+import { getYoutubeVideoUrl } from '../../VideoPlayer/utils/getYoutubeUrls';
 import Link from 'next/link';
+import { PostImage } from './PostImage';
 
 export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps }) {
   const {
      title,
      body,
-     imgUrl,
      externalSourceLink,
      youtubeId,
      blogId,
@@ -22,10 +20,6 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
     : blogId ? `/${blogId}` 
     : externalSourceLink || '';
 
-  const blogImage = imgUrl ? imgUrl
-    : youtubeId ? getYoutubeThumbnaillUrl(youtubeId) 
-    : null;
-
   const isInternalLink = !!blogId;  
 
   const showComment = false;
@@ -33,18 +27,8 @@ export function BlogListItem({ blogPost }: { blogPost: PrismaTypes.BlogPostProps
   return (
     <div className="flex flex-col items-start gap-2">
       <div>
-        <div className="w-full flex-shrink-0 border border-gray-600">
-          {!!blogImage && (
-            <Image 
-              className="w-full object-cover" 
-              src={blogImage} 
-              alt={title} 
-              width={THUMBNAIL_SIZE} 
-              height={THUMBNAIL_SIZE} 
-            />
-          )}
-        </div>
-                
+        <PostImage post={blogPost} />
+        
         {!!youtubeId && (
           <div className="flex mt-1">
             <VideoPlayerBlogItemControls 
