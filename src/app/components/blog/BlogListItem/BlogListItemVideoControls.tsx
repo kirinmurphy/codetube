@@ -37,8 +37,8 @@ function VideoPlayerControls (props: Omit<Props, 'playOnYoutubeOnly'>) {
     videoCollection, 
     activeVideo,
     isPlaying,
-    addVideo, 
-    addVideoAndPlay, 
+    addVideos, 
+    addAndPlayVideos, 
     removeVideo,
     playNewVideo,
     playActiveVideo,
@@ -52,7 +52,8 @@ function VideoPlayerControls (props: Omit<Props, 'playOnYoutubeOnly'>) {
   const isActiveVideoPlaying = isActiveVideo && isPlaying;
 
   const handleAddAndPlay = () => {
-    addVideoAndPlay({ youtubeId, title, played: true });
+    const video = { youtubeId, title, played: true };
+    addAndPlayVideos([video]);
   };
 
   const handlePlayAfterAdd = () => {
@@ -61,7 +62,8 @@ function VideoPlayerControls (props: Omit<Props, 'playOnYoutubeOnly'>) {
   }
 
   const handleAddToQueue = () => {
-    addVideo({ youtubeId, title, played: false });
+    const video = { youtubeId, title, played: false };
+    addVideos([video]);
   };
 
   const handleRemoveFromPlayer = () => {
