@@ -8,12 +8,15 @@ interface FetchOptions {
 export async function fetchIt<T>({ queryName, params }: FetchOptions): Promise<T> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:8888';
   const url = new URL(`/.netlify/functions/${queryName}`, baseUrl);
-
+  
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       url.searchParams.append(key, value);
     });
   }
+
+
+  console.log(`Fetching from URL: ${url.toString()}`); 
 
   try {
     const response = await fetch(url.toString());

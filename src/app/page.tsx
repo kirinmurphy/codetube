@@ -1,19 +1,25 @@
 import { fetchTagsFacet } from '@/src/app/requests/fetchTagsFacet';
 import { fetchBlogPosts } from '@/src/app/requests/fetchBlogPosts';
 import { fetchPostsByTagGroup } from '@/src/app/requests/fetchPostsByTagGroup';
+
 import { ClientRouterWrapper } from './components/layout/ClientRouterWrapper';
 import { PostsByTagGroup } from './components/blog/PostsByTagGroup/PostsByTagGroup';
 import { TagNavigation } from './components/blog/tags/TagNavigation';
 import { PostViewWrapper } from './components/blog/PostViewWrapper';
 import { HomePageDefault } from './components/blog/HomePageDefault';
 
-const HOMEPAGE_TAG_GROUP_NAMES = ['new_react_stuff', 'browser_basics', 'nextjs', 'css'];
+const HOMEPAGE_TAG_GROUP_NAMES = [
+  'new_react_stuff', 
+  'browser_basics', 
+  'nextjs', 
+  'css'
+];
 
 interface Props {
   searchParams: Record<string, string>;
 }
 
-export default async function Home({ searchParams = {} }: Props) {
+export default async function Home ({ searchParams = {} }: Props) {
   const selectedTagName = searchParams?.tag || '';
   const hasUserFilter = selectedTagName !== '';
     
@@ -30,7 +36,8 @@ export default async function Home({ searchParams = {} }: Props) {
 
     if (!allTags || (!blogPosts && !groupedPosts)) return <></>;
 
-    const selectedTag = allTags.filter(tagOption => tagOption.name === selectedTagName)[0] || {};
+    const selectedTag = allTags
+      .filter(tagOption => tagOption.name === selectedTagName)[0] || {};
 
     return (
       <ClientRouterWrapper initialTag={selectedTagName}>
