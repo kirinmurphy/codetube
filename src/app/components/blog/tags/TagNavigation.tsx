@@ -3,9 +3,9 @@
 import { useRef, useState } from 'react';
 import clsx from 'clsx';
 
-import { TagWithCount } from '@/src/lib/fetchTagsFacet';
+import { TagWithCount } from '@/src/app/requests/fetchTagsFacet';
 import { HandleTagSelectionProps, SearchableTag } from "./SearchableTag";
-import { useCallbackOnExternalEventTrigger } from '@/src/lib/useCallbackOnExternalEventTrigger';
+import { useCallbackOnExternalEventTrigger } from '@/src/app/components/utils/useCallbackOnExternalEventTrigger';
 import { useVideoPlayer } from '../../VideoPlayer/utils/useVideoPlayer';
 import { VideoPlayerDisplayState } from '../../VideoPlayer/types';
 import { Button, ButtonType } from '../../widgets/Button';
@@ -70,11 +70,13 @@ export function TagNavigation ({ allTags, tagName }: Props) {
           '!flex absolute top-10 right-0 z-10 p-6 bg-black rounded-lg shadow-md': isFilterOpenInMobile
         })}
       >
-        {!!tagName && (
-          <Button type={ButtonType.Text} onClick={handleClearFilter}>
-            View All
-          </Button>
-        )}
+        <Button 
+          isDisabled={!tagName} 
+          type={ButtonType.Text} 
+          onClick={handleClearFilter}>
+          home
+        </Button>
+
         {allTags.map(tagOption => (
           <div key={tagOption.id}>
             <SearchableTag 

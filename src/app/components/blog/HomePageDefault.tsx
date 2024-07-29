@@ -1,5 +1,5 @@
-import { PostsByTagGroupResult, FilteredTagGroupResponse } from "@/src/lib/fetchPostsByTagGroup";
-import { TagWithCount } from "@/src/lib/fetchTagsFacet";
+import { PostsByTagGroupResult, FilteredTagGroupResponse } from "@/src/app/requests/fetchPostsByTagGroup";
+import { TagWithCount } from "@/src/app/requests/fetchTagsFacet";
 import { PostsByTagGroup } from "./PostsByTagGroup/PostsByTagGroup";
 import { FeaturedPost } from "./FeaturedPost";
 

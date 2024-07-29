@@ -1,6 +1,6 @@
-import { fetchTagsFacet } from '@/src/lib/fetchTagsFacet';
-import { fetchBlogPosts } from '@/src/lib/fetchBlogPosts';
-import { fetchPostsByTagGroup } from '@/src/lib/fetchPostsByTagGroup';
+import { fetchTagsFacet } from '@/src/app/requests/fetchTagsFacet';
+import { fetchBlogPosts } from '@/src/app/requests/fetchBlogPosts';
+import { fetchPostsByTagGroup } from '@/src/app/requests/fetchPostsByTagGroup';
 import { ClientRouterWrapper } from './components/layout/ClientRouterWrapper';
 import { PostsByTagGroup } from './components/blog/PostsByTagGroup/PostsByTagGroup';
 import { TagNavigation } from './components/blog/tags/TagNavigation';
@@ -20,9 +20,12 @@ export default async function Home({ searchParams = {} }: Props) {
   try {
     const [allTags, blogPosts, groupedPosts] = await Promise.all([
       fetchTagsFacet(),
-      hasUserFilter ? fetchBlogPosts({ tag: selectedTagName }) : Promise.resolve(null),
-      hasUserFilter ? Promise.resolve(null) 
-        : fetchPostsByTagGroup({ tagNames: HOMEPAGE_TAG_GROUP_NAMES, maxItemsPerTag: 4 })
+      hasUserFilter 
+        ? fetchBlogPosts({ tag: selectedTagName }) 
+        : Promise.resolve(null),
+      !hasUserFilter 
+        ? fetchPostsByTagGroup({ tagNames: HOMEPAGE_TAG_GROUP_NAMES, maxItemsPerTag: 4 })
+        : Promise.resolve(null)
     ]);
 
     if (!allTags || (!blogPosts && !groupedPosts)) return <></>;

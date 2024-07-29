@@ -6,6 +6,7 @@ export enum ButtonType {
   DefaultDisabled = 'defaultDisabled',
   Primary = 'primary',
   Text = 'text',
+  TextDisabled = 'textDisabled',
   TextActive = 'textActive',
 }
 
@@ -17,8 +18,8 @@ const BUTTON_TYPE_STYLES = {
   [ButtonType.DefaultDisabled]: 'bg-gray-900 text-gray-700 border-gray-900 hover:bg-gray-900',
   [ButtonType.Primary]: '',
   [ButtonType.Text]: 'text-light-gray-900 hover:text-white hover:underline',
+  [ButtonType.TextDisabled]: 'text-gray-400',
   [ButtonType.TextActive]: 'text-white font-bold hover:underline',
-
 };
 
 type ButtonPropsBase = {
