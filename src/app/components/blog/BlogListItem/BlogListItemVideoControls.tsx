@@ -6,18 +6,18 @@ import { FaPlay, FaPlus, FaMinusCircle, FaPause, FaExternalLinkAlt } from "react
 import { Button } from '../../widgets/Button';
 import { useVideoPlayer } from "../../VideoPlayer/utils/useVideoPlayer";
 import { getYoutubeVideoUrl } from "../../VideoPlayer/utils/getYoutubeUrls";
+import { BlogPost } from "@prisma/client";
 
 interface Props {
-  youtubeId: string;
-  title: string;
-  playOnYoutubeOnly: boolean;
+  post: BlogPost;
 }
 
-export function VideoPlayerBlogItemControls (props: Props) {
-  const { playOnYoutubeOnly, ...videoProps } = props;
-  return playOnYoutubeOnly 
-    ? <ExternalYoutubeNavLink youtubeId={props.youtubeId} />
-    : <VideoPlayerControls {...videoProps} />;
+export function VideoPlayerBlogItemControls ({ post }: Props) {
+  const { playOnYoutubeOnly, youtubeId, title } = post;
+
+  return !youtubeId ? <></>
+    : playOnYoutubeOnly ? <ExternalYoutubeNavLink youtubeId={youtubeId} />
+    : <VideoPlayerControls youtubeId={youtubeId} title={title} />;
 }
 
 function ExternalYoutubeNavLink ({ youtubeId }: { youtubeId: string }) {
@@ -25,12 +25,17 @@ function ExternalYoutubeNavLink ({ youtubeId }: { youtubeId: string }) {
   return (
     <PlayerButton onClick={() => { window.open(externalLink, '_blank'); }}>
       <FaExternalLinkAlt /> 
-      <span className="leading-none font-normal text-sm"> Only</span> 
+      <span className="leading-none font-normal text-sm"> only</span> 
     </PlayerButton>
   );
 }
 
-function VideoPlayerControls (props: Omit<Props, 'playOnYoutubeOnly'>) {
+interface VideoPlayerControlsProps {
+  youtubeId: string;
+  title: string;
+}
+
+function VideoPlayerControls (props: VideoPlayerControlsProps) {
   const { youtubeId, title } = props;
 
   const { 

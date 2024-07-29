@@ -7,7 +7,7 @@ export function FeaturedPost ({ posts }: { posts: BlogPost[] }) {
 
   return (
     <div className="mb-8">
-      <BlogListItem blogPost={featuredPost} />
+      <BlogListItem blogPost={featuredPost} isFeatured={true} />
     </div>
   );
 }
