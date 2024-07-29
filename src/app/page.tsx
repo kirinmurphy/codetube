@@ -1,11 +1,11 @@
 import { fetchTagsFacet } from '@/src/lib/fetchTagsFacet';
 import { fetchBlogPosts } from '@/src/lib/fetchBlogPosts';
-import { fetchPostsByTagGroup, FilteredTagGroupResponse } from '@/src/lib/fetchPostsByTagGroup';
+import { fetchPostsByTagGroup } from '@/src/lib/fetchPostsByTagGroup';
 import { ClientRouterWrapper } from './components/layout/ClientRouterWrapper';
 import { PostsByTagGroup } from './components/blog/PostsByTagGroup/PostsByTagGroup';
 import { TagNavigation } from './components/blog/tags/TagNavigation';
 import { PostViewWrapper } from './components/blog/PostViewWrapper';
-import { BlogPost } from '@prisma/client';
+import { HomePageDefault } from './components/blog/HomePageDefault';
 
 const HOMEPAGE_TAG_GROUP_NAMES = ['new_react_stuff', 'browser_basics', 'nextjs', 'css'];
 
@@ -41,24 +41,7 @@ export default async function Home({ searchParams = {} }: Props) {
           )}
 
           {groupedPosts?.tagGroups && (
-            <>
-              {groupedPosts.featuredPosts.length > 0 && (
-                <div className="mb-8">
-                  <FeaturedPost posts={groupedPosts.featuredPosts} />
-                </div>
-              )}
-              {groupedPosts.tagGroups.map((props: FilteredTagGroupResponse) => (
-                props.posts.length > 0 && (
-                  <div key={props.tag.id} className="mb-8">
-                    <PostsByTagGroup 
-                      {...props} 
-                      tagWithCount={allTags.find(tag => tag.name === props.tag.name)}
-                      allowViewMore={true} 
-                    />
-                  </div>
-                )
-              ))}
-            </>
+            <HomePageDefault allTags={allTags} groupedPosts={groupedPosts} />
           )}
         </PostViewWrapper>
       </ClientRouterWrapper>
@@ -67,19 +50,4 @@ export default async function Home({ searchParams = {} }: Props) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return <div>Error loading data: {errorMessage}</div>;
   }
-}
-
-
-function FeaturedPost ({ posts }: { posts: BlogPost[] }) {
-  const featuredPostIndex = Math.floor(Math.random() * posts.length);
-  const featuredPost = posts[featuredPostIndex];
-
-  return (
-    <div className="mb-8">
-      <h2 className="text-3xl font-bold mb-4 flex-grow 900mq:mb-6">
-        {featuredPost.title}
-      </h2>
-
-    </div>
-  );
 }

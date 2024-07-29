@@ -32,25 +32,9 @@ export const handler: Handler = async (event) => {
       const [tagGroups, featuredPosts] = await Promise.all([
         Promise.all(tagNameCollection.map(async (tagName) => {
           const posts = await prisma.blogPost.findMany({
-            where: {
-              tags: {
-                some: {
-                  tag: {
-                    name: tagName
-                  }
-                }
-              }
-            },
-            include: {
-              tags: {
-                include: {
-                  tag: true
-                }
-              }
-            },
-            orderBy: {
-              createdAt: 'desc'
-            },
+            where: { tags: { some: { tag: { name: tagName }}}},
+            include: { tags: { include: { tag: true }}},
+            orderBy: { createdAt: 'desc' },
             take: totalMaxItemsPerTag
           });
 

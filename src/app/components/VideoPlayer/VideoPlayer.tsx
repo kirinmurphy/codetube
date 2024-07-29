@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import YouTube from "react-youtube";
 import clsx from "clsx";
 
 import { VideoPlayerDisplayState } from "./types";
@@ -9,6 +8,7 @@ import { useVideoPlayer } from "./utils/useVideoPlayer";
 import { VideoPlayerFull } from "./VideoPlayerFull";
 import { VideoPlayerMini } from "./VideoPlayerMini";
 import { VideoDisplayStateActions } from "./VideoDisplayStateActions";
+import { YoutubePlayer } from "../widgets/YoutubePlayer";
 
 export function VideoPlayer () {
   const { 
@@ -39,6 +39,7 @@ export function VideoPlayer () {
     }, 5000);
   };  
 
+
   return (
     <>
       {videoCollection.length > 0 && (
@@ -56,23 +57,15 @@ export function VideoPlayer () {
             'visible relative w-full': !isMiniPlayer,
             'invisible absolute -left-full': isMiniPlayer,
           })}>
-            <div className="relative pb-[56.25%] h-0 overflow-hidden">
-              <YouTube
-                className="absolute top-0 left-0 w-full h-full"
-                iframeClassName="absolute top-0 left-0 w-full h-full"
-                videoId={activeVideo?.youtubeId}
-                onEnd={playNextVideo}
-                onPlay={() => { setPlayingState(true); }}
-                onPause={() => { setPlayingState(false); }}
-                onReady={onReady}
-                onError={handleVideoError}                  
-                opts={{
-                  playerVars: {
-                    autoplay: autoPlay ? 1 : 0,
-                  },
-                }}
-              />
-            </div>
+            <YoutubePlayer
+              videoId={activeVideo?.youtubeId}
+              onEnd={playNextVideo}
+              onPlay={() => { setPlayingState(true); }}
+              onPause={() => { setPlayingState(false); }}
+              onReady={onReady}
+              onError={handleVideoError}                  
+              opts={{ playerVars: { autoplay: autoPlay ? 1 : 0 }}}
+            />
           </div>    
 
           {!isMiniPlayer && <VideoPlayerFull />}
