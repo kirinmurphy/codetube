@@ -54,14 +54,14 @@ export function TagNavigation ({ allTags, tagName }: Props) {
   const dropdownArrow = isFilterOpenInMobile ? '▲' : '▼';
 
   return (
-    <div ref={tagListRef} className="relative flex flex-col">
+    <div ref={tagListRef} className="relative flex flex-col mb-8">
       <header className={clsx('flex justify-end 900mq:hidden', {
         '900mq:!flex': isSplitScreen
       })}>
-        <div onClick={handleFilterToggle} className="flex gap-1 cursor-pointer">
+        <Button onClick={handleFilterToggle} className="flex gap-1 cursor-pointer">
           Filter
           <span className="inline-block transform scale-y-50">{dropdownArrow}</span>
-        </div>
+        </Button>
       </header>
 
       <div

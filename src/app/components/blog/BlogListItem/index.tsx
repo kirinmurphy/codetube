@@ -3,6 +3,7 @@ import { VideoPlayerBlogItemControls } from './BlogListItemVideoControls';
 import { PostImage } from './PostImage';
 import { PostTitle } from './PostTitle';
 import { InlineVideoPlayer } from './InlineVideoPlayer';
+import { BlogListItemWrapper } from './BlogListItemWrapper';
 
 interface Props {
   blogPost: PrismaTypes.BlogPostProps;
@@ -15,7 +16,7 @@ export function BlogListItem({ blogPost, isFeatured }: Props) {
   const isFeaturedVideo = isFeatured && !!youtubeId;
 
   return (
-    <div className="flex flex-col items-start gap-2">
+    <BlogListItemWrapper isFeaturedVideo={isFeaturedVideo}>
       <div className="w-full">
         {isFeaturedVideo && <InlineVideoPlayer youtubeId={youtubeId} />}
         {!isFeaturedVideo && <PostImage post={blogPost} />} 
@@ -29,7 +30,7 @@ export function BlogListItem({ blogPost, isFeatured }: Props) {
 
       <div>
         <header className="mb-2">
-          <PostTitle post={blogPost} />
+          <PostTitle post={blogPost} isFeatured={isFeatured} />
         </header>
 
         {isFeatured && (
@@ -38,6 +39,6 @@ export function BlogListItem({ blogPost, isFeatured }: Props) {
           </div> 
         )}
       </div>
-    </div>
+    </BlogListItemWrapper>
   );
 }

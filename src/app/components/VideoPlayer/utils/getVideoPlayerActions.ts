@@ -157,7 +157,7 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     const isMobile = window.innerWidth <= 900;
     const newScreenType: ScreenType = isSmallMobile ? ScreenType.SmallMobile 
       : isMobile ? ScreenType.Mobile 
-      : ScreenType.Full;
+      : ScreenType.Wide;
 
     setVideoPlayerState((prevState) => ({
       ...prevState,

@@ -12,6 +12,6 @@ export function getNewDisplayStateWhenPlayingVideo ({ displayState, screenType }
   screenType: ScreenType;
 }) {
   return displayState !== VideoPlayerDisplayState.Closed ? displayState 
-    : screenType === ScreenType.Full ? VideoPlayerDisplayState.SplitScreen 
+    : screenType === ScreenType.Wide ? VideoPlayerDisplayState.SplitScreen 
     : VideoPlayerDisplayState.FullScreen;
 };

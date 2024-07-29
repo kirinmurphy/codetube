@@ -19,7 +19,7 @@ export function HomePageDefault ({ allTags, groupedPosts }: HomePageDefaultProps
 
       {groupedPosts.tagGroups.map((props: FilteredTagGroupResponse) => (
         props.posts.length > 0 && (
-          <div key={props.tag.id} className="mb-8">
+          <div key={props.tag.id} className="mb-12">
             <PostsByTagGroup 
               {...props} 
               tagWithCount={allTags.find(tag => tag.name === props.tag.name)}

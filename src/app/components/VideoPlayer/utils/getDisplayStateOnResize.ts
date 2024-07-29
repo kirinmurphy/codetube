@@ -10,9 +10,9 @@ export function getDisplayStateOnResize(props: Props): VideoPlayerDisplayState {
 
   const screenTypeChanged = prevState.screenType !== newScreenType;
 
-  const screenTypeExpanded = screenTypeChanged && newScreenType === ScreenType.Full;
+  const screenTypeExpanded = screenTypeChanged && newScreenType === ScreenType.Wide;
   const screenTypeShrunk = screenTypeChanged 
-    && prevState.screenType === ScreenType.Full && newScreenType === ScreenType.Mobile;
+    && prevState.screenType === ScreenType.Wide && newScreenType === ScreenType.Mobile;
 
   const expandedInFullScreen = screenTypeExpanded 
     && prevState.displayState === VideoPlayerDisplayState.FullScreen;
