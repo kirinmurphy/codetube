@@ -64,11 +64,7 @@ export function VideoPlayer () {
               onPause={() => { setPlayingState(false); }}
               onReady={onReady}
               onError={handleVideoError}                  
-              opts={{
-                playerVars: {
-                  autoplay: autoPlay ? 1 : 0,
-                },
-              }}
+              opts={{ playerVars: { autoplay: autoPlay ? 1 : 0 }}}
             />
           </div>    
 

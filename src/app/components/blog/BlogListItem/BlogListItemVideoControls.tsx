@@ -14,10 +14,15 @@ interface Props {
 
 export function VideoPlayerBlogItemControls ({ post }: Props) {
   const { playOnYoutubeOnly, youtubeId, title } = post;
+  const isPlayerLink = youtubeId && !playOnYoutubeOnly;
+  const isExternalLink = youtubeId && playOnYoutubeOnly;
 
-  return !youtubeId ? <></>
-    : playOnYoutubeOnly ? <ExternalYoutubeNavLink youtubeId={youtubeId} />
-    : <VideoPlayerControls youtubeId={youtubeId} title={title} />;
+  return (
+    <div className="flex">
+      {isPlayerLink && <VideoPlayerControls youtubeId={youtubeId} title={title} />}
+      {isExternalLink && <ExternalYoutubeNavLink youtubeId={youtubeId} />}
+    </div>
+  ) 
 }
 
 function ExternalYoutubeNavLink ({ youtubeId }: { youtubeId: string }) {

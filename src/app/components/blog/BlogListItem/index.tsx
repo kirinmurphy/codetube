@@ -2,6 +2,7 @@ import { PrismaTypes } from '@/src/lib/prisma';
 import { VideoPlayerBlogItemControls } from './BlogListItemVideoControls';
 import { PostImage } from './PostImage';
 import { PostTitle } from './PostTitle';
+import { InlineVideoPlayer } from './InlineVideoPlayer';
 
 interface Props {
   blogPost: PrismaTypes.BlogPostProps;
@@ -11,13 +12,16 @@ interface Props {
 export function BlogListItem({ blogPost, isFeatured }: Props) {
   const { body, youtubeId } = blogPost;
 
+  const isFeaturedVideo = isFeatured && !!youtubeId;
+
   return (
     <div className="flex flex-col items-start gap-2">
-      <div>
-        <PostImage post={blogPost} />
+      <div className="w-full">
+        {isFeaturedVideo && <InlineVideoPlayer youtubeId={youtubeId} />}
+        {!isFeaturedVideo && <PostImage post={blogPost} />} 
 
         {!!youtubeId && (
-          <div className="flex mt-1">
+          <div className="mt-2">
             <VideoPlayerBlogItemControls post={blogPost} />
           </div>
         )}
