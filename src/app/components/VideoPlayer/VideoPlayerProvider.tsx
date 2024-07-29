@@ -39,6 +39,7 @@ export function VideoPlayerProvider ({ children }: Props) {
     autoPlay: false,
     screenType: ScreenType.Mobile,
     isPlaying: false,
+    youtubeIdRegistry: new Set<string>(),
   });
 
   const videoPlayerRef = useVideoPlayerRef();

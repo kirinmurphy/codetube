@@ -1,6 +1,5 @@
-"use client";
-
 import { YouTubePlayer } from 'react-youtube';
+
 import { 
   VideoPlayerDisplayState, 
   ScreenType, 
@@ -12,7 +11,8 @@ import {
 
 import { getDisplayStateOnResize } from './getDisplayStateOnResize';
 import { getNextActiveVideoOnRemove } from './getNextActiveVideoOnRemove';
-import { getUpdatedCollectionWithInsertedVideo } from './getUpdatedCollectionWithInsertVideo';
+import { getUpdatedCollectionWithInsertedVideos } from './getUpdatedCollectionWithInsertVideos';
+import { getNewDisplayStateWhenAddingVideo, getNewDisplayStateWhenPlayingVideo } from './getNewDisplayState';
 
 export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoPlayerActions {
 
@@ -23,56 +23,85 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     activeVideo, 
     displayState, 
     autoPlay, 
-    screenType 
+    screenType,
+    youtubeIdRegistry, 
   } = videoPlayerState;
 
-  const getNewDisplayState = () => {
-    return displayState !== VideoPlayerDisplayState.Closed ? displayState 
-      : screenType === ScreenType.Full ? VideoPlayerDisplayState.SplitScreen 
-      : VideoPlayerDisplayState.FullScreen;
-  };
-
-  const setPlayingState = (isPlaying: boolean) => {
-    setVideoPlayerState({ ...videoPlayerState, isPlaying });
-  };
-
+  // == INIT ================ // 
   const onReady = (event: { target: YouTubePlayer }) => {
     videoPlayerRef.current = event.target;
   };
 
-  const addVideo = (video: VideoItem) => {
-    const isFirstVideo = videoCollection.length === 0;
-    const newDisplayState = displayState !== VideoPlayerDisplayState.Closed 
-      ? displayState : VideoPlayerDisplayState.Mini;
- 
+
+  // == CRUD PLAYLIST ================ //
+  const addVideos = (videos: VideoItem[]) => {
+    const playlistIsEmpty = videoCollection.length === 0;
+    const newVideos = videos.filter(video => !youtubeIdRegistry.has(video.youtubeId));
+    const newFullVideoCollection = [...videoCollection, ...newVideos];
+      
     setVideoPlayerState({ 
       ...videoPlayerState,
-      videoCollection: [...videoCollection, video], 
-      activeVideo: isFirstVideo ? video : activeVideo,
-      displayState: newDisplayState,
-      autoPlay: videoCollection.length === 0 ? false : autoPlay
+      videoCollection: newFullVideoCollection, 
+      activeVideo: playlistIsEmpty ? newVideos[0] : activeVideo,
+      displayState: getNewDisplayStateWhenAddingVideo({ displayState }),
+      autoPlay: playlistIsEmpty ? false : autoPlay,
+      youtubeIdRegistry: getAppendedYoutubeIdRegistry({ youtubeIdRegistry, newVideos }),
     });
-  };
+  }
 
-  const addVideoAndPlay = (video: VideoItem) => {    
-    const newVideoCollection = getUpdatedCollectionWithInsertedVideo({
-      video, videoCollection, activeVideo
+  const addAndPlayVideos = (videos: VideoItem[]) => {    
+    const newVideos = videos.filter(video => !youtubeIdRegistry.has(video.youtubeId));
+    const newFullVideoCollection = getUpdatedCollectionWithInsertedVideos({
+      newVideos, videoCollection, activeVideo
     });
 
     setVideoPlayerState({
       ...videoPlayerState,
-      videoCollection: newVideoCollection,
-      activeVideo: video,
-      displayState: getNewDisplayState(),
+      videoCollection: newFullVideoCollection,
+      activeVideo: videos[0],
+      displayState: getNewDisplayStateWhenPlayingVideo({ displayState, screenType }) || displayState,
       autoPlay: true,
       isPlaying: true,
+      youtubeIdRegistry: getAppendedYoutubeIdRegistry({ youtubeIdRegistry, newVideos }),
+    });
+  }
+
+  const removeVideo = (youtubeId: string) => {
+    const nextActiveVideo = getNextActiveVideoOnRemove({ youtubeId, activeVideo, videoCollection });    
+    const filteredVideos = videoCollection.filter((item) => item.youtubeId !== youtubeId);
+    const filteredYoutubeIdRegistry = new Set([...youtubeIdRegistry].filter(id => id !== youtubeId));
+    const newDisplayState = !!filteredVideos.length ? displayState : VideoPlayerDisplayState.Closed;
+
+    setVideoPlayerState({ 
+      ...videoPlayerState,
+      videoCollection: filteredVideos,
+      activeVideo: nextActiveVideo || activeVideo,
+      displayState: newDisplayState,
+      autoPlay: nextActiveVideo ? false : autoPlay,
+      isPlaying: false,
+      youtubeIdRegistry: filteredYoutubeIdRegistry
     });
   };
  
+  // == PLAYER STATE CHANGES ================ // 
+  const setPlayingState = (isPlaying: boolean) => {
+    setVideoPlayerState({ ...videoPlayerState, isPlaying });
+  };
+
+  const updateDisplayState = (displayState: VideoPlayerDisplayState) => {
+    const isClosed = displayState === VideoPlayerDisplayState.Closed;
+    if ( isClosed && videoPlayerRef.current ) { videoPlayerRef.current.pauseVideo(); }
+    setVideoPlayerState({ ...videoPlayerState, displayState });
+  }
+
   const playNewVideo = ({ video, displayState }: PlayVideoProps) => {
+    const newDisplayState = displayState 
+      || getNewDisplayStateWhenPlayingVideo({ displayState, screenType }) 
+      || videoPlayerState.displayState;
+
     setVideoPlayerState({
       ...videoPlayerState,
-      displayState: displayState || getNewDisplayState(),
+      displayState: newDisplayState,
       activeVideo: video,
       autoPlay: true,
       isPlaying: true,
@@ -86,7 +115,10 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     }
 
     const isClosed = displayState === VideoPlayerDisplayState.Closed;
-    if ( isClosed ) { updateDisplayState(getNewDisplayState()); }
+    if ( isClosed ) { 
+      const newDisplayState = getNewDisplayStateWhenPlayingVideo({ displayState, screenType });
+      if ( newDisplayState ) { updateDisplayState(newDisplayState); }    
+    }
   }
 
   const pauseVideo = () => {
@@ -120,26 +152,6 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     else { pauseVideo() }
   };
 
-  const removeVideo = (youtubeId: string) => {
-    const nextActiveVideo = getNextActiveVideoOnRemove({ youtubeId, activeVideo, videoCollection });    
-    const filteredVideos = videoCollection.filter((item) => item.youtubeId !== youtubeId);
-
-    setVideoPlayerState({ 
-      ...videoPlayerState,
-      videoCollection: filteredVideos,
-      activeVideo: nextActiveVideo || activeVideo,
-      displayState: !!filteredVideos.length ? displayState : VideoPlayerDisplayState.Closed,
-      autoPlay: nextActiveVideo ? false : autoPlay,
-      isPlaying: false,
-    });
-  };
-
-  const updateDisplayState = (displayState: VideoPlayerDisplayState) => {
-    const isClosed = displayState === VideoPlayerDisplayState.Closed;
-    if ( isClosed && videoPlayerRef.current ) { videoPlayerRef.current.pauseVideo(); }
-    setVideoPlayerState({ ...videoPlayerState, displayState });
-  }
-
   const handlePlayerResize = ({ window }: { window: Window }) => {
     const isSmallMobile = window.innerWidth <= 599;
     const isMobile = window.innerWidth <= 900;
@@ -156,9 +168,10 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
   
   return {
     onReady,
+    addVideos,
+    addAndPlayVideos,
+    removeVideo,
     setPlayingState,
-    addVideo,
-    addVideoAndPlay,
     updateDisplayState,
     playNewVideo,
     playActiveVideo,
@@ -167,7 +180,18 @@ export function getVideoPlayerActions (props: VideoPlayerContextDefault): VideoP
     playPreviousVideo,
     getNextVideo,
     playNextVideo,
-    removeVideo,
     handlePlayerResize,
   }
 }
+
+
+function getAppendedYoutubeIdRegistry ({ youtubeIdRegistry, newVideos }: {
+  youtubeIdRegistry: Set<string>;
+  newVideos: VideoItem[];
+}): Set<string> {
+  return new Set([
+    ...youtubeIdRegistry, 
+    ...newVideos.map(video => video.youtubeId)
+  ]);
+}
+

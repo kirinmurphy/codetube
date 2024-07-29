@@ -5,7 +5,6 @@ export enum ButtonType {
   Default = 'default',
   DefaultDisabled = 'defaultDisabled',
   Primary = 'primary',
-  // Tag = 'tag',
   Text = 'text',
   TextActive = 'textActive',
 }
@@ -17,7 +16,6 @@ const BUTTON_TYPE_STYLES = {
   [ButtonType.Default]: 'text-white bg-black hover:bg-gray-800 border border-gray-700',
   [ButtonType.DefaultDisabled]: 'bg-gray-900 text-gray-700 border-gray-900 hover:bg-gray-900',
   [ButtonType.Primary]: '',
-  // [ButtonType.Tag]: 'bg-blue-100 text-black hover:bg-light-blue-700',
   [ButtonType.Text]: 'text-light-gray-900 hover:text-white hover:underline',
   [ButtonType.TextActive]: 'text-white font-bold hover:underline',
 

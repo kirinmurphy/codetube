@@ -27,6 +27,7 @@ export interface VideoPlayerStateProps {
   autoPlay: boolean;
   screenType: ScreenType;
   isPlaying: boolean;
+  youtubeIdRegistry: Set<string>; 
 }
 
 type SetVideoPlayerState = (state: VideoPlayerStateProps 
@@ -46,8 +47,8 @@ export interface PlayVideoProps {
 export interface VideoPlayerActions {
   onReady: (event: YouTubeEvent<Event>) => void;
   setPlayingState: (isPlaying: boolean) => void;
-  addVideo: (item: VideoItem) => void;
-  addVideoAndPlay: (item: VideoItem) => void;
+  addVideos: (videos: VideoItem[]) => void;
+  addAndPlayVideos: (videos: VideoItem[]) => void;
   playNewVideo: ({ video, displayState }: PlayVideoProps) => void;  
   playActiveVideo: () => void;
   pauseVideo: () => void;

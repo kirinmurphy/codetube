@@ -47,8 +47,8 @@ function VideoPlayerControls (props: VideoPlayerControlsProps) {
     videoCollection, 
     activeVideo,
     isPlaying,
-    addVideo, 
-    addVideoAndPlay, 
+    addVideos, 
+    addAndPlayVideos, 
     removeVideo,
     playNewVideo,
     playActiveVideo,
@@ -62,7 +62,8 @@ function VideoPlayerControls (props: VideoPlayerControlsProps) {
   const isActiveVideoPlaying = isActiveVideo && isPlaying;
 
   const handleAddAndPlay = () => {
-    addVideoAndPlay({ youtubeId, title, played: true });
+    const video = { youtubeId, title, played: true };
+    addAndPlayVideos([video]);
   };
 
   const handlePlayAfterAdd = () => {
@@ -71,7 +72,8 @@ function VideoPlayerControls (props: VideoPlayerControlsProps) {
   }
 
   const handleAddToQueue = () => {
-    addVideo({ youtubeId, title, played: false });
+    const video = { youtubeId, title, played: false };
+    addVideos([video]);
   };
 
   const handleRemoveFromPlayer = () => {
