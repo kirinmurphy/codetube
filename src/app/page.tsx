@@ -1,12 +1,13 @@
 import { fetchTagsFacet } from '@/src/lib/fetchTagsFacet';
 import { fetchBlogPosts } from '@/src/lib/fetchBlogPosts';
-import { fetchPostsByTagGroup, PostsByTagGroupResult } from '@/src/lib/fetchPostsByTagGroup';
+import { fetchPostsByTagGroup } from '@/src/lib/fetchPostsByTagGroup';
 import { ClientRouterWrapper } from './components/layout/ClientRouterWrapper';
 import { PostsByTagGroup } from './components/blog/PostsByTagGroup/PostsByTagGroup';
 import { TagNavigation } from './components/blog/tags/TagNavigation';
 import { PostViewWrapper } from './components/blog/PostViewWrapper';
+import { HomePageDefault } from './components/blog/HomePageDefault';
 
-const HOMEPAGE_TAG_GROUP_NAMES = ['react_19', 'nextjs', 'css', 'browser_basics'];
+const HOMEPAGE_TAG_GROUP_NAMES = ['new_react_stuff', 'browser_basics', 'nextjs', 'css'];
 
 interface Props {
   searchParams: Record<string, string>;
@@ -39,17 +40,9 @@ export default async function Home({ searchParams = {} }: Props) {
             <PostsByTagGroup tag={selectedTag} posts={blogPosts} />
           )}
 
-          {groupedPosts && (
-            groupedPosts.map((props: PostsByTagGroupResult) => (
-              <div key={props.tag.id} className="mb-8">
-                <PostsByTagGroup 
-                  {...props} 
-                  tagWithCount={allTags.find(tag => tag.name === props.tag.name)}
-                  allowViewMore={true} 
-                />
-              </div>
-            ))
-          )}          
+          {groupedPosts?.tagGroups && (
+            <HomePageDefault allTags={allTags} groupedPosts={groupedPosts} />
+          )}
         </PostViewWrapper>
       </ClientRouterWrapper>
     );

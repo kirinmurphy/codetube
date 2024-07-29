@@ -8,7 +8,10 @@ async function main() {
 
   const tagMap = new Map();
 
-  for (const post of seedData) {
+  const seedDataCopy = [...seedData];
+  seedDataCopy.reverse();
+
+  for (const post of seedDataCopy) {
     const { tags, ...postWithoutTags } = post;
     const createdPost = await prisma.blogPost.create({
       data: postWithoutTags,

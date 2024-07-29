@@ -4,11 +4,8 @@ import React, {
   createContext, 
   ReactNode, 
   useState,
-  useRef, 
-  useEffect, 
   useLayoutEffect, 
 } from 'react';
-import { YouTubePlayer } from "react-youtube";
 
 import { debounce } from '@/src/lib/debounce';
 
@@ -21,6 +18,7 @@ import {
 } from './types';
 
 import { getVideoPlayerActions } from './utils/getVideoPlayerActions';
+import { useVideoPlayerRef } from './utils/useClearRef';
 
 interface VideoPlayerContextProps extends VideoPlayerContextDefault {
   playerActions: VideoPlayerActions;
@@ -43,18 +41,11 @@ export function VideoPlayerProvider ({ children }: Props) {
     isPlaying: false,
   });
 
-  const videoPlayerRef = useRef<YouTubePlayer>(null);
+  const videoPlayerRef = useVideoPlayerRef();
 
   const playerActions = getVideoPlayerActions({ 
     videoPlayerRef, videoPlayerState, setVideoPlayerState 
   });
-
-  useEffect(() => {
-    const ref = videoPlayerRef.current;
-    return () => { 
-      if (ref) { ref.srcObject = null; }
-     };
-  }, []);
 
   useLayoutEffect(() => {
     const onResize = () => { playerActions.handlePlayerResize({ window }) };
