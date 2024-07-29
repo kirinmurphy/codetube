@@ -15,8 +15,8 @@ export function InlineVideoPlayer ({ youtubeId }: { youtubeId: string }) {
   }
 
   useEffect(() => {
-    console.log('<<<<<<<FIIRRRRINGGGGG>>>>>>>');
-    if ( isPlaying ) { inlineVideoPlayerRef.current.pauseVideo(); }
+    const shouldPauseVideo = isPlaying && inlineVideoPlayerRef.current;
+    if ( shouldPauseVideo ) { inlineVideoPlayerRef.current.pauseVideo(); }
   }, [isPlaying, inlineVideoPlayerRef]);
 
   const handleVideoError = () => {

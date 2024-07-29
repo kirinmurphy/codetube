@@ -1,8 +1,8 @@
-import { FilteredTagGroupResponse } from "@/src/lib/fetchPostsByTagGroup";
+import { FilteredTagGroupResponse } from "@/src/app/requests/fetchPostsByTagGroup";
 import { BlogListItem } from "../BlogListItem";
 import { PostCollectionWrapper } from "../PostCollectionWrapper";
 import { ViewMoreByTagButton } from "./ViewMoreByTagButton";
-import { TagWithCount } from "@/src/lib/fetchTagsFacet";
+import { TagWithCount } from "@/src/app/requests/fetchTagsFacet";
 import { GroupVideoControls } from "./GroupVideoControls";
 
 interface Props extends FilteredTagGroupResponse {
@@ -16,7 +16,7 @@ export function PostsByTagGroup (props: Props) {
   const hasMore = !!tagWithCount && posts.length < tagWithCount.count;
   const showViewMore = allowViewMore && hasMore;
   
-  return (
+  return posts.length > 0 ? (
     <>
       <header className="flex">
         <div className="mb-4 flex-grow flex gap-5 items-center 900mq:mb-6">
@@ -36,6 +36,6 @@ export function PostsByTagGroup (props: Props) {
         ))}
       </PostCollectionWrapper>
     </>
-  );
+  ): <></>;
 }
 

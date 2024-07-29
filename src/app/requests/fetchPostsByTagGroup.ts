@@ -1,5 +1,5 @@
 import { BlogPost } from '@prisma/client';
-import { fetchIt } from './fetchIt';
+import { fetchIt } from '@/src/lib/fetchIt';
 import { TagWithCount } from './fetchTagsFacet';
 
 export interface FilteredTagGroupResponse {

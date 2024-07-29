@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { BlogPost } from "@prisma/client";
 import { getYoutubeVideoUrl } from "../../VideoPlayer/utils/getYoutubeUrls";
+import clsx from "clsx";
 
-export function PostTitle ({ post }: { post: BlogPost }) {
+interface Props {
+  post: BlogPost;
+  isFeatured?: boolean;
+}
+
+export function PostTitle ({ post, isFeatured }: Props) {
   const { title, youtubeId, blogId, externalSourceLink } = post;
   const itemLink = youtubeId ? getYoutubeVideoUrl(youtubeId)  
     : blogId ? `/${blogId}` 
@@ -11,7 +17,10 @@ export function PostTitle ({ post }: { post: BlogPost }) {
   const isInternalLink = !!blogId;  
 
   return (
-    <h3 className="text-lg line-clamp-2">
+    <h3 className={clsx('line-clamp-2', {
+      'text-lg': !isFeatured,
+      'text-xl font-bold': isFeatured
+    })}>
 
       {itemLink && 
         (isInternalLink ? (
