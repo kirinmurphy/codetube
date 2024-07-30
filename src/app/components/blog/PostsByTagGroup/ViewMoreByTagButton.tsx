@@ -17,7 +17,7 @@ export function ViewMoreByTagButton ({ tagName}: Props) {
 
   return (
     <Button type={ButtonType.Text} onClick={handlPlayMoreTag}>
-      <span className="underline">View More</span>
+      <span className="underline">More</span>
     </Button>
   );
 }

@@ -6,7 +6,7 @@ export function FeaturedPost ({ posts }: { posts: BlogPost[] }) {
   const featuredPost = posts[featuredPostIndex];
 
   return (
-    <div className="mb-12">
+    <div className="mb-4 900mq:mb-12">
       <BlogListItem blogPost={featuredPost} isFeatured={true} />
     </div>
   );

@@ -28,12 +28,12 @@ export function BlogListItem({ blogPost, isFeatured }: Props) {
         )}
       </div>
 
-      <div>
+      <div className="flex flex-col h-full">
         <header className="mb-2">
           <PostTitle post={blogPost} isFeatured={isFeatured} />
         </header>
 
-        {isFeatured && (
+        {isFeatured && !!body && (
           <div className="mb-4">
             {body}
           </div> 

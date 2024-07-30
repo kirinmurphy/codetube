@@ -54,7 +54,7 @@ export function TagNavigation ({ allTags, tagName }: Props) {
   const dropdownArrow = isFilterOpenInMobile ? '▲' : '▼';
 
   return (
-    <div ref={tagListRef} className="relative flex flex-col mb-8">
+    <div ref={tagListRef} className="relative flex flex-col mb-2 900mq:mb-8">
       <header className={clsx('flex justify-end 900mq:hidden', {
         '900mq:!flex': isSplitScreen
       })}>
@@ -65,7 +65,7 @@ export function TagNavigation ({ allTags, tagName }: Props) {
       </header>
 
       <div
-        className={clsx('hidden 900mq:flex flex-col gap-2', {
+        className={clsx('hidden 900mq:flex flex-col 900mq:gap-1', {
           '900mq:!hidden': isSplitScreen && !isFilterOpenInMobile,
           '!flex absolute top-10 right-0 z-10 p-6 bg-black rounded-lg shadow-md': isFilterOpenInMobile
         })}

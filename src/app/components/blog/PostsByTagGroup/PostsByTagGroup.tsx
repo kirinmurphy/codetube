@@ -18,8 +18,8 @@ export function PostsByTagGroup (props: Props) {
   
   return posts.length > 0 ? (
     <>
-      <header className="flex">
-        <div className="mb-4 flex-grow flex gap-5 items-center 900mq:mb-6">
+      <header className="flex items-center gap-4 mb-4 900mq:mb-6">
+        <div className="flex-grow flex gap-5 items-center">
           <h2 className="text-3xl font-bold ">
             {tag.name.replace(/_/g, ' ')}
           </h2>

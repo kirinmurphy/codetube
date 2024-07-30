@@ -10,9 +10,8 @@ export async function fetchIt<T>({ queryName, params }: FetchOptions): Promise<T
   const url = new URL(`/.netlify/functions/${queryName}`, baseUrl);
   
   if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      url.searchParams.append(key, value);
-    });
+    const searchParams = new URLSearchParams(params);
+    url.search = searchParams.toString();
   }
 
 

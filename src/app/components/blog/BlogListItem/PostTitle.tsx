@@ -10,6 +10,7 @@ interface Props {
 
 export function PostTitle ({ post, isFeatured }: Props) {
   const { title, youtubeId, blogId, externalSourceLink } = post;
+  
   const itemLink = youtubeId ? getYoutubeVideoUrl(youtubeId)  
     : blogId ? `/${blogId}` 
     : externalSourceLink || '';

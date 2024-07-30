@@ -9,9 +9,11 @@ import { PostViewWrapper } from './components/blog/PostViewWrapper';
 import { HomePageDefault } from './components/blog/HomePageDefault';
 
 const HOMEPAGE_TAG_GROUP_NAMES = [
-  'new_react_stuff', 
-  'browser_basics', 
+  'new_react_stuff',
+  'new_javascript_stuff',
+  'javascript_basics',
   'nextjs', 
+  'code_assist',
   'css'
 ];
 

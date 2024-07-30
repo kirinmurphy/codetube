@@ -33,7 +33,7 @@
     "imgUrl": "",
     "youtubeId": "eiC58R16hb8",
     "playOnYoutubeOnly": false,
-    "tags": ["browser_basics"]
+    "tags": ["browser_basics", "javascript_basics"]
   },
   {
     "title": "Depth First & Tree Traversals (Pre, In, Post) Explained",
@@ -52,15 +52,6 @@
     "youtubeId": "BgLTDT03QtU",
     "playOnYoutubeOnly": false,
     "tags": ["algorithmy_stuff"]
-  },
-  {
-    "title": "Supermaven super code completion",
-    "body": "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing. Can fit an entire medium-sized repo in its 300,000 token context window.",
-    "featured": true,
-    "imgUrl": "",
-    "youtubeId": "JhmdYN1wbG0",
-    "playOnYoutubeOnly": false,
-    "tags": ["code_assist"]
   },
   {
     "title": "Every React 19 Feature Explained in 8 Minutes",
@@ -142,5 +133,176 @@
     "youtubeId": "x1RJ5Q09PqM",
     "playOnYoutubeOnly": false,
     "tags": ["css", "tailwind"]
+  },
+  { 
+    "title":"8 NEW JavaScript 2024 Features",
+    "body":"",
+    "featured":false,
+    "imgUrl":"",
+    "youtubeId":"duNEnLUxie8",
+    "playOnYoutubeOnly":false,
+    "tags":["new_javascript_stuff"]
+  },
+  {
+    "title":"Reference Vs Value in JavasScript",
+    "body":"",
+    "featured":false,
+    "imgUrl":"",
+    "youtubeId":"-hBJz2PPIVE",
+    "playOnYoutubeOnly":false,
+    "tags":["javascript_basics"]
+  },
+  {
+    "title":"Your NextJS App is Too Big",
+    "body":"",
+    "featured":false,
+    "imgUrl":"",
+    "youtubeId":"EIGmcxwbbZw",
+    "playOnYoutubeOnly":false,
+    "tags":["nextjs", "performance"]
+  },
+  {
+    "title": "The Biggest Typescript Update In Years",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "4XgIvE5SH4Y",
+    "playOnYoutubeOnly": false,
+    "tags": ["typescript"]
+  },
+  { 
+    "title": "React Compiler: It's Strager Than You Think",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "wnXGSwrOw80",
+    "playOnYoutubeOnly": false,
+    "tags": ["new_react_stuff"]
+  },
+  {
+    "title": "7 Cryptography Concepts EVERY Developer Should Know",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "NuyzuNBFWxQ",
+    "playOnYoutubeOnly": false,
+    "tags": ["security"]
+  },
+  { 
+    "title": "If You Are Using Next.js You Need To Enable This Development Feature",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "1jpqBfptng0",
+    "playOnYoutubeOnly": false,
+    "tags": ["nextjs"]
+  },
+  { 
+    "title": "The New JS Features Coming Soon (I'm so hyped)",
+    "body": "",
+    "featured": false,
+    "imgUrl": "", 
+    "youtubeId": "nT0j7ze5jqE",
+    "playOnYoutubeOnly": false,
+    "tags": ["new_javascript_stuff"]
+  },
+  {
+    "title": "Next 14 Reveals React's Taint, Solves RSC Safety Issues",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "JrKBinrMGR4",
+    "playOnYoutubeOnly": false,
+    "tags": ["nextjs"]
+  },
+  {
+    "title": "They made React great again?",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "4k6Xgjqkad4",
+    "playOnYoutubeOnly": false,
+    "tags": ["new_react_stuff"]
+  },
+  {
+    "title": "I can’t believe they built this in React (w/ React Fiber)",
+    "body": "",
+    "featured": true,
+    "imgUrl": "", 
+    "youtubeId": "oF2bDrRZuF4",
+    "playOnYoutubeOnly": false,
+    "tags": ["new_react_stuff", "animation"]
+  },
+  {
+    "title": "If You Cannot Name All 5 JS Scopes You Need To Watch This Video",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "SQP9VV5b9IM",
+    "playOnYoutubeOnly": false,
+    "tags": ["javascript_basics"]
+  },
+  {
+    "title": "JavaScript Visualized - Execution Contexts",
+    "body": "",
+    "featured": true,
+    "imgUrl": "",
+    "youtubeId": "zdGfo6I1yrA",
+    "playOnYoutubeOnly": false,
+    "tags": ["javascript_basics"]
+  },
+  {
+    "title": "Javascript Visualized - Promise Execution",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "Xs1EMmBLpn4",
+    "playOnYoutubeOnly": false,
+    "tags": ["javascript_basics"]
+  },
+  {
+    "title": "Forget ChatGPT, This AI Tool (ClaudeAI) Is Much Better!",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "6z3ThwSwS9s",
+    "playOnYoutubeOnly": false,
+    "tags": ["code_assist"]
+  },
+  {
+    "title": "How TOo Debug React Apps Like A Senior Developer",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "l8knG0BPr-o",
+    "playOnYoutubeOnly": false,
+    "tags": ["react_basics"]
+  },
+  {
+    "title": "NEW Claude Projects Full Guide! (Amazing Results)",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "oNAi8blLLk4",
+    "playOnYoutubeOnly": false,
+    "tags": ["code_assist"]
+  },
+  {
+    "title": "Why & When You Should be Using Claude over ChatGPT",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "8N9ccG7_V1w",
+    "playOnYoutubeOnly": false,
+    "tags": ["code_assist"]
+  },
+  {
+    "title": "Supermaven super code completion",
+    "body": "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing. Can fit an entire medium-sized repo in its 300,000 token context window.",
+    "featured": true,
+    "imgUrl": "",
+    "youtubeId": "JhmdYN1wbG0",
+    "playOnYoutubeOnly": false,
+    "tags": ["code_assist"]
   }
 ]

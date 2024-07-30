@@ -17,11 +17,12 @@ export function BlogListItemWrapper ({ children, isFeaturedVideo }: Props) {
   const showWideView = isFeaturedVideo &&  !isSplitScreen && isWideScreen;
 
   return (
-    <div className={clsx('grid gap-2 items-start', {
-      'grid-cols-1': !showWideView,
-      'grid-cols-2 gap-6': showWideView,
+    <div className={clsx('grid items-start', {
+      'grid-cols-1 gap-2 justify-start items-start': !showWideView,
+      'grid-cols-2 gap-x-6': showWideView,
     })} style={{
-      gridTemplateColumns: showWideView ? '2fr 1fr' : '1fr'
+      gridTemplateColumns: showWideView ? '2fr 1fr' : '1fr',
+      gridTemplateRows: 'auto 1fr'
     }}>
       {children}
     </div>
