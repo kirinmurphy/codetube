@@ -16,8 +16,6 @@ export function VideoPlayer () {
     videoCollection, 
     displayState,
     autoPlay,
-    isPlaying,
-    videoPlayerRef,
     onReady,
     setPlayingState,
     playNextVideo,
@@ -67,8 +65,6 @@ export function VideoPlayer () {
               onReady={onReady}
               onError={handleVideoError}                  
               opts={{ playerVars: { autoplay: autoPlay ? 1 : 0 }}}
-              isPlaying={isPlaying}
-              playerRef={videoPlayerRef}
             />
           </div>    
 

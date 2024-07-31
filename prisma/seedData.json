@@ -54,6 +54,24 @@
     "tags": ["algorithmy_stuff"]
   },
   {
+    "title": "Every React 19 Feature Explained in 8 Minutes",
+    "body": "Very Exciting Stuff",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "2NPIYnY3ilo",
+    "playOnYoutubeOnly": true,
+    "tags": ["new_react_stuff"]
+  },
+  {
+    "title": "Signals In JS...",
+    "body": "full on pub sub in javascript",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "vGBBtqPnaUk",
+    "playOnYoutubeOnly": false,
+    "tags": ["new_javascript_stuff"]
+  },
+  {
     "title": "React 19 Is FINALLY Here",
     "body": "",
     "featured": false,
