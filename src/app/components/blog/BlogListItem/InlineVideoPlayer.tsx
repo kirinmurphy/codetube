@@ -11,17 +11,25 @@ interface Props {
 }
 
 export function InlineVideoPlayer ({ youtubeId }: Props) {
-  const { isPlaying } = useVideoPlayer();
+  const { 
+    isPlaying: isGlobalPlayerPlaying,
+    pauseVideo: pauseGlobalPlayer, 
+  } = useVideoPlayer();
+
   const inlineVideoPlayerRef = useVideoPlayerRef();
+
+  useEffect(() => {
+    const shouldPauseVideo = isGlobalPlayerPlaying && inlineVideoPlayerRef.current;
+    if ( shouldPauseVideo ) { inlineVideoPlayerRef.current.pauseVideo(); }
+  }, [isGlobalPlayerPlaying, inlineVideoPlayerRef]);
 
   const onReady = (event: { target: YouTubePlayer }) => {
     inlineVideoPlayerRef.current = event.target;
   }
 
-  useEffect(() => {
-    const shouldPauseVideo = isPlaying && inlineVideoPlayerRef.current;
-    if ( shouldPauseVideo ) { inlineVideoPlayerRef.current.pauseVideo(); }
-  }, [isPlaying, inlineVideoPlayerRef]);
+  const handleOnPlay = () => {
+    pauseGlobalPlayer();
+  }
 
   const handleVideoError = () => {
     console.error('error');
@@ -32,6 +40,7 @@ export function InlineVideoPlayer ({ youtubeId }: Props) {
       <YoutubePlayer
         videoId={youtubeId}
         onReady={onReady}
+        onPlay={handleOnPlay}
         onError={handleVideoError}                  
         opts={{ playerVars: { autoplay: false }}}
       />

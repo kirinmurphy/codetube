@@ -21,7 +21,7 @@ export function PostImage ({ post }: { post: BlogPost }) {
           src={blogImage} 
           alt={title} 
           width={THUMBNAIL_SIZE} 
-          height={THUMBNAIL_SIZE} 
+          height={Math.floor(THUMBNAIL_SIZE * .6)}  
         />
       )}
     </div>

@@ -10,27 +10,13 @@ export const handler: Handler = async (event) => {
       const tag = event.queryStringParameters?.tag || '';
   
       const getAllItemsQuery: Prisma.BlogPostFindManyArgs = {
-        include: {
-          tags: {
-            include: {
-              tag: true,
-            },
-          },
-        },
-      }
+        include: { tags: { include: { tag: true }}} 
+      };
     
       const getItemsByTagQuery: Prisma.BlogPostFindManyArgs = {
-        where: {
-          tags: {
-            some: {
-              tag: {
-                name: tag,
-              },
-            },
-          },
-        },
+        where: { tags: { some: { tag: { name: tag }}}},
         ...getAllItemsQuery,
-      }
+      };
     
       const query = tag ? getItemsByTagQuery : getAllItemsQuery;
   

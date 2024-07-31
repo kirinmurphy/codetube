@@ -34,7 +34,7 @@ export const handler: Handler = async (event) => {
           const posts = await prisma.blogPost.findMany({
             where: { tags: { some: { tag: { name: tagName }}}},
             include: { tags: { include: { tag: true }}},
-            orderBy: { createdAt: 'desc' },
+            // orderBy: { createdAt: 'desc' },
             take: totalMaxItemsPerTag
           });
 

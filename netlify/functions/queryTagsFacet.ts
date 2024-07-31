@@ -8,13 +8,7 @@ export const handler: Handler = async (event) => {
     errorMessage: 'Failed to fetch tags facet',
     getQueryResponse: async ({ prisma, }) => {
       const tags = await prisma.tag.findMany({
-        include: {
-          _count: {
-            select: {
-              posts: true,
-            },
-          },
-        },
+        include: { _count: { select: { posts: true, }}}
       });
   
       const tagsWithCount = tags
