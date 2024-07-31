@@ -16,7 +16,7 @@ export function PostViewWrapper ({ children, tagNavigation }: Props) {
 
   return (
     <div className={clsx('', {
-      'flex flex-col 900mq:flex-row gap-4': !isSplitScreen
+      'flex flex-col gap-4 900mq:flex-row 900mq:gap-8': !isSplitScreen
     })}>
       <div className={clsx('', {
         '900mq:w-[220px]': !isSplitScreen

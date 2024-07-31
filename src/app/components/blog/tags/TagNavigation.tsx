@@ -1,16 +1,16 @@
 "use client"; 
 
 import { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 
 import { TagWithCount } from '@/src/app/requests/fetchTagsFacet';
-import { HandleTagSelectionProps, SearchableTag } from "./SearchableTag";
 import { useCallbackOnExternalEventTrigger } from '@/src/app/components/utils/useCallbackOnExternalEventTrigger';
 import { useVideoPlayer } from '../../VideoPlayer/utils/useVideoPlayer';
 import { VideoPlayerDisplayState } from '../../VideoPlayer/types';
 import { Button, ButtonType } from '../../widgets/Button';
-import { useRouter } from 'next/navigation';
 import { getTagPath } from '../utils/getTagPath';
+import { HandleTagSelectionProps, SearchableTag } from "./SearchableTag";
 
 interface Props {
   allTags: TagWithCount[];
