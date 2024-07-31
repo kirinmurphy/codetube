@@ -22,7 +22,7 @@ async function main() {
   }
 
   try {
-    await runCommand(`node scripts/deleteDirectory.js ${srcDirectory}`);
+    await runCommand(`node scripts/deleteDirectory.cjs ${srcDirectory}`);
     await runCommand('npx prisma generate');
     await runCommand('tsc -p tsconfig.netlify.json');
     await runCommand(`netlify functions:build --src ${srcDirectory}/functions`);
