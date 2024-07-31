@@ -6,7 +6,11 @@ import { useVideoPlayerRef } from "../../VideoPlayer/utils/useClearRef";
 import { useVideoPlayer } from "../../VideoPlayer/utils/useVideoPlayer";
 import { useEffect } from "react";
 
-export function InlineVideoPlayer ({ youtubeId }: { youtubeId: string }) {
+interface Props {
+  youtubeId: string;
+}
+
+export function InlineVideoPlayer ({ youtubeId }: Props) {
   const { isPlaying } = useVideoPlayer();
   const inlineVideoPlayerRef = useVideoPlayerRef();
 
