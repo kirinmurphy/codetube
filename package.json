@@ -2,6 +2,7 @@
   "name": "codethingsdotnet",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "npx prisma generate && prisma migrate deploy && next build",
@@ -12,7 +13,8 @@
     "migrate:prod": "npx prisma migrate deploy && npx prisma generate",
     "seed:dev": "yarn run migrate:dev && npx prisma db seed",
     "seed:prod": "yarn run migrate:prod && npx prisma db seed",
-    "compileServerFunctions": "node scripts/compileServerFunctions.js netlify/dist"
+    "compileServerFunctions": "node scripts/compileServerFunctions.js netlify/dist",
+    "test": "jest"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -28,6 +30,10 @@
     "react-youtube": "^10.1.0"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -37,10 +43,17 @@
     "babel-plugin-react-compiler": "^0.0.0-experimental-938cd9a-20240601",
     "eslint": "^8",
     "eslint-config-next": "15.0.0-rc.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
     "prisma": "^5.15.1",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
+  },
+  "resolutions": {
+    "string-width": "4.2.3",
+    "strip-ansi": "6.0.1",
+    "cliui": "7.0.4"
   }
 }
