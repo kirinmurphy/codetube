@@ -6,7 +6,7 @@
     "imgUrl": "",
     "youtubeId": "TDtVagwa3QQ",
     "playOnYoutubeOnly": false,
-    "tags": ["data_structures"]
+    "tags": ["algorithmy_stuff"]
   },
   {
     "title": "When You Use Vanilla CSS After Using Tailwind",
@@ -42,7 +42,7 @@
     "imgUrl": "",
     "youtubeId": "fPz40W9mfCg",
     "playOnYoutubeOnly": false,
-    "tags": ["data_structures"]
+    "tags": ["algorithmy_stuff"]
   },
   {
     "title": "Big O Clicks",
@@ -297,12 +297,30 @@
     "tags": ["code_assist"]
   },
   {
-    "title": "Supermaven super code completion",
+    "title": "Supermaven: The Fastest Copilot with a 300,000-Token Context Window!",
     "body": "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing. Can fit an entire medium-sized repo in its 300,000 token context window.",
     "featured": true,
     "imgUrl": "",
     "youtubeId": "JhmdYN1wbG0",
     "playOnYoutubeOnly": false,
     "tags": ["code_assist"]
+  },
+  {
+    "title": "React Compiler: In-Depth Beyond React Conf 2024",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "PYHBHK37xlE",
+    "playOnYoutubeOnly": true,
+    "tags": ["new_react_stuff"]
+  },
+  {
+    "title": "Warning: React 19's use Hook Can Impact App Performance",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "t6MeFVF3V9I",
+    "tags": ["new_react_stuff"]
   }
 ]
