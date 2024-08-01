@@ -38,7 +38,7 @@ export function TagNavigation ({ allTags, tagName }: Props) {
   }
 
   const pushNewRoute = ({ newPath }: { newPath: string }) => {
-    router.push(newPath, { scroll: false });
+    router.push(newPath);
     setIsFilterOpenInMobile(false);
   }
 

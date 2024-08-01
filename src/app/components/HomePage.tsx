@@ -1,7 +1,6 @@
 import { use } from 'react';
 
 import { fetchHomepageData } from '../requests/fetchHomepageData';
-import { ClientRouterWrapper } from './layout/ClientRouterWrapper';
 import { PostsByTagGroup } from './blog/PostsByTagGroup/PostsByTagGroup';
 import { TagNavigation } from './blog/tags/TagNavigation';
 import { PostViewWrapper } from './blog/PostViewWrapper';
@@ -22,20 +21,18 @@ export function HomePage ({ selectedTagName, tagGroupNames }: Props) {
     .filter(tagOption => tagOption.name === selectedTagName)[0] || {};
 
   return (
-    <ClientRouterWrapper initialTag={selectedTagName}>
-      <PostViewWrapper
-        tagNavigation={
-          <TagNavigation allTags={allTags} tagName={selectedTagName} />
-        }
-      >
-        {blogPosts && (
-          <PostsByTagGroup tag={selectedTag} posts={blogPosts} />
-        )}
+    <PostViewWrapper
+      tagNavigation={
+        <TagNavigation allTags={allTags} tagName={selectedTagName} />
+      }
+    >
+      {blogPosts && (
+        <PostsByTagGroup tag={selectedTag} posts={blogPosts} />
+      )}
 
-        {groupedPosts?.tagGroups && (
-          <HomePageDefault allTags={allTags} groupedPosts={groupedPosts} />
-        )}
-      </PostViewWrapper>
-    </ClientRouterWrapper>
+      {groupedPosts?.tagGroups && (
+        <HomePageDefault allTags={allTags} groupedPosts={groupedPosts} />
+      )}
+    </PostViewWrapper>
   );
 }

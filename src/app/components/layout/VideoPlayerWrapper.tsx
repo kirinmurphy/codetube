@@ -4,6 +4,8 @@ import clsx from "clsx";
 import { VideoPlayer } from "../VideoPlayer/VideoPlayer";
 import { useVideoPlayer } from "../VideoPlayer/utils/useVideoPlayer";
 import { VideoPlayerDisplayState } from "../VideoPlayer/types";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 export function VideoPlayerWrapper({ children }: { children: React.ReactNode }) {
   const { displayState } = useVideoPlayer();
@@ -12,6 +14,13 @@ export function VideoPlayerWrapper({ children }: { children: React.ReactNode }) 
   const isSplitScreen = displayState === VideoPlayerDisplayState.SplitScreen;
   const isFullScreen = displayState === VideoPlayerDisplayState.FullScreen;
   const isMini = displayState === VideoPlayerDisplayState.Mini;
+
+  const searchParams = useSearchParams();
+  const contentPanelRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {    
+    if ( contentPanelRef.current ) { contentPanelRef.current.scrollTo(0, 0); }
+  }, [searchParams]);
 
   return (
     <div className={clsx('w-full', {
@@ -28,7 +37,7 @@ export function VideoPlayerWrapper({ children }: { children: React.ReactNode }) 
         <VideoPlayer />
       </div>
       
-      <div className={clsx(`
+      <div ref={contentPanelRef} className={clsx(`
         fixed bottom-0 right-0 z-0 w-full h-full 
         overflow-y-scroll transition-all duration-200 ease-in-out`, {
           '900mq:w-[400px] 900mq:translate-x-0 1250mq:w-[550px] 1250mq:px-2': isSplitScreen,

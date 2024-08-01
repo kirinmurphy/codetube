@@ -12,7 +12,7 @@ export function ViewMoreByTagButton ({ tagName}: Props) {
   const router = useRouter();
 
   const handlPlayMoreTag = () => {
-    router.push(getTagPath(tagName), { scroll: false });
+    router.push(getTagPath(tagName));
   };
 
   return (
