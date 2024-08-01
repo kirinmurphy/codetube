@@ -11,24 +11,29 @@ datasource db {
 }
 
 model BlogPost {
-  id                 Int      @id @default(autoincrement())
+  id                 Int        @id @default(autoincrement())
   title              String
   imgUrl             String
-  body               String  @db.VarChar(1000)
+  body               String     @db.VarChar(1000)
   externalSourceLink String?
   youtubeId          String?  
   blogId             String?  
   featured           Boolean?
   playOnYoutubeOnly  Boolean
-  createdAt          DateTime @default(now())
+  createdAt          DateTime   @default(now())
   tags               BlogPostTag[]
+
+  @@index([createdAt])
 }
 
 model Tag {
   id   Int      @id @default(autoincrement())
   name String   @unique
   posts BlogPostTag[]
+
+  @@index([name])
 }
+
 
 model BlogPostTag {
   id         Int      @id @default(autoincrement())

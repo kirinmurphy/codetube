@@ -6,7 +6,7 @@ Test driving the new React 19, Next 15, Prisma, Tailwind stack. With server comp
 
 - initial page renders with server content, with client side navigation / filtering taking over once loaded
 - media player built with react-youtube, with dynamic multi-display state wrangled in Tailwind 
-- server(less) functions using prisma delployed on netlify
+- server(less) functions using prisma delployed on netlify, with indexing of common query params
 
 
 ## To Run
