@@ -26,7 +26,7 @@ export function VideoPlayerWrapper({ children }: { children: React.ReactNode }) 
     <div className={clsx('w-full', {
       '900mq:flex 900mq:h-screen': isSplitScreen
     })}>
-      <div className={clsx(
+      <div id="video-player-panel" className={clsx(
         'fixed left-0 bottom-0 z-10 overflow-y-auto transition-all duration-200 ease-in-out bg-gray-900', {
           'invisible w-0 h-0': isClosed,
           'h-full w-[calc(100%-400px)] 1250mq:w-[calc(100%-550px)]': isSplitScreen,

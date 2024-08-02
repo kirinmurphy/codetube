@@ -4,6 +4,7 @@ import "./css/globals.css";
 import { VideoPlayerProvider } from "./components/VideoPlayer/VideoPlayerProvider";
 import { Page } from "./components/layout/Page";
 import { VideoPlayerWrapper } from "./components/layout/VideoPlayerWrapper";
+import { Suspense } from 'react';
 
 const lato = Lato({
   weight: ['400', '700'],
@@ -20,11 +21,13 @@ export default function RootLayout ({ children }: Readonly<Props>) {
     <html lang="en">
       <body className={`${lato.className} min-w-[320px]`}>
         <VideoPlayerProvider>
-          <VideoPlayerWrapper>
-            <Page>
-              {children}
-            </Page>
-          </VideoPlayerWrapper>
+          <Suspense fallback={<div>Loading...</div>}>
+            <VideoPlayerWrapper>
+              <Page>
+                {children}
+              </Page>
+            </VideoPlayerWrapper>
+          </Suspense>
         </VideoPlayerProvider>
       </body>
     </html>
