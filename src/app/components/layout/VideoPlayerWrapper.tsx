@@ -18,7 +18,7 @@ export function VideoPlayerWrapper({ children }: { children: React.ReactNode }) 
   const searchParams = useSearchParams();
   const contentPanelRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {    
+  useEffect(() => {
     if ( contentPanelRef.current ) { contentPanelRef.current.scrollTo(0, 0); }
   }, [searchParams]);
 

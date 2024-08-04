@@ -39,7 +39,6 @@ export function VideoPlayer () {
     }, 5000);
   };  
 
-
   return (
     <>
       {videoCollection.length > 0 && (
