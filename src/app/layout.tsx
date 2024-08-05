@@ -19,7 +19,7 @@ interface Props {
 export default function RootLayout ({ children }: Readonly<Props>) {
   return (
     <html lang="en">
-      <body className={`${lato.className} min-w-[320px]`}>
+      <body className={`${lato.className}`}>
         <VideoPlayerProvider>
           <Suspense fallback={<div>Loading...</div>}>
             <VideoPlayerWrapper>

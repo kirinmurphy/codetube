@@ -23,6 +23,13 @@ const config: Config = {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
       },
+      padding: {
+        '1vw': '1vw',
+        '2vw': '2vw',
+        '4vw': '4vw',
+        '6vw': '6vw',
+        '8vw': '8vw'
+      },      
     },
   },
   plugins: [],

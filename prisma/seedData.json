@@ -278,6 +278,19 @@
     "playOnYoutubeOnly": false,
     "tags": ["code_assist"]
   },
+
+  {
+    "title": "3 Questions: You Don't Know JavaScript | Prime Reacts",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "flzlEmyxMs8",
+    "playOnYoutubeOnly": false,
+    "tags": ["javascript_basics"]
+  },
+
+
+
   {
     "title": "Supermaven: The Fastest Copilot with a 300,000-Token Context Window!",
     "body": "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing. Can fit an entire medium-sized repo in its 300,000 token context window.",
