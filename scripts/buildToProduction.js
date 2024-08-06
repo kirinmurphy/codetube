@@ -5,11 +5,11 @@ const runCommand = (command) => {
 };
 
 try {
+  runCommand('yarn run compileServerFunctions');
+  runCommand('yarn run build');
   if (process.env.RUN_SEED === 'true') {
     runCommand('yarn run seed:prod');
   }
-  runCommand('yarn run compileServerFunctions');
-  runCommand('yarn run build');
 } catch (error) {
   console.error('Error during custom build:', error);
   process.exit(1);
