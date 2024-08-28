@@ -1,6 +1,9 @@
 import { Handler } from "@netlify/functions";
 import { BlogPost, Tag } from "@prisma/client";
-import { getNetlifyFunctionHandler } from "../utils/getNetlifyFunctionHandler";
+import { clearMemCache, getNetlifyFunctionHandler } from "../utils/getNetlifyFunctionHandler";
+
+const HOMEPAGE_CACHE_KEY = 'homepage_data';
+const HOMEPAC_CACHE_EXPIRY = 60 * 60 * 24 * 7; // 1 week
 
 type BlogPostWithTags = BlogPost & {
   tags: {
@@ -22,6 +25,10 @@ export const handler: Handler = async (event) => {
   return await getNetlifyFunctionHandler<ResponseData>({
     event,
     errorMessage: 'Failed to fetch posts by tag group',
+    cacheConfig: {
+      key: HOMEPAGE_CACHE_KEY,
+      expiry: HOMEPAC_CACHE_EXPIRY
+    },
     getQueryResponse: async ({ prisma, event }) => {
       const queryStringParameters = event.queryStringParameters || {};
       const { tagNames, maxItemsPerTag } = queryStringParameters;
@@ -54,3 +61,5 @@ export const handler: Handler = async (event) => {
     }
   });
 };
+
+export const clearHomepageCache = clearMemCache(HOMEPAGE_CACHE_KEY)

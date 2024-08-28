@@ -14,7 +14,6 @@ export async function fetchIt<T>({ queryName, params }: FetchOptions): Promise<T
     url.search = searchParams.toString();
   }
 
-
   console.log(`Fetching from URL: ${url.toString()}`); 
 
   try {
