@@ -1,4 +1,4 @@
-import { HandlerEvent, HandlerResponse } from "@netlify/functions";
+import { HandlerResponse } from "@netlify/functions";
 import { PrismaClient } from "@prisma/client";
 import { Client } from 'memjs';
 
@@ -21,23 +21,40 @@ interface QueryResponseProps {
 export type QueryResponseType<T> = (props:QueryResponseProps) => Promise<T>;
 
 interface GetNetlifyFunctionHandlerProps<T> {
-  event: HandlerEvent;
   errorMessage: string;
-  getQueryResponse: QueryResponseType<T>;
   cacheConfig?: CacheConfig;
+  getQueryResponse: QueryResponseType<T>;
 }
 
 export async function getNetlifyFunctionHandler<T>(
   props: GetNetlifyFunctionHandlerProps<T>
 ): Promise<HandlerResponse> {
 
-  const { errorMessage, getQueryResponse, cacheConfig } = props;
+  const { errorMessage, cacheConfig, getQueryResponse } = props;
 
   try {
     let response: T;
 
     if ( cacheConfig ) {
       const { value: cachedData } = await memcachedClient.get(cacheConfig.key)
+
+
+      try {
+        const { value: cachedData } = await memcachedClient.get(cacheConfig.key);
+        if (cachedData) {
+          console.log('Cache hit for key: ', cacheConfig.key);
+          response = JSON.parse(cachedData.toString());
+        } else {
+          console.log('Cache miss for key: ', cacheConfig.key);
+          response = await getQueryResponse({ prisma });
+          await setCacheData(cacheConfig, response);
+        }
+      } catch (cacheError) {
+        console.log('Cache error, falling back to database query: ', cacheError);
+        response = await getQueryResponse({ prisma });
+        await setCacheData(cacheConfig, response);
+      }
+
 
       if ( cachedData ) {
         console.log('Cache hit for key: ', cacheConfig.key);
@@ -86,3 +103,16 @@ export async function getNetlifyFunctionHandler<T>(
 //     console.error(`Failed to clear cache for key ${cacheKey}: `, error);
 //   }
 // };
+
+async function setCacheData<T>(cacheConfig: CacheConfig, data: T) {
+  try {
+    await memcachedClient.set(
+      cacheConfig.key,
+      JSON.stringify(data),
+      { expires: cacheConfig.expiry }
+    );
+    console.log('Cache set successfully for key: ', cacheConfig.key);
+  } catch (setCacheError) {
+    console.error('Failed to set cache: ', setCacheError);
+  }
+}

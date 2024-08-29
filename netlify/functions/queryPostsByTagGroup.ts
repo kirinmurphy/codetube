@@ -21,7 +21,6 @@ interface ResponseData {
 
 export const handler: Handler = async (event) => {
   return await getNetlifyFunctionHandler<ResponseData>({
-    event,
     errorMessage: 'Failed to fetch posts by tag group',
     cacheConfig: {
       key: QueryCacheKeys.HOMEPAGE_CACHE_KEY,

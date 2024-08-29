@@ -7,7 +7,6 @@ export const handler: Handler = async (event) => {
   const tag = event.queryStringParameters?.tag || '';
 
   return await getNetlifyFunctionHandler<BlogPost[]>({ 
-    event,
     errorMessage: 'Failed to fetch blog posts',
     cacheConfig: {
       key: QueryCacheKeys.BLOG_POST_CACHE_KEY+tag,
