@@ -34,11 +34,15 @@ export function SearchableTag(props: Props) {
 
   const buttonState = isActiveTag ? ButtonType.TextActive : ButtonType.Text;
 
+  const hideTag = tag.id === null && currentTagName === '';
+
   return (
     <Button 
       type={buttonState} 
       onClick={handleTagClick} 
-      className={clsx('group w-full flex items-center gap-2')}>
+      className={clsx('group w-full flex items-center gap-2', { 
+        'invisible': hideTag 
+      })}>
 
       <div className="flex-1 flex items-center gap-2">
         <span className="text-lg">{tag.readableName}</span>

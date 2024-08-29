@@ -10,7 +10,7 @@ const viewAllTag: TagWithCount = {
 };
 
 export interface TagWithCount {
-  id: number;
+  id: number | null;
   name: string;
   readableName: string;
   count: number;

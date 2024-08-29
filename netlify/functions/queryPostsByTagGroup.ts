@@ -59,5 +59,3 @@ export const handler: Handler = async (event) => {
     }
   });
 };
-
-// export const clearHomepageCache = clearMemCache(HOMEPAGE_CACHE_KEY)
