@@ -5,7 +5,12 @@ interface FetchOptions {
   params?: Record<string, string>;
 }
 
-export async function fetchIt<T>({ queryName, params }: FetchOptions): Promise<T> {
+interface FetchResult<T> {
+  data: T | null;
+  error: Error | null;
+}
+
+export async function fetchIt<T>({ queryName, params }: FetchOptions): Promise<FetchResult<T>> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:8888';
   const url = new URL(`/.netlify/functions/${queryName}`, baseUrl);
   
@@ -14,29 +19,28 @@ export async function fetchIt<T>({ queryName, params }: FetchOptions): Promise<T
     url.search = searchParams.toString();
   }
 
-  console.log(`Fetching from URL: ${url.toString()}`); 
+  console.log(`Fetching from URL: ${url.toString()}`);
 
   try {
     const response = await fetch(url.toString());
     const text = await response.text();
 
     if (!response.ok) {
-      throw new QueryError(`HTTP error! status: ${response.status}`, text);
+      return {
+        data: null,
+        error: new QueryError(`HTTP error! status: ${response.status}`, text)
+      };
     }
 
-    return JSON.parse(text);
+    return {
+      data: JSON.parse(text) as T,
+      error: null
+    };
   } catch (error) {
-    console.error(`Error fetchihng data from${queryName}:`, error);
-
-    if ( error instanceof QueryError ) {
-      console.error('QueryError details:', error.message, error.responseText);
-    } else if ( error instanceof SyntaxError ) {
-      console.error('JSON Parsing Error:', error.message)
-    } else {
-      console.error('Unexpected Error:', error);
-    }
-
-    // TODO: Need to enable an error state for the consuming functions
-    return null as unknown as T;
+    console.error(`Error fetching data from ${queryName}:`, error);
+    return {
+      data: null,
+      error: error instanceof Error ? error : new Error(String(error))
+    };
   }
 }

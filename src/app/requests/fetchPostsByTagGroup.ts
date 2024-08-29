@@ -20,11 +20,18 @@ interface GetPostsByTagGroupQueryParams {
 export async function fetchPostsByTagGroup(props: GetPostsByTagGroupQueryParams) {
   const { tagNames, maxItemsPerTag } = props;
   
-  return await fetchIt<PostsByTagGroupResult>({
+  const { data: postsByTagGroup, error } = await fetchIt<PostsByTagGroupResult>({
     queryName: 'queryPostsByTagGroup',
     params: { 
       tagNames: tagNames.join(','),
       maxItemsPerTag: maxItemsPerTag.toString()
     }
   });
+
+  if ( error ) {
+    console.error('FETCH HOMEPAGE TAG GROUP FAIL: ', error.message)
+    return null;
+  }
+
+  return postsByTagGroup;
 }

@@ -17,9 +17,14 @@ export interface TagWithCount {
 }
 
 export async function fetchTagsFacet(): Promise<TagWithCount[]> {
-  const tags = await fetchIt<TagWithCount[]>({ 
+  const { data: tags, error } = await fetchIt<TagWithCount[]>({ 
     queryName: 'queryTagsFacet' 
-  }) || [];
+  });
 
-  return [viewAllTag, ...tags];
+  if ( error ) {
+    console.error('FETCH TAGS FAIL: ', error.message)
+    return [];
+  }
+
+  return [viewAllTag, ...(tags || [])];
 }
