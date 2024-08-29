@@ -1,18 +1,5 @@
 const { exec } = require('child_process');
 
-function runCommand(command) {
-  return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error executing ${command}:`, stderr);
-        return reject(error);
-      }
-      console.log(`Output of ${command}:`, stdout);
-      resolve();
-    });
-  });
-}
-
 async function main() {
   const srcDirectory = process.argv[2];
 
@@ -33,3 +20,16 @@ async function main() {
 }
 
 main();
+
+function runCommand(command) {
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing ${command}:`, stderr);
+        return reject(error);
+      }
+      console.log(`Output of ${command}:`, stdout);
+      resolve();
+    });
+  });
+}

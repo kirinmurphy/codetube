@@ -27,6 +27,16 @@ export async function fetchIt<T>({ queryName, params }: FetchOptions): Promise<T
     return JSON.parse(text);
   } catch (error) {
     console.error(`Error fetchihng data from${queryName}:`, error);
-    throw error;
+
+    if ( error instanceof QueryError ) {
+      console.error('QueryError details:', error.message, error.responseText);
+    } else if ( error instanceof SyntaxError ) {
+      console.error('JSON Parsing Error:', error.message)
+    } else {
+      console.error('Unexpected Error:', error);
+    }
+
+    // TODO: Need to enable an error state for the consuming functions
+    return null as unknown as T;
   }
 }

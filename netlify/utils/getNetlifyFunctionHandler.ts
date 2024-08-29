@@ -65,14 +65,14 @@ export async function getNetlifyFunctionHandler<T>(
       body: JSON.stringify(response),
     };
   } catch (error) {
-    console.error(`${errorMessage}: `, error);
+    console.error(`AAA${errorMessage}: `, error);
 
     return {
       statusCode: 500,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ error: errorMessage, details: error }),
+      body: JSON.stringify({ error: 'BBB' + errorMessage, details: error }),
     };
   } finally {
     await prisma.$disconnect();

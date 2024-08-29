@@ -19,7 +19,7 @@ export interface TagWithCount {
 export async function fetchTagsFacet(): Promise<TagWithCount[]> {
   const tags = await fetchIt<TagWithCount[]>({ 
     queryName: 'queryTagsFacet' 
-  });
+  }) || [];
 
   return [viewAllTag, ...tags];
 }

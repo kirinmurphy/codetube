@@ -71,7 +71,8 @@ export function TagNavigation ({ allTags, tagName }: Props) {
         })}
       >
         <Button 
-          isDisabled={!tagName} 
+          // isDisabled={!tagName}
+          className={!tagName ? 'invisible': ''} 
           type={ButtonType.Text} 
           onClick={handleClearFilter}>
           home
