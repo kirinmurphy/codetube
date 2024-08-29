@@ -16,7 +16,6 @@ interface CacheConfig {
 
 interface QueryResponseProps {
   prisma: PrismaClient;
-  event: HandlerEvent;
 }
 
 export type QueryResponseType<T> = (props:QueryResponseProps) => Promise<T>;
@@ -32,7 +31,7 @@ export async function getNetlifyFunctionHandler<T>(
   props: GetNetlifyFunctionHandlerProps<T>
 ): Promise<HandlerResponse> {
 
-  const { event, errorMessage, getQueryResponse, cacheConfig } = props;
+  const { errorMessage, getQueryResponse, cacheConfig } = props;
 
   try {
     let response: T;
@@ -45,7 +44,7 @@ export async function getNetlifyFunctionHandler<T>(
         response = JSON.parse(cachedData.toString());
       } else {
         console.log('Cache miss for key: ', cacheConfig.key);
-        response = await getQueryResponse({ prisma, event });
+        response = await getQueryResponse({ prisma });
 
         await memcachedClient.set(
           cacheConfig.key,
@@ -54,7 +53,7 @@ export async function getNetlifyFunctionHandler<T>(
         );
       }
     } else {
-      response = await getQueryResponse({ prisma, event });
+      response = await getQueryResponse({ prisma });
     }
 
     return {
@@ -65,20 +64,19 @@ export async function getNetlifyFunctionHandler<T>(
       body: JSON.stringify(response),
     };
   } catch (error) {
-    console.error(`AAA${errorMessage}: `, error);
+    console.error(`${errorMessage}: `, error);
 
     return {
       statusCode: 500,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ error: 'BBB' + errorMessage, details: error }),
+      body: JSON.stringify({ error: errorMessage, details: error }),
     };
   } finally {
     await prisma.$disconnect();
   }
 }
-
 
 // export const clearMemCache = async (cacheKey: string) => {
 //   try {

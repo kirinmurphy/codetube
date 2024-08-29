@@ -71,7 +71,7 @@ export function TagNavigation ({ allTags, tagName }: Props) {
         })}
       >
         <SearchableTag
-          tag={{ id:null, name: '', readableName: 'home', count: 0 }}
+          tag={{ id: null, name: '', readableName: 'home', count: 0 }}
           currentTagName={tagName}
           handleTagSelection={handleClearFilter} 
         />

@@ -27,7 +27,7 @@ export const handler: Handler = async (event) => {
       key: QueryCacheKeys.HOMEPAGE_CACHE_KEY,
       expiry: GLOBAL_CACHE_EXPIRY
     },
-    getQueryResponse: async ({ prisma, event }) => {
+    getQueryResponse: async ({ prisma }) => {
       const queryStringParameters = event.queryStringParameters || {};
       const { tagNames, maxItemsPerTag } = queryStringParameters;
 

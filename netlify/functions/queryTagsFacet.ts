@@ -11,7 +11,7 @@ export const handler: Handler = async (event) => {
     //   key: QueryCacheKeys.TAG_FACET_CACHE_KEY,
     //   expiry: GLOBAL_CACHE_EXPIRY
     // },
-    getQueryResponse: async ({ prisma, }) => {
+    getQueryResponse: async ({ prisma }) => {
       const tags = await prisma.tag.findMany({
         include: { _count: { select: { posts: true, }}}
       });
