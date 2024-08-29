@@ -10,16 +10,21 @@ const viewAllTag: TagWithCount = {
 };
 
 export interface TagWithCount {
-  id: number;
+  id: number | null;
   name: string;
   readableName: string;
   count: number;
 }
 
 export async function fetchTagsFacet(): Promise<TagWithCount[]> {
-  const tags = await fetchIt<TagWithCount[]>({ 
+  const { data: tags, error } = await fetchIt<TagWithCount[]>({ 
     queryName: 'queryTagsFacet' 
   });
 
-  return [viewAllTag, ...tags];
+  if ( error ) {
+    console.error('FETCH TAGS FAIL: ', error.message)
+    return [];
+  }
+
+  return [viewAllTag, ...(tags || [])];
 }

@@ -1,6 +1,7 @@
 import { Handler } from "@netlify/functions";
 import { BlogPost, Tag } from "@prisma/client";
 import { getNetlifyFunctionHandler } from "../utils/getNetlifyFunctionHandler";
+import { QueryCacheKeys, GLOBAL_CACHE_EXPIRY } from "../utils/constants";
 
 type BlogPostWithTags = BlogPost & {
   tags: {
@@ -22,6 +23,10 @@ export const handler: Handler = async (event) => {
   return await getNetlifyFunctionHandler<ResponseData>({
     event,
     errorMessage: 'Failed to fetch posts by tag group',
+    cacheConfig: {
+      key: QueryCacheKeys.HOMEPAGE_CACHE_KEY,
+      expiry: GLOBAL_CACHE_EXPIRY
+    },
     getQueryResponse: async ({ prisma, event }) => {
       const queryStringParameters = event.queryStringParameters || {};
       const { tagNames, maxItemsPerTag } = queryStringParameters;

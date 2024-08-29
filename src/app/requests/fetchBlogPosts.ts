@@ -10,8 +10,15 @@ export async function fetchBlogPosts({ tag }: GetBlogPostQueryParams) {
   const hasViewAllFilter = tag === VIEW_ALL_TAG_NAME;
   const filteredTag = hasViewAllFilter ? '' : tag;
 
-  return await fetchIt<BlogPost[]>({
+  const { data: blogPosts, error } = await fetchIt<BlogPost[]>({
     queryName: 'queryBlogPosts',
     params: filteredTag ? { tag: filteredTag } : undefined
   });
+
+  if ( error ) {
+    console.error('FETCH BLOG POSTS FAIL: ', error.message)
+    return null;
+  }
+
+  return blogPosts;
 }

@@ -8,7 +8,7 @@ import { TagWithCount } from '@/src/app/requests/fetchTagsFacet';
 import { useCallbackOnExternalEventTrigger } from '@/src/app/components/utils/useCallbackOnExternalEventTrigger';
 import { useVideoPlayer } from '../../VideoPlayer/utils/useVideoPlayer';
 import { VideoPlayerDisplayState } from '../../VideoPlayer/types';
-import { Button, ButtonType } from '../../widgets/Button';
+import { Button } from '../../widgets/Button';
 import { getTagPath } from '../utils/getTagPath';
 import { HandleTagSelectionProps, SearchableTag } from "./SearchableTag";
 
@@ -43,7 +43,7 @@ export function TagNavigation ({ allTags, tagName }: Props) {
   }
 
   const handleTagSelection = ({ tagName, isActiveTag }: HandleTagSelectionProps) => {
-    const newPath = isActiveTag ? '/' : getTagPath(tagName);
+    const newPath = !tagName || isActiveTag ? '/' : getTagPath(tagName);
     pushNewRoute({ newPath });
   }
 
@@ -70,12 +70,11 @@ export function TagNavigation ({ allTags, tagName }: Props) {
           '!flex absolute top-10 right-0 z-10 p-6 bg-black rounded-lg shadow-md': isFilterOpenInMobile
         })}
       >
-        <Button 
-          isDisabled={!tagName} 
-          type={ButtonType.Text} 
-          onClick={handleClearFilter}>
-          home
-        </Button>
+        <SearchableTag
+          tag={{ id:null, name: '', readableName: 'home', count: 0 }}
+          currentTagName={tagName}
+          handleTagSelection={handleClearFilter} 
+        />
 
         {allTags.map(tagOption => (
           <div key={tagOption.id}>
