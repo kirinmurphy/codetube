@@ -80,11 +80,11 @@ export async function getNetlifyFunctionHandler<T>(
 }
 
 
-export const clearMemCache = async (cacheKey: string) => {
-  try {
-    await memcachedClient.delete(cacheKey);
-    console.log(`Cache cleared successfully for key: ${cacheKey}`);
-  } catch (error) {
-    console.error(`Failed to clear cache for key ${cacheKey}: `, error);
-  }
-};
+// export const clearMemCache = async (cacheKey: string) => {
+//   try {
+//     await memcachedClient.delete(cacheKey);
+//     console.log(`Cache cleared successfully for key: ${cacheKey}`);
+//   } catch (error) {
+//     console.error(`Failed to clear cache for key ${cacheKey}: `, error);
+//   }
+// };
