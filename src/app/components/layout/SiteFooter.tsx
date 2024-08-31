@@ -1,14 +1,29 @@
-import { FaEnvelope } from "react-icons/fa";
+import Script from "next/script";
+
+// Extend JSX.IntrinsicElements to include the web component
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      'copy-email-component': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & { email: string }, 
+        HTMLElement
+      >;
+    }
+  }
+}
 
 export function SiteFooter() {
   return (
     <div className="flex justify-end border-t border-gray-400 pr-1 pt-4vw pb-2vw 600mq:pt-10 600mq:pb-6">
-      <a href="mailto:codethingsdotnet@gmail.com" 
-        className="group flex gap-2 text-gray-600 hover:text-gray-400">
-
-        <span className="invisible group-hover:visible">codethingsdotnet@gmail.com</span>
-        <FaEnvelope className="size-6" />
-      </a>
+      <Script
+        src="https://cdn.codethings.net/webcomponents/copy-email-component/index.js"
+        type="module"
+        strategy="lazyOnload"
+      />
+      <copy-email-component 
+        email="codethingsdotnet@gmail.com">
+      </copy-email-component>
     </div>
   );
 } 

@@ -29,6 +29,7 @@ export default function RootLayout ({ children }: Readonly<Props>) {
             </VideoPlayerWrapper>
           </Suspense>
         </VideoPlayerProvider>
+      
       </body>
     </html>
   );
