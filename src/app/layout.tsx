@@ -5,12 +5,17 @@ import { VideoPlayerProvider } from "./components/VideoPlayer/VideoPlayerProvide
 import { Page } from "./components/layout/Page";
 import { VideoPlayerWrapper } from "./components/layout/VideoPlayerWrapper";
 import { Suspense } from 'react';
+import type { Metadata } from 'next'
 
 const lato = Lato({
-  weight: ['400', '700'],
+  weight: ['100', '300','400', '700'],
   subsets: ['latin'],
   display: 'swap',
-})
+});
+
+export const metadata: Metadata = {
+  title: 'Codethube :: Youtube UI Clone',
+}
 
 interface Props {
   children: React.ReactNode;

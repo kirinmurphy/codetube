@@ -11,11 +11,11 @@
   {
     "title": "When You Use Vanilla CSS After Using Tailwind",
     "body": "Never ever thought I would fall for this non-semantic, repeating yourself everywhere, page-cluttering lib.  boy was I wrong.  turns out I don't hate css.  I hate stylesheets.  I'll be happy if I  never have to look at one again.",
-    "featured": true,
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "zJATx80zW9w",
     "playOnYoutubeOnly": false,
-    "tags": ["css", "tailwind"]
+    "tags": ["featured", "css"]
   },
   {
     "title": "Only The Best Developers Understand How This Works",
@@ -33,7 +33,7 @@
     "imgUrl": "",
     "youtubeId": "eiC58R16hb8",
     "playOnYoutubeOnly": false,
-    "tags": ["browser_basics", "javascript_basics"]
+    "tags": ["featured", "browser_basics", "javascript_basics"]
   },
   {
     "title": "Depth First & Tree Traversals (Pre, In, Post) Explained",
@@ -78,7 +78,7 @@
     "imgUrl": "",
     "youtubeId": "SO8lBVWF2Y8",
     "playOnYoutubeOnly": false,
-    "tags": ["new_javascript_stuff"]
+    "tags": ["featured", "new_javascript_stuff"]
   },
   {
     "title": "5 Simple Steps for Solving Any Recursive Problem",
@@ -105,7 +105,7 @@
     "imgUrl": "",
     "youtubeId": "mSBnJvHtgD0",
     "playOnYoutubeOnly": false,
-    "tags": ["new_javascript_stuff"]
+    "tags": ["featured", "new_javascript_stuff"]
   },
   {
     "title": "10 Tailwind Classes I Wish I Knew Earlier",
@@ -114,7 +114,7 @@
     "imgUrl": "",
     "youtubeId": "x1RJ5Q09PqM",
     "playOnYoutubeOnly": false,
-    "tags": ["css", "tailwind"]
+    "tags": ["css"]
   },
   { 
     "title":"8 NEW JavaScript 2024 Features",
@@ -213,7 +213,7 @@
     "imgUrl": "", 
     "youtubeId": "oF2bDrRZuF4",
     "playOnYoutubeOnly": false,
-    "tags": ["new_react_stuff", "animation"]
+    "tags": ["featured", "new_react_stuff", "animation"]
   },
   {
     "title": "If You Cannot Name All 5 JS Scopes You Need To Watch This Video",
@@ -231,7 +231,7 @@
     "imgUrl": "",
     "youtubeId": "zdGfo6I1yrA",
     "playOnYoutubeOnly": false,
-    "tags": ["javascript_basics"]
+    "tags": ["featured", "javascript_basics"]
   },
   {
     "title": "Javascript Visualized - Promise Execution",
@@ -298,7 +298,7 @@
     "imgUrl": "",
     "youtubeId": "JhmdYN1wbG0",
     "playOnYoutubeOnly": false,
-    "tags": ["code_assist"]
+    "tags": ["featured", "code_assist"]
   },
   {
     "title": "React Compiler: In-Depth Beyond React Conf 2024",
@@ -317,5 +317,93 @@
     "playOnYoutubeOnly": false,
     "youtubeId": "t6MeFVF3V9I",
     "tags": ["new_react_stuff"]
-  }
+  },
+
+
+  {
+    "title": "\"The Life & Death of htmx\" by Alexander Petros at Big Sky Dev Con 2024",
+    "body": "",
+    "featured": true,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "inRB6ull5WQ",
+    "tags": ["featured", "design_patterns", "htmx"]
+  },
+
+
+
+
+
+  {
+    "title": "Radical Simplicity",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "xh-iMBOXl6M",
+    "tags": ["design_patterns"]
+  },
+  {
+    "title": "These CSS PRO Tips & Tricks Will Blow Your Mind!",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "PL3Odw-k8W4",
+    "tags": ["css"]
+  },
+  {
+    "title": "5 Levels of Go Error Handling",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "y5utZCeHys0",
+    "tags": ["go"]
+  },
+  {
+    "title": "But what is a GPT? Visual intro to transformers | Chapter 5, Deep Learning",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "wjZofJX0v4M",
+    "tags": ["LLM_basics"]
+  },
+  {
+    "title": "OpenAI Discovers JSON (And Zod???)",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "LjSeuLZkvqE",
+    "tags": ["AI_APIs"]
+  },
+  {
+    "title": "FULL Introduction To HTMX Using Golang",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "x7v6SNIgJpE",
+    "tags": ["htmx"]
+  },
+  {
+    "title": "Learn React Generic Components In 6 Minutes",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "5s6dIkrv6Y4",
+    "tags": ["typescript"]
+  },
+  {
+    "title": "WebComponents Will Outlive Your JavaScript Framework | Prime Reacts",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "1vF6puwX3bE",
+    "tags": ["javascript_basics", "design_patterns"]
+  }  
 ]

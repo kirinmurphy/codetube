@@ -3,6 +3,7 @@ import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { HomePage } from './components/HomePage';
 
 const HOMEPAGE_TAG_GROUP_NAMES = [
+  'featured',
   'new_react_stuff',
   'new_javascript_stuff',
   'javascript_basics',
