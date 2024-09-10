@@ -40,3 +40,6 @@ next-env.d.ts
 
 # Netlify functions output
 /netlify/dist
+
+
+playlist-fetch.sh
