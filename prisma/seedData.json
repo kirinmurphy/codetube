@@ -74,7 +74,7 @@
   {
     "title": "Why Signals Are Better Than React Hooks",
     "body": "",
-    "featured": true,
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "SO8lBVWF2Y8",
     "playOnYoutubeOnly": false,
@@ -101,11 +101,11 @@
   {
     "title": "20+ Must Know Array Methods That Almost Nobody Knows",
     "body": "",
-    "featured": true,
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "mSBnJvHtgD0",
     "playOnYoutubeOnly": false,
-    "tags": ["featured", "new_javascript_stuff"]
+    "tags": ["new_javascript_stuff"]
   },
   {
     "title": "10 Tailwind Classes I Wish I Knew Earlier",
@@ -209,11 +209,11 @@
   {
     "title": "I can’t believe they built this in React (w/ React Fiber)",
     "body": "",
-    "featured": true,
+    "featured": false,
     "imgUrl": "", 
     "youtubeId": "oF2bDrRZuF4",
     "playOnYoutubeOnly": false,
-    "tags": ["featured", "new_react_stuff", "animation"]
+    "tags": ["new_react_stuff", "animation"]
   },
   {
     "title": "If You Cannot Name All 5 JS Scopes You Need To Watch This Video",
@@ -320,15 +320,6 @@
   },
 
 
-  {
-    "title": "\"The Life & Death of htmx\" by Alexander Petros at Big Sky Dev Con 2024",
-    "body": "",
-    "featured": true,
-    "imgUrl": "",
-    "playOnYoutubeOnly": false,
-    "youtubeId": "inRB6ull5WQ",
-    "tags": ["featured", "design_patterns", "htmx"]
-  },
 
 
 
@@ -405,5 +396,63 @@
     "playOnYoutubeOnly": false,
     "youtubeId": "1vF6puwX3bE",
     "tags": ["javascript_basics", "design_patterns"]
-  }  
+  },
+
+  {
+    "title": "Node.js Doesn't Suck Anymore",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "si9pVRaGz30",
+    "tags": ["nodeJS"]
+  },
+
+  {
+    "title": "Mastering Memory Management in Node.js: Tips and Tricks for Better Performance",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "youtubeId": "YBnN2JpS4hI",
+    "playOnYoutubeOnly": false,
+    "tags": ["nodeJS"] 
+  },
+
+
+  {
+    "title": "You Don't Know Node - ForwardJS San Francisco",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "oPo4EQmkjvY",
+    "tags": ["nodeJS"]
+  },
+  {
+    "title": "The Secret Inside One Million Checkboxes",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "OI4DbECnp8A", 
+    "tags": ["featured"]
+  },
+  {
+    "title": "Node.js Under the Hood | Understanding Node.js Core Concepts ",
+    "body": "",
+    "featured": true,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "8fPdzhLPhr0",
+    "tags": ["nodeJS", "featured"]
+  },
+  {
+    "title": "\"The Life & Death of htmx\" by Alexander Petros at Big Sky Dev Con 2024",
+    "body": "",
+    "featured": true,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "inRB6ull5WQ",
+    "tags": ["featured", "design_patterns", "htmx"]
+  }
 ]

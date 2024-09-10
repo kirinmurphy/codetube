@@ -8,10 +8,10 @@
     "build:prod": "node scripts/buildToProduction.js",
     "start": "next start",
     "lint": "next lint",
-    "clearMemcache": "node scripts/clearMemcache.js",
+    "clearMemcached": "node scripts/clearMemcached.js",
     "migrate:dev": "npx prisma migrate dev --name init && npx prisma generate",
-    "seed:dev": "yarn run migrate:dev && npx prisma db seed && yarn run clearMemcache",
-    "seed:prod": "npx prisma db seed && yarn run clearMemcache",
+    "seed:dev": "yarn run migrate:dev && npx prisma db seed && yarn run clearMemcached",
+    "seed:prod": "npx prisma db seed && yarn run clearMemcached",
     "compileServerFunctions": "node scripts/compileServerFunctions.js netlify/dist"
   },
   "prisma": {

@@ -4,12 +4,12 @@ import { HomePage } from './components/HomePage';
 
 const HOMEPAGE_TAG_GROUP_NAMES = [
   'featured',
-  'new_react_stuff',
   'new_javascript_stuff',
   'javascript_basics',
+  'nodeJS',
+  'new_react_stuff',
   'nextjs', 
-  'code_assist',
-  'css'
+  'code_assist'
 ];
 
 interface Props {
