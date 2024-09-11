@@ -8,8 +8,8 @@ const HOMEPAGE_TAG_GROUP_NAMES = [
   'javascript_basics',
   'nodeJS',
   'new_react_stuff',
-  'nextjs', 
-  'code_assist'
+  'nextjs',
+  // 'code_assist'
 ];
 
 interface Props {

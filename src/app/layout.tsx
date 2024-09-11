@@ -14,7 +14,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: 'Codetubes :: Youtube UI Clone',
+  title: 'Codetube :: Youtube UI Clone',
 }
 
 interface Props {

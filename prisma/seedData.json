@@ -69,7 +69,7 @@
     "imgUrl": "",
     "youtubeId": "RBM03RihZVs",
     "playOnYoutubeOnly": false,
-    "tags": ["nextjs"]
+    "tags": ["nextJS"]
   },
   {
     "title": "Why Signals Are Better Than React Hooks",
@@ -141,16 +141,7 @@
     "imgUrl":"",
     "youtubeId":"EIGmcxwbbZw",
     "playOnYoutubeOnly":false,
-    "tags":["nextjs", "performance"]
-  },
-  {
-    "title": "The Biggest Typescript Update In Years",
-    "body": "",
-    "featured": false,
-    "imgUrl": "",
-    "youtubeId": "4XgIvE5SH4Y",
-    "playOnYoutubeOnly": false,
-    "tags": ["typescript"]
+    "tags":["nextJS", "performance"]
   },
   { 
     "title": "React Compiler: It's Strager Than You Think",
@@ -177,7 +168,7 @@
     "imgUrl": "",
     "youtubeId": "1jpqBfptng0",
     "playOnYoutubeOnly": false,
-    "tags": ["nextjs"]
+    "tags": ["nextJS"]
   },
   { 
     "title": "The New JS Features Coming Soon (I'm so hyped)",
@@ -195,7 +186,7 @@
     "imgUrl": "",
     "youtubeId": "JrKBinrMGR4",
     "playOnYoutubeOnly": false,
-    "tags": ["nextjs"]
+    "tags": ["nextJS"]
   },
   {
     "title": "They made React great again?",
@@ -389,6 +380,24 @@
     "tags": ["typescript"]
   },
   {
+    "title": "Why should not use EventEmitter for Asynchronous Operations",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "Ra7Ji9LmG9o",
+    "tags": ["nodeJS"]
+  },
+  {
+    "title": "Understanding and Debugging Memory Leaks in Your Node.js Applications",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "hliOMEQRqf8",
+    "tags": ["nodeJS"]
+  },  
+  {
     "title": "WebComponents Will Outlive Your JavaScript Framework | Prime Reacts",
     "body": "",
     "featured": false,
@@ -397,7 +406,6 @@
     "youtubeId": "1vF6puwX3bE",
     "tags": ["javascript_basics", "design_patterns"]
   },
-
   {
     "title": "Node.js Doesn't Suck Anymore",
     "body": "",
@@ -407,7 +415,6 @@
     "youtubeId": "si9pVRaGz30",
     "tags": ["nodeJS"]
   },
-
   {
     "title": "Mastering Memory Management in Node.js: Tips and Tricks for Better Performance",
     "body": "",
@@ -416,6 +423,15 @@
     "youtubeId": "YBnN2JpS4hI",
     "playOnYoutubeOnly": false,
     "tags": ["nodeJS"] 
+  },
+  {
+    "title": "Understanding and Debugging Memory Leaks in Your Node.js Applications",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "hliOMEQRqf8",
+    "tags": ["nodeJS"]
   },
 
 

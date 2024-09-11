@@ -6,7 +6,7 @@ export function SiteHeader() {
         <h1 className="flex items-center gap-4 translate-y-[-8px]">
           <a href="/" className="text-base 600mq:text-lg 800mq:text-xl font-bold">
             <span className="inline-block pl-2 mr-5 scale-x-150 translate-y-[5px]">▶</span> 
-            <span className="inline-block scale-y-[200%]">codetubes</span>
+            <span className="inline-block scale-y-[200%]">codetube</span>
           </a>
         </h1>
       </div>
