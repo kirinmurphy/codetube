@@ -4,7 +4,7 @@
   functions = "netlify/dist/functions"
 
 [dev]
-  command = "next dev"
+  command = "yarn dev"
   port = 8888
   targetPort = 3000
   framework = "#custom"

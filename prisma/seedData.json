@@ -9,6 +9,33 @@
     "tags": ["algorithmy_stuff"]
   },
   {
+    "title": "Migration Lesson: Don't Use Prisma | Prime Reacts",
+    "youtubeId": "jqhHXe746Ns",
+    "tags": ["nextJS"],
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "body": ""
+  },
+  {
+    "title": "Learn Next.js Intercepting Routes In 11 Minutes",
+    "youtubeId": "zDZBKEvU8b0",
+    "tags": ["nextJS"],
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "body": ""
+  },    
+  {
+    "title": "How to use Multithreading with \"worker threads\" in Node.js?",
+    "youtubeId": "MuwJJrfIfsU",
+    "tags": ["nodeJS"],
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "body": ""
+  },    
+  {
     "title": "When You Use Vanilla CSS After Using Tailwind",
     "body": "Never ever thought I would fall for this non-semantic, repeating yourself everywhere, page-cluttering lib.  boy was I wrong.  turns out I don't hate css.  I hate stylesheets.  I'll be happy if I  never have to look at one again.",
     "featured": false,
@@ -159,7 +186,7 @@
     "imgUrl": "",
     "youtubeId": "NuyzuNBFWxQ",
     "playOnYoutubeOnly": false,
-    "tags": ["security"]
+    "tags": ["security", "design_patterns"]
   },
   { 
     "title": "If You Are Using Next.js You Need To Enable This Development Feature",
@@ -279,13 +306,10 @@
     "playOnYoutubeOnly": false,
     "tags": ["javascript_basics"]
   },
-
-
-
   {
     "title": "Supermaven: The Fastest Copilot with a 300,000-Token Context Window!",
     "body": "Just started test driving this new code completion tool called Supermaven.  It's SO fast.  And it's pretty fricken good at guessing. Can fit an entire medium-sized repo in its 300,000 token context window.",
-    "featured": true,
+    "featured": false,
     "imgUrl": "",
     "youtubeId": "JhmdYN1wbG0",
     "playOnYoutubeOnly": false,
@@ -309,13 +333,6 @@
     "youtubeId": "t6MeFVF3V9I",
     "tags": ["new_react_stuff"]
   },
-
-
-
-
-
-
-
   {
     "title": "Radical Simplicity",
     "body": "",
@@ -350,7 +367,7 @@
     "imgUrl": "",
     "playOnYoutubeOnly": false,
     "youtubeId": "wjZofJX0v4M",
-    "tags": ["LLM_basics"]
+    "tags": ["LLM_basics", "featured"]
   },
   {
     "title": "OpenAI Discovers JSON (And Zod???)",
@@ -431,10 +448,165 @@
     "imgUrl": "",
     "playOnYoutubeOnly": false,
     "youtubeId": "hliOMEQRqf8",
+    "tags": ["nodeJS", "featured"]
+  },
+  {
+    "title": "This Node Debugger Trick Will Save You Hours",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "8WN5LogHiUE",
     "tags": ["nodeJS"]
+  },
+  {
+    "title": "Creating custom struct tags in Golang is awesome!",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "vtHZb7gNlbw",
+    "tags": ["go"]
+  },
+  {
+    "title": "Master Go Programming With These Concurrency Patterns",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "qyM8Pi1KiiM",
+    "tags": ["go"]
+  },
+  {
+    "title": "Node.js Under the Hood | Understanding Node.js Core Concepts ",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "8fPdzhLPhr0",
+    "tags": ["nodeJS", "featured"]
+  },
+
+  {
+    "title": "Go Concurrency Explained: Go Routines & Channels",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "B9uR2gLM80E",
+    "tags": ["go"]
+  },
+  {
+    "title": "Golang Has Entered a New Era for Routing",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "UjhpyjVMfuo",
+    "tags": ["go"]
+  },
+  {
+    "title": "How To Use Goroutines For Aggregating Data In Golang?!",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "LGVRPFZr548",
+    "tags": ["go"]
+  },
+  {
+    "title": "The standard library now has all you need for advanced routing in Go.",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "H7tbjKFSg58",
+    "tags": ["go"]
   },
 
 
+  {
+    "title": "Go 1.23: What You Need to Know About the Latest Features",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "tOESPitTVwE",
+    "tags": ["go"]
+  },
+  {
+    "title": "Learning Golang Context!! Never Looked At It!",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "VMonYfJlrc0",
+    "tags": ["go"]
+  },
+  {
+    "title": "How the Golang Context Package Works",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "Q0BdETrs1Ok",
+    "tags": ["go"]
+  },
+  {
+    "title": "Master Golang with Interfaces",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "IbXSEGB8LRs",
+    "tags": ["go"]
+  },
+  {
+    "title": "Golang: The Last Interface Explanation You'll Ever Need",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "SX1gT5A9H-U",
+    "tags": ["go"]
+  },
+  {
+    "title": "Typescript's Most Misunderstood Feature: Unions and Intersections",
+    "body": "",
+    "featured": true,
+    "imgUrl": "",
+    "youtubeId": "X6vvMJIicJM",
+    "tags": ["typescript", "featured"],
+    "playOnYoutubeOnly": false
+  },
+
+  {
+    "title": "Let's Fix The Fatal Flaw in TypeScript's Union Types!",
+    "body": "",
+    "featured": false,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "52vHiczZ3Bc",
+    "tags": ["typescript"]
+  },  
+  {
+    "title": "Remix's Concurrent Submissions Are Fundamentally Flawed",
+    "body": "",
+    "featured": true,
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "youtubeId": "Tvms2DaG8UY",
+    "tags": ["design_patterns"]
+  },
+  {
+    "title": "React's most dangerous feature",
+    "body": "",
+    "featured": false,
+    "youtubeId": "yUm-ET8w_28",
+    "imgUrl": "",
+    "playOnYoutubeOnly": false,
+    "tags": ["new_react_stuff", "nextJS", "featured"]
+  },
   {
     "title": "You Don't Know Node - ForwardJS San Francisco",
     "body": "",
@@ -444,23 +616,24 @@
     "youtubeId": "oPo4EQmkjvY",
     "tags": ["nodeJS"]
   },
+
   {
-    "title": "The Secret Inside One Million Checkboxes",
+    "title": "JavaScript Memory Leaks and How To Fix Them",
+    "youtubeId": "IkoGmbNJolo",
+    "tags": ["javascript_basics", "featured"],
     "body": "",
     "featured": false,
     "imgUrl": "",
-    "playOnYoutubeOnly": false,
-    "youtubeId": "OI4DbECnp8A", 
-    "tags": ["featured"]
+    "playOnYoutubeOnly": false
   },
   {
-    "title": "Node.js Under the Hood | Understanding Node.js Core Concepts ",
+    "title": "The Secret Inside One Million Checkboxes",
     "body": "",
     "featured": true,
     "imgUrl": "",
     "playOnYoutubeOnly": false,
-    "youtubeId": "8fPdzhLPhr0",
-    "tags": ["nodeJS", "featured"]
+    "youtubeId": "OI4DbECnp8A", 
+    "tags": ["featured"]
   },
   {
     "title": "\"The Life & Death of htmx\" by Alexander Petros at Big Sky Dev Con 2024",
