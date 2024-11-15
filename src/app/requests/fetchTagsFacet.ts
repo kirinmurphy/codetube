@@ -1,11 +1,11 @@
 import { fetchIt } from '@/src/lib/fetchIt';
 
-export const VIEW_ALL_TAG_NAME = 'view_all';
+export const VIEW_ALL_TAG_NAME = 'all_posts';
 
 const viewAllTag: TagWithCount = {
   id: 0,
   name: VIEW_ALL_TAG_NAME,
-  readableName: 'view all',
+  readableName: 'all posts',
   count: 0,  
 };
 
