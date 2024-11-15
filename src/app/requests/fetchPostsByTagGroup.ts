@@ -19,7 +19,7 @@ interface GetPostsByTagGroupQueryParams {
 
 export async function fetchPostsByTagGroup(props: GetPostsByTagGroupQueryParams) {
   const { tagNames, maxItemsPerTag } = props;
-  
+
   const { data: postsByTagGroup, error } = await fetchIt<PostsByTagGroupResult>({
     queryName: 'queryPostsByTagGroup',
     params: { 

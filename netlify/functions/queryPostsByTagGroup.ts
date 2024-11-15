@@ -35,13 +35,17 @@ export const handler: Handler = async (event) => {
       const tagNameCollection = tagNames?.split(',') || [];
       const totalMaxItemsPerTag = parseInt(maxItemsPerTag || '4', 10);
 
+
       const [tagGroups, featuredPosts] = await Promise.all([
         Promise.all(tagNameCollection.map(async (tagName) => {
           const isFeaturedTag = tagName === TAG_FEATURED;
           const featuredMultiplier = isFeaturedTag ? 2 : 1;
           const posts = await prisma.blogPost.findMany({
             where: { tags: { some: { tag: { name: tagName }}}},
-            include: { tags: { include: { tag: true }}},
+            include: { tags: { 
+              include: { tag: true }, 
+              where: { tag: { name: tagName } }
+            }},
             // orderBy: { createdAt: 'desc' },
             take: totalMaxItemsPerTag * featuredMultiplier
           });

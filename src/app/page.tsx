@@ -9,7 +9,6 @@ const HOMEPAGE_TAG_GROUP_NAMES = [
   'nodeJS',
   'new_react_stuff',
   'nextjs',
-  // 'code_assist'
 ];
 
 interface Props {

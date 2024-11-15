@@ -1,4 +1,3 @@
-// clearMemcache.js
 const memjs = require('memjs');
 require('dotenv').config();
 
@@ -6,8 +5,8 @@ async function clearMemcache() {
   const memcachedClient = memjs.Client.create(process.env.MEMCACHIER_SERVERS || '', {
     username: process.env.MEMCACHIER_USERNAME || '',
     password: process.env.MEMCACHIER_PASSWORD || '',
-    timeout: 15000, // Increase timeout to 15 seconds
-    retries: 2 // Add retries
+    timeout: 15000, 
+    retries: 2 
   });
    
   try {
