@@ -12,11 +12,12 @@ const HOMEPAGE_TAG_GROUP_NAMES = [
 ];
 
 interface Props {
-  searchParams: Record<string, string>;
+  searchParams: Promise<Record<string, string>>;
 }
 
-export default async function Home ({ searchParams = {} }: Props) {
-  const selectedTagName = searchParams?.tag || '';
+export default async function Home ({ searchParams }: Props) {
+  const params = await searchParams;
+  const selectedTagName = params?.tag || '';
 
   return (
     <ErrorBoundary>
