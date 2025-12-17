@@ -36,9 +36,6 @@ export async function getNetlifyFunctionHandler<T>(
     let response: T;
 
     if ( cacheConfig ) {
-      const { value: cachedData } = await memcachedClient.get(cacheConfig.key)
-
-
       try {
         const { value: cachedData } = await memcachedClient.get(cacheConfig.key);
         if (cachedData) {
@@ -53,21 +50,6 @@ export async function getNetlifyFunctionHandler<T>(
         console.log('Cache error, falling back to database query: ', cacheError);
         response = await getQueryResponse({ prisma });
         await setCacheData(cacheConfig, response);
-      }
-
-
-      if ( cachedData ) {
-        console.log('Cache hit for key: ', cacheConfig.key);
-        response = JSON.parse(cachedData.toString());
-      } else {
-        console.log('Cache miss for key: ', cacheConfig.key);
-        response = await getQueryResponse({ prisma });
-
-        await memcachedClient.set(
-          cacheConfig.key,
-          JSON.stringify(response),
-          { expires: cacheConfig.expiry }
-        );
       }
     } else {
       response = await getQueryResponse({ prisma });
